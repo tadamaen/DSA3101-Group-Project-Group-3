@@ -2,18 +2,18 @@
 ## Enhancing Guest Experience Through Data-Driven Journey Mapping and Analysis 
 
 #### Subgroup A Members: 
-Yu Zifan 
-Low Shi Ya Amelia 
-Tan Teck Hwe Damaen 
-Lien Wei Hao, Jordan 
-Isabella Chong 
+###### Yu Zifan 
+###### Low Shi Ya Amelia 
+###### Tan Teck Hwe Damaen 
+###### Lien Wei Hao, Jordan 
+###### Isabella Chong 
 
 #### Subgroup B Members: 
-Tan Jone Lung 
-Beh Wan Ting 
-Fun Wen Xin 
-Yeo Jing Wen, Cheryl 
-Su Xiangliang, Brenda
+###### Tan Jone Lung 
+###### Beh Wan Ting 
+###### Fun Wen Xin 
+###### Yeo Jing Wen, Cheryl 
+###### Su Xiangliang, Brenda
 
 #### Introduction 
 
