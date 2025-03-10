@@ -5,15 +5,15 @@
 ###### Yu Zifan 
 ###### Low Shi Ya Amelia 
 ###### Tan Teck Hwe Damaen 
-###### Lien Wei Hao, Jordan 
 ###### Isabella Chong 
+###### Su Xiangling, Brenda
 
 #### Subgroup B Members: 
 ###### Tan Jone Lung 
 ###### Beh Wan Ting 
 ###### Fun Wen Xin 
 ###### Yeo Jing Wen, Cheryl 
-###### Su Xiangliang, Brenda
+###### Lien Wei Hao, Jordan 
 
 #### Introduction 
 
