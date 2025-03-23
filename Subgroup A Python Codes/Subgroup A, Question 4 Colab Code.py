@@ -997,11 +997,39 @@ From the bar chart above, we observe that `Halloween Horror Night` is most likel
 --------------------------------------------------------------------------------
 
 ##### Satisfaction Ratings
+
+To analyze the guest satisfaction of USS of recent survey respondents, we will be using column `q15` (How likely are you to recommend USS to others?) of the dataset. This column consists of scores from 1-10, where a score of 1 means that respondents are not at all likely to recommend USS to others while a score of 10 means that respondents are extremely likely to recommend USS to others
 """
 
+# Extracting the relevant columns for analysis (q15, q17)
+df_satisfaction_scores = df[['q15', 'q17_1', 'q17_2', 'q17_3', 'q17_4', 'q17_5', 'q17_6']]
 
+# Create a count of values in q15
+q15_counts = df_satisfaction_scores['q15'].value_counts().sort_index()
 
-"""++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Create the bar plot
+plt.figure(figsize = (10, 8))
+ax = sns.barplot(x = q15_counts.index, y = q15_counts.values)
+
+# Add count labels on top of each bar
+for p in ax.patches:
+    ax.annotate(f'{int(p.get_height())}', (p.get_x() + p.get_width() / 2., p.get_height()),
+                ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+
+# Add title and labels
+plt.title('Overall Satisfaction Score Of USS')
+plt.xlabel('Satisfaction Score (1-10)')
+plt.ylabel('Number Of Respondents')
+
+# Add grid lines for better readability
+plt.grid(axis = 'y', linestyle = '--', alpha = 0.7)
+
+# Show the plot
+plt.show()
+
+"""Referring to the Net Promoter Score (NPS) metric, 95 out of 507 survey respondents are promoters (gave a rating of 9 or 10), suggesting that only about 18.8% of them were satisfied with their experience at USS. About 53% of survey respondents gave scores of 7 and 8, which means that they would not strongly recommend others to visit USS. This indicates that slightly over half of the survey respondents were not very satisfied with their experience at USS, leading to an indifferent score.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #### Step 2: Obtain And Analyze The Demographics Of Visitors Who Visited USS Some Time Ago
 
@@ -1497,8 +1525,6 @@ The sections that we will be comparing are:
 
 **6.   Preferred Timing**
 
-**7.   Satisfaction Ratings**
-
 ###### Age Of Visitors:
 """
 
@@ -1526,7 +1552,53 @@ sns.heatmap(heatmap_data, annot=annot_data, cmap="Reds", fmt="", linewidths=0.5)
 plt.title("Age Group Proportions: Current vs. Historical Data")
 plt.show()
 
-"""--------------------------------------------------------------------------------
+"""This heatmap shows the age distribution of visitors comparing current versus historical data for USS
+
+Looking at the data in detail:
+
+Children (Below 12 Years Old):
+*   Current: 16.8%
+*   Historical: 15.3%
+*   Slight increase in children visiting currently
+
+Teenagers (13 To 20 Years Old):
+
+*   Current: 25.0%
+*   Historical: 24.7%
+*   Almost unchanged, representing about a quarter of visitors in both periods
+
+Young Adults (21 To 34 Years Old):
+
+*   Current: 32.3%
+*   Historical: 20.3%
+*   Significant increase of 12 percentage points, making this the most dramatic change in the dataset
+
+Middle-Aged Adults (35 To 49 Years Old):
+
+*   Current: 14.3%
+*   Historical: 19.6%
+*   Notable decrease of about 5.3 percentage points
+
+Older Adults (50 To 64 Years Old):
+
+*   Current: 7.7%
+*   Historical: 15.3%
+*   Substantial decrease of 7.6 percentage points, showing this demographic has become much less represented
+
+Seniors (65 Years Old And Above):
+
+
+*   Current: 4.0%
+*   Historical: 4.8%
+*   Slight decrease, but remains the smallest proportion in both datasets
+
+Key Trends:
+
+The visitor population has significantly shifted toward younger adults (21-34), which now make up nearly a third of all visitors. There has been a marked decline in middle-aged and older adult visitors (35-64 age groups). The proportion of children and teenagers remains relatively stable between the two periods. The current visitor profile is more heavily skewed toward younger demographics, with 74.1% of visitors under 35 years old (compared to 60.3% historically). The 50+ age groups collectively dropped from 20.1% historically to just 11.7% currently.
+
+This suggests a strategic repositioning or changing appeal of USS, with significantly stronger attraction to young adults and slightly reduced engagement with older demographics.
+
+--------------------------------------------------------------------------------
 
 ###### Gender Of Visitors:
 """
@@ -1551,7 +1623,28 @@ sns.heatmap(heatmap_data, annot=annot_data, cmap="Greens", fmt="", linewidths=0.
 plt.title("Gender Proportions: Current vs. Historical Data")
 plt.show()
 
-"""--------------------------------------------------------------------------------
+"""This heatmap displays gender proportions comparing current versus historical data for USS.
+
+The gender distribution shows a dramatic reversal between the two time periods:
+
+Current Data:
+*   Female: 61.0%
+*   Male: 39.0%
+
+Historical Data:
+*   Female: 32.3%
+*   Male: 67.7%
+
+Key Trends:
+
+There has been a complete inversion in the gender proportions between the historical and current periods. Historically, males dominated the visitor demographics, representing over two-thirds (67.7%) of all visitors.
+Currently, females constitute the clear majority at 61.0% of visitors.
+The shift represents a 28.7 percentage point increase in female representation.
+Male representation has correspondingly decreased by 28.7 percentage points.
+
+This significant gender proportion reversal suggests a possible fundamental change in either: The attraction's appeal or marketing strategy, the programming or exhibition content, targeted outreach efforts or the organizational culture or reputation.
+
+--------------------------------------------------------------------------------
 
 ###### Nationality Of Visitors:
 """
@@ -1576,7 +1669,28 @@ sns.heatmap(heatmap_data, annot=annot_data, cmap="Blues", fmt="", linewidths=0.5
 plt.title("Nationality Proportions: Current vs. Historical Data")
 plt.show()
 
-"""--------------------------------------------------------------------------------
+"""This heatmap shows the nationality proportions comparing current versus historical data for USS, breaking down visitors into "Local" and "Tourist" categories.
+
+Current Data:
+*   Local: 55.2%
+*   Tourist: 44.8%
+
+Historical Data:
+*   Local: 34.3%
+*   Tourist: 65.7%
+
+Key Trends:
+
+There has been a significant shift in the visitor composition, with the proportions essentially inverting between the two time periods.Historically, tourists were the dominant visitor group, making up nearly two-thirds (65.7%) of all visitors. Currently, locals constitute the majority at 55.2% of visitors.
+This represents a 20.9 percentage point increase in local visitation.
+Tourist representation has correspondingly decreased by 20.9 percentage points.
+
+This substantial change in the visitor demographic suggests:
+
+A shift in focus toward attracting and serving the local community
+Potentially reduced international or out-of-area tourism or a possible reorientation of programming or exhibits to appeal more to local interests. There couls also be changes in marketing strategy to target the local market.
+
+--------------------------------------------------------------------------------
 
 ###### Visitor Type:
 """
@@ -1610,7 +1724,41 @@ sns.heatmap(heatmap_data, annot=annot_data, cmap="Purples", fmt="", linewidths=0
 plt.title("Visitor Type Proportions: Current vs. Historical Data")
 plt.show()
 
-"""--------------------------------------------------------------------------------
+"""This heatmap illustrates the visitor type proportions comparing current versus historical data for USS, breaking down visitors into five distinct categories.
+
+Current Data:
+
+*   Solo Traveller: 18.8%
+*   Visiting With Friends: 25.9%
+*   Family With Young Children: 29.1%
+*   Family With Teenagers: 20.8%
+*   Family With Elderly: 5.3%
+
+Historical Data:
+
+*   Solo Traveller: 13.0%
+*   Visiting With Friends: 19.0%
+*   Family With Young Children: 37.2%
+*   Family With Teenagers: 12.9%
+*   Family With Elderly: 18.0%
+
+Key Trends:
+
+
+
+1.   "Family With Young Children" remains the largest visitor segment in both periods, though it has decreased by 8.1 percentage points (from 37.2% to 29.1%).
+2.   "Visiting With Friends" has increased significantly from 19.0% to 25.9%, suggesting USS has become more popular as a social destination.
+3.   "Family With Elderly" has seen the most dramatic decrease, dropping from 18.0% to just 5.3% (a 12.7 percentage point decline).
+4.  "Family With Teenagers" has increased substantially from 12.9% to 20.8%, an 8.1 percentage point increase.
+5.  "Solo Traveller" visitation has increased from 13.0% to 18.8%.
+
+
+These changes align with the previous demographic shifts observed:
+
+The decline in elderly family visits corresponds with the overall reduction in older visitors. The increase in friend groups and solo travelers aligns with the shift toward younger adults (21-34). The growth in teenage family visits matches the stable proportion of teenage visitors we saw in the age breakdown.
+Overall, USS has transitioned from being primarily a family destination (particularly for young children and elderly family members) to a more diversified attraction that appeals to varied groups, especially friends, solo visitors and families with teenagers.
+
+--------------------------------------------------------------------------------
 
 ###### Preferred Days:
 """
@@ -1647,7 +1795,39 @@ sns.heatmap(heatmap_data, annot=annot_data, cmap="Oranges", fmt="", linewidths=0
 plt.title("Preferred Day Proportions: Current vs. Historical Data")
 plt.show()
 
-"""--------------------------------------------------------------------------------
+"""This heatmap displays the preferred day proportions comparing current versus historical data for USS, showing when visitors prefer to attend.
+
+Current Data:
+*   Weekdays: 27.4%
+*   Weekends: 19.5%
+*   Public Holidays: 16.3%
+*   School Holidays: 21.5%
+*   Special Events: 15.3%
+
+
+Historical Data:
+*   Weekdays: 24.0%
+*   Weekends: 29.6%
+*   Public Holidays: 28.1%
+*   School Holidays: 14.9%
+*   Special Events: 3.4%
+
+Key Trends:
+1.   Visitor timing preferences have significantly shifted between the two periods, with much more evenly distributed attendance patterns now.
+2.   Historically, attendance was concentrated during weekends (29.6%) and public holidays (28.1%), which together accounted for 57.7% of visitors.
+3.   Currently, weekdays have become the most popular time to visit (27.4%), followed by school holidays (21.5%).
+4.   Weekend visitation has decreased substantially from 29.6% to 19.5% (a 10.1 percentage point decline).
+5.   Public holiday visitation has dropped significantly from 28.1% to 16.3% (an 11.8 percentage point decrease).
+6.   Special events have seen a dramatic increase in popularity, rising from just 3.4% to 15.3% (an 11.9 percentage point increase).
+7.   School holiday visitation has increased from 14.9% to 21.5% (a 6.6 percentage point rise).
+
+These changes align with the demographic shifts observed in previous charts:
+
+The increase in weekday and special event visitation correlates with the rise in local visitors who likely have more flexibility to visit on non-peak days. The growth in school holiday attendance matches the increase in families with teenagers. The decrease in weekend and public holiday visitation suggests less reliance on tourism and out-of-town visitors.
+
+Overall, USS has transitioned from a destination primarily visited during traditional peak tourism periods (weekends and public holidays) to one with more balanced attendance throughout different time periods, with special emphasis on weekdays, school holidays, and special events.
+
+--------------------------------------------------------------------------------
 
 ###### Preferred Timing:
 """
@@ -1691,7 +1871,156 @@ sns.heatmap(heatmap_data, annot=annot_data, cmap="Greys", fmt="", linewidths=0.5
 plt.title("Preferred Time Slot Proportions: Current vs. Historical Data")
 plt.show()
 
-"""++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+"""This heatmap presents the preferred time slot proportions comparing current versus historical data for USS, showing when during the day visitors prefer to attend.
+
+Current Data:
+*   Early Morning (8am to 10am): 13.8%
+*   Late Morning (10am to 12pm): 16.4%
+*   Early Afternoon (12pm to 2pm): 17.7%
+*   Late Afternoon (2pm to 4pm): 20.0%
+*   Evening (4pm to 6pm): 17.9%
+*   Night (6pm to 9pm): 14.3%
+
+Historical Data:
+*   Early Morning (8am to 10am): 14.6%
+*   Late Morning (10am to 12pm): 15.0%
+*   Early Afternoon (12pm to 2pm): 16.1%
+*   Late Afternoon (2pm to 4pm): 18.4%
+*   Evening (4pm to 6pm): 21.4%
+*   Night (6pm to 9pm): 14.6%
+
+Key Trends:
+
+1.   The time slot preferences show relatively modest changes compared to the more dramatic shifts observed in other demographic categories.
+2.   Late afternoon (2pm to 4pm) has become the most popular time slot currently at 20.0%, while evening (4pm to 6pm) was historically the most popular at 21.4%.
+3.   Evening visitation has decreased from 21.4% to 17.9% (a 3.5 percentage point decline).
+4.   The current distribution is more balanced across time slots, with no single time period strongly dominating.
+5.   Early afternoon and late morning have seen modest increases in popularity (1.6 and 1.4 percentage points respectively).
+6.   Early morning and night time slots remain the least popular periods in both datasets, with minimal changes.
+
+These time slot preference changes align with the broader demographic shifts:
+
+The more evenly distributed time preferences may reflect the greater proportion of local visitors who have more flexibility in their visiting times. The slight decline in evening visits could relate to the decrease in tourist visitors, who might previously have preferred to visit attractions later in the day. The increased popularity of afternoon slots aligns with the growth in family and friend group visits.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #### Step 4: Implement Effective Strategies To Tailor To The Identified Groups
+
+Before we propose effective strategies, we need to first determine the groups that are under-represented in the survey. This is to entice the groups of individuals who might initally not be interested in visiting USS in order to increase the overall demand for USS, as well as enhancing the guest experience at USS.
+
+From the results obtained above, we can pinpoint certain groups that might not be visiting USS as much.
+
+1. **The Elderly (Particularly 65 years and above)**
+2. **Males (Dropping in proportions recently)**
+3. **Tourists (Dropping in proportions recently)**
+
+There are other groups of people that although still have fairly high proportions, it shows a downward trend from previous years. USS should also propose marketing strategies to entice these groups of people to continue visiting USS. These groups include
+
+1.  **Families With Young Children (Dropped in proportions though still high)**
+2.  **35 To 49 Year Olds (Working Adults)**
+
+--------------------------------------------------------------------------------
+
+**Elderly**
+
+1. Senior Discount Days: Offer exclusive senior citizen discounts on weekdays or off-peak periods (e.g., "Senior Citizens’ Special: 20% Off Tickets Every Wednesday")
+
+Offering senior discounts during off-peak times can help fill up the park during slower periods, increasing overall attendance. By targeting seniors, USS attracts a demographic that might otherwise avoid peak pricing. Seniors visiting on discounted days are likely to spend on additional services such as food, beverages, merchandise, and special experiences. The sense of savings from the discount encourages seniors to purchase tickets and additional items that they might not have otherwise.
+
+2. Group Discounts for Senior Groups: Provide group pricing for seniors visiting with family or friends
+
+Offering group discounts encourages seniors to visit USS with their families or friends, which can increase group ticket sales. Group visits often lead to higher spending since more people are on-site, and each individual tends to purchase food, drinks, and souvenirs. Additionally, seniors visiting with companions will likely make use of other park amenities (such as VIP tours, photo packages, and merchandise). By offering a lower price for senior groups, USS can attract larger parties, thus improving both ticket sales and overall park revenue through group purchases and shared experiences.
+
+3. Relaxation Zones: Designate calming rest areas with comfortable seating, shade, and gentle music for seniors to relax in between attractions
+
+Relaxation zones enhance the experience for elderly visitors, encouraging them to stay longer in the park without feeling fatigued. This added comfort can lead to increased spending on food, drinks, and souvenirs as seniors take breaks in these areas. The zones also provide a sense of exclusivity and care, which could result in more seniors choosing USS as their destination for leisure, leading to repeat visits. Creating a positive and comfortable environment for older guests can also foster word-of-mouth promotion, attracting new visitors from within the same demographic, boosting future revenue.
+
+4. Senior-Friendly Tours: Offer guided, leisurely-paced tours around the park
+
+Senior-friendly tours can be monetized by charging an additional fee for guided experiences, adding another revenue stream to USS. These tours cater specifically to the interests and pace of elderly visitors, which not only enhances their experience but also offers them something they might be willing to pay for. Seniors often appreciate leisurely, informative tours that are easy to follow, and offering them the chance to learn about the history of USS.
+
+5. Accessible Services: Promote accessibility options like wheelchair rentals, mobility aids, and priority seating for shows
+
+Providing accessible services like wheelchair rentals and priority seating ensures that elderly visitors, especially those with mobility issues, can fully enjoy the park without feeling restricted. The availability of mobility aids makes USS more inclusive, attracting a wider range of seniors, including those who may have previously thought the park was not accessible to them. By offering these services, USS not only increases the likelihood of senior visits but also generates additional revenue from rentals and premium services like priority seating.
+
+--------------------------------------------------------------------------------
+
+**Males**
+
+1. Increase Action-Packed Themed Attractions and Events: Focus on high-adrenaline, action-oriented rides and experiences, such as those based on blockbuster action movies (e.g., Fast & Furious, Transformers, Jurassic Park)
+
+Men often enjoy intense, thrilling experiences. By emphasizing action-packed attractions, USS can increase ticket sales as these types of experiences tend to attract larger crowds. Additionally, special events can be ticketed separately, generating extra revenue. Merchandise related to these events (e.g., superhero or movie-themed items) can also drive increased sales. High-adrenaline attractions also encourage repeat visits, especially if new features or events are added over time.
+
+2. Partnerships with Popular Male-Oriented Brands: Partner with well-known male-oriented brands (e.g., sports brands, gaming companies, or popular men's lifestyle brands)
+
+Brand partnerships can draw new visitors who are loyal to specific brands, leading to increased foot traffic and engagement. Co-branded merchandise (e.g., limited-edition items from a popular gaming brand) can be sold, providing additional revenue. Additionally, exclusive partnerships often generate buzz and marketing opportunities, leading to greater awareness and attendance from the target demographic.
+
+3. Sports Bar and Gaming Lounges: Set up sports bars or gaming lounges within the park where male visitors can watch live sports events, play games, or relax while enjoying food and drinks
+
+Sports bars and gaming lounges create an opportunity to increase F&B revenue by offering food and drink packages. These venues are attractive for groups of male visitors who can socialize, relax, and spend time at the park in between attractions. By creating a space for leisure, USS can encourage visitors to stay longer in the park, increasing their overall spending on food, drinks, and potentially event tickets or VIP access to exclusive viewing areas for major events.
+
+4. Adventure and Extreme Sports Experiences: Introduce extreme sports or adventure activities, such as virtual reality (VR) experiences, rock climbing, or even a high-flying experience like bungee jumping
+
+Adventure and extreme sports experiences are often popular among men who seek thrilling, physically demanding activities. Charging for these activities separately or offering package deals can drive additional revenue. Such experiences can also increase the time visitors spend in the park, resulting in more spending on food, drinks, and merchandise. These types of attractions also encourage repeat visits from thrill-seekers.
+
+--------------------------------------------------------------------------------
+
+**Tourists**
+
+1. Launch International Marketing Campaigns: Partner with international travel agencies, airlines, and influencers to launch targeted marketing campaigns in key tourist markets such as China, India and Southeast Asia
+
+International tourists typically spend more on experiences, food, and souvenirs when visiting a theme park. By attracting more tourists from overseas, USS can tap into new revenue streams from foreign visitors who may also contribute to increased hotel bookings, travel packages, and extended stays. This kind of exposure boosts ticket sales, as well as demand for premium experiences like VIP tours and fast passes, which increase overall spending per guest.
+
+2. Create Seasonal or Themed Events to Attract Tourists During Off-Peak Periods
+
+Host special seasonal or limited-time themed events such as "Summer Fest" or "Halloween Horror Nights" to entice tourists during off-peak months. Promoting these events through global tourism channels can attract visitors specifically interested in these unique experiences. Special events generate excitement and urgency, encouraging tourists to visit USS during times when they might otherwise not have considered it. These events can drive up ticket prices for exclusive access, increase the sale of themed merchandise, and boost spending on food and beverage items. The demand for limited-time events can also increase park attendance during historically slower seasons, reducing revenue loss from lower off-peak visitation.
+
+3. Offer Multi-Day Passes with Exclusive Benefits for Tourists: Introduce multi-day passes specifically targeted at tourists, which allow for unlimited access to USS and partner attractions over a certain number of days
+
+Multi-day passes encourage tourists to spend more time at USS, potentially increasing per-visitor revenue. Tourists who purchase multi-day passes are more likely to spend on food, merchandise, and add-on services like express passes or special events. By offering exclusive benefits, USS also incentivizes higher-priced purchases and repeat visits during the tourist's stay in Singapore.
+
+4. Develop Unique Tourist-Centric Experiences and Packages: Create unique experiences tailored to tourists - behind-the-scenes tours, private character meet-and-greets or exclusive access to new attractions
+
+Unique, premium experiences can command higher prices and attract tourists willing to pay extra for exclusive access. Offering tailored experiences encourages tourists to spend more than they would on standard tickets, boosting overall revenue per guest. These high-value experiences can also be marketed as limited-time offers, increasing demand and encouraging tourists to visit USS sooner rather than later. Additionally, the luxury appeal of these experiences may attract high-net-worth tourists, further increasing revenue from premium offerings.
+
+--------------------------------------------------------------------------------
+
+**Families with Young Children**
+
+1. Family Passes: Offer bundles that include tickets for two adults and two children at a discounted rate.
+
+Family bundles make the experience more affordable for families, which can lead to a higher volume of ticket sales. Families are more likely to purchase bundles, as they feel they are getting better value for money. The discounted rate encourages families to buy tickets for both parents and children at once, and they might also purchase additional services like food, merchandise, or express passes, boosting overall revenue. Offering bundled pricing creates a sense of cost savings, increasing the likelihood of families committing to a visit.
+
+2. Free Entry for Toddlers: Provide free admission for children under 3 years old, making it more affordable for families.
+
+While offering free admission to toddlers may seem like a loss of revenue for the very young group, it encourages families to visit USS in the first place. With younger children not being charged for tickets, families with toddlers are more likely to attend. These families will still contribute to revenue by spending on food, merchandise, photo ops, and additional experiences that are not discounted, which helps to offset the "free" entry for the toddlers. This approach also attracts more repeat visits as parents may return when they have multiple children of different age groups.
+
+3. Interactive Learning Stations: Set up engaging, hands-on experiences related to the movies and themes (eg movie-making workshops, or behind-the-scenes shows)
+Seasonal Family Events: Host special themed events (eg Christmas or Halloween) with kid-friendly activities
+
+Interactive and educational experiences are highly attractive to families, especially when they are tied to popular movie themes that kids love. These types of experiences can be monetized through special admission fees or bundled with ticket sales as part of a premium package. Additionally, interactive stations encourage parents and children to spend more time at the venue, which leads to increased spending on food, drinks, souvenirs, and other experiences. Children's participation in workshops also leads to a memorable experience, increasing the likelihood of word-of-mouth recommendations and repeat visits, which drives future revenue.
+
+4. Character Meet-and-Greets: Feature more kid-friendly characters apart from the usual ones that are currently available in USS for family photos and interactions
+
+Character meet-and-greets are a major draw for families with young children. Offering popular, kid-friendly characters allows USS to charge a premium for exclusive photo opportunities or VIP meet-and-greet experiences. Families are willing to pay for these experiences to create lasting memories and unique interactions for their children. Additionally, character-themed merchandise can be sold at meet-and-greet locations, further increasing revenue from each family. The emotional connection created by meeting beloved characters encourages families to visit more often, especially if they know new characters or themed experiences are coming up.
+
+--------------------------------------------------------------------------------
+
+**Working Adults**
+
+1. After-Work or Late-Night Events: Host special after-work or late-night events that cater to working adults, such as "Happy Hour" events, themed parties, or exclusive access to certain attractions or shows during the evening
+
+These events can drive attendance during typically off-peak hours, filling the park when it may otherwise be less crowded. By offering special events, USS can attract working adults who may not typically have the time to visit during the day, increasing overall ticket sales. The addition of exclusive experiences like VIP access, premium shows, or food and beverage deals can encourage working adults to spend more, boosting revenue from premium packages, food, drinks, and merchandise. The events can also include paid add-ons like drink tickets or special photo opportunities, further driving spending.
+
+2. Corporate Partnership Packages: Partner with businesses and corporations to offer exclusive corporate discounts or team-building packages for employees
+
+Corporate partnerships can lead to bulk ticket sales, generating significant revenue from organizations buying tickets for groups of employees. Team-building events or group outings create opportunities for USS to offer additional upsells, like lunch or dinner packages, private tours, or special events tailored to corporate groups. The exposure to corporate clients may encourage them to visit USS for personal trips, bringing in new customers and increasing repeat visits. Offering exclusive perks or experiences for employees can elevate the value proposition, driving higher ticket sales and additional purchases.
+
+3. Weekend Relaxation and Wellness Packages: Develop relaxation and wellness-focused weekend packages, including stress-relief activities, spa experiences, or health-themed events
+
+Wellness and relaxation activities can be a unique selling point for working adults looking for an alternative to traditional amusement park experiences. These experiences could be monetized through premium pricing for spa treatments, wellness seminars, or stress-relief activities like yoga sessions or nature walks. The packages can encourage longer stays, resulting in higher spending on food, merchandise, and optional add-ons. Offering wellness experiences could attract affluent working adults who may be willing to pay for higher-end experiences and services, leading to increased overall revenue.Marketing these packages as exclusive or limited-time offerings can drive demand and create a sense of urgency, boosting sales.
+
+--------------------------------------------------------------------------------
+
+**All these strategies listed above will help to improve visitor experience, whether be in terms of financially, enjoyability, emotionally or flexibility. Satisfaction rates will increase if the following strategies are to be implemented. These strategies might help to achieve USS's goal of improving satisfaction rates to higher levels and at the same time, increase its revenue due to higher demand.**
 """
