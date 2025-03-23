@@ -126,8 +126,12 @@ Here is a description of the what each of the various columns of the dataset rep
                 <td>Which type of theme park visitor best describes you?</td>
             </tr>
             <tr>
-                <td>q2</td>
+                <td>q2_1</td>
                 <td>What is your age range?</td>
+            </tr>
+            <tr>
+                <td>q2_2</td>
+                <td>What is your gender?</td>
             </tr>
             <tr>
                 <td>q3</td>
@@ -422,6 +426,10 @@ plt.ylabel('Number Of Guests')
 # Add grid lines for better readability
 plt.grid(axis = 'y', linestyle = '--', alpha = 0.7)
 
+# Annotate the bars with the count values
+for i, count in enumerate(q15_counts.values):
+    plt.text(i, count + 0.1, str(count), ha='center', va='bottom', fontsize=12)
+
 # Show the plot
 plt.show()
 
@@ -472,6 +480,10 @@ plt.ylabel('Number Of Respondants')
 
 # Add grid lines for better readability
 plt.grid(axis = 'y', linestyle = '--', alpha = 0.3)
+
+# Add number labels on top of bars
+for i, value in enumerate(person_type_counts.values):
+    ax.text(i, value + 1, str(value), ha='center', va='bottom', fontsize=10)
 
 # Show the plot
 plt.show()
@@ -564,6 +576,10 @@ plt.ylabel('Number Of Respondants')
 # Add grid lines for better readability
 plt.grid(axis = 'y', linestyle = '--', alpha = 0.7)
 
+# Annotate the bars with the count values
+for i, count in enumerate(q17_1_counts.values):
+    plt.text(i, count + 0.1, str(count), ha='center', va='bottom', fontsize=12)
+
 # Show the plot
 plt.show()
 
@@ -583,6 +599,10 @@ plt.ylabel('Number Of Respondants')
 
 # Add grid lines for better readability
 plt.grid(axis = 'y', linestyle = '--', alpha = 0.7)
+
+# Annotate the bars with the count values
+for i, count in enumerate(q17_2_counts.values):
+    plt.text(i, count + 0.1, str(count), ha='center', va='bottom', fontsize=12)
 
 # Show the plot
 plt.show()
@@ -604,6 +624,10 @@ plt.ylabel('Number Of Respondants')
 # Add grid lines for better readability
 plt.grid(axis = 'y', linestyle = '--', alpha = 0.7)
 
+# Annotate the bars with the count values
+for i, count in enumerate(q17_3_counts.values):
+    plt.text(i, count + 0.1, str(count), ha='center', va='bottom', fontsize=12)
+
 # Show the plot
 plt.show()
 
@@ -623,6 +647,10 @@ plt.ylabel('Number Of Respondants')
 
 # Add grid lines for better readability
 plt.grid(axis = 'y', linestyle = '--', alpha = 0.7)
+
+# Annotate the bars with the count values
+for i, count in enumerate(q17_4_counts.values):
+    plt.text(i, count + 0.1, str(count), ha='center', va='bottom', fontsize=12)
 
 # Show the plot
 plt.show()
@@ -644,6 +672,10 @@ plt.ylabel('Number Of Respondants')
 # Add grid lines for better readability
 plt.grid(axis = 'y', linestyle = '--', alpha = 0.7)
 
+# Annotate the bars with the count values
+for i, count in enumerate(q17_5_counts.values):
+    plt.text(i, count + 0.1, str(count), ha='center', va='bottom', fontsize=12)
+
 # Show the plot
 plt.show()
 
@@ -663,6 +695,10 @@ plt.ylabel('Number Of Respondants')
 
 # Add grid lines for better readability
 plt.grid(axis = 'y', linestyle = '--', alpha = 0.7)
+
+# Annotate the bars with the count values
+for i, count in enumerate(q17_6_counts.values):
+    plt.text(i, count + 0.1, str(count), ha='center', va='bottom', fontsize=12)
 
 # Show the plot
 plt.show()
