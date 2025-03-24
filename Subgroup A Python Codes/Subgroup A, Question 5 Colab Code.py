@@ -47,20 +47,28 @@ def plot_bar_per_cluster(df, question, cluster_col='cluster'):
         responses = df[df[cluster_col] == c][question].value_counts()
         responses = responses.reindex(all_labels, fill_value=0)
         plot_data[f'Cluster {c}'] = responses
+    return plot_data
 
-    plot_data.plot(kind='bar', figsize=(12, 6))
-    plt.title(f"Distribution of '{question}' Responses by Cluster")
-    plt.xlabel("Responses")
-    plt.ylabel("Count")
-    plt.xticks(rotation=45)
-    plt.legend(title="Cluster")
-    plt.tight_layout()
-    plt.show()
+# Plot graph for q1
+plot_data = plot_bar_per_cluster(data, 'q1')
+plot_data.plot(kind = 'bar', figsize = (12,6))
+plt.title("Visitor Group Type Across Clusters")
+plt.xlabel("")
+plt.ylabel("Count")
+plt.xticks(rotation = 45)
 
-plot_bar_per_cluster(data, 'q1')
+# Plot graph for q2_1
+plot_data = plot_bar_per_cluster(data, 'q2_1')
+plot_data.plot(kind = 'bar', figsize = (12,6))
+plt.title("Distribution of Visitor Age Across Clusters")
+plt.xlabel("")
+plt.ylabel("Count")
+plt.xticks(rotation = 45)
 
-plot_bar_per_cluster(data, 'q2_1')
-
-
-
-plot_bar_per_cluster(data, 'q12')
+# Plot graph for q12
+plot_data = plot_bar_per_cluster(data, 'q12')
+plot_data.plot(kind = 'bar', figsize = (12,6))
+plt.title("Preferred Park Exploration Method Across Clusters")
+plt.xlabel("")
+plt.ylabel("Count")
+plt.xticks(rotation = 45)
