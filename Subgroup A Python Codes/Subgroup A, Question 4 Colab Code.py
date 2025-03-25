@@ -928,7 +928,7 @@ plt.show()
 
 """The bar chart above suggests that `Special Events` may not be as important as other factors such as `Cost And Ticket Prices` and `Weather Conditions` in influencing survey respondants to visit theme parks. However, it is still a factor taken into consideration by 29% of respondants.
 
-To further investigate which particular special events attract visitors, we will analyse column `q8` (What type of events influence your decision to visit?), which consists of the following options:
+To further investigate which particular special events attract visitors, we will analyze column `q8` (What type of events influence your decision to visit?), which consists of the following options:
 
 *   **Minion Land Grand Opening**
 *   **Halloween Horror Night**
@@ -971,7 +971,7 @@ count_ones = count_ones.sort_values(ascending = False)
 
 # Plot the bar chart with a color
 plt.figure(figsize = (12, 8))
-ax = count_ones.plot(kind = 'bar')
+ax = count_ones.plot(kind = 'bar', color='plum')
 
 # Add labels and title
 plt.title('Total Count of Events Attracting Visitors')
@@ -992,7 +992,7 @@ plt.show()
 
 """Key Observations And Insights:
 
-From the bar chart above, we observe that `Halloween Horror Night` is most likely to attract guests to visit USS, followed by `Minion Land Grand Opening` then `A Universal Christmas`, but the difference in total count between the 3 events is not large. However, we have to note that `Minion Land Grand Opening` is a one-time event while `Halloween Horror Night` and `A Universal Christmas` are annual events.
+From the bar chart above, we observe that `Halloween Horror Night` is most likely to attract guests to visit USS, followed by `Minion Land Grand Opening` then `A Universal Christmas`, but the difference in total count between the 3 events is not large. A point to note is that `Minion Land Grand Opening` is a one-time event while `Halloween Horror Night` and `A Universal Christmas` are annual events. On the other hand, about 36% of survey respondents are not interested in any of the above events.
 
 --------------------------------------------------------------------------------
 
@@ -1001,11 +1001,11 @@ From the bar chart above, we observe that `Halloween Horror Night` is most likel
 To analyze the guest satisfaction of USS of recent survey respondents, we will be using column `q15` (How likely are you to recommend USS to others?) of the dataset. This column consists of scores from 1-10, where a score of 1 means that respondents are not at all likely to recommend USS to others while a score of 10 means that respondents are extremely likely to recommend USS to others
 """
 
-# Extracting the relevant columns for analysis (q15, q17)
-df_satisfaction_scores = df[['q15', 'q17_1', 'q17_2', 'q17_3', 'q17_4', 'q17_5', 'q17_6']]
+# Extracting the relevant column for analysis (q15)
+df_satisfaction_scores = df['q15']
 
 # Create a count of values in q15
-q15_counts = df_satisfaction_scores['q15'].value_counts().sort_index()
+q15_counts = df_satisfaction_scores.value_counts().sort_index()
 
 # Create the bar plot
 plt.figure(figsize = (10, 8))
@@ -1123,8 +1123,7 @@ To clean the raw dataset from Kaggle, we need to do the following:
 """
 
 # Remove unnecessary columns
-df_history = df_history.drop(columns=['reviewer', 'title', 'review_text',
-                                      'written_date'])
+df_history = df_history.drop(columns=['reviewer', 'title', 'review_text'])
 
 # Filter for rows where 'branch' is "Universal Studios Singapore"
 df_history = df_history[df_history['branch'] == "Universal Studios Singapore"]
@@ -1137,8 +1136,15 @@ df_history = df_history.rename(columns={
 })
 
 # Rearrange the columns in the specified order
-df_history = df_history[['gender', 'age_range', 'nationality', 'branch',
-                         'visitor_type', 'day_preferred', 'time_of_day', 'rating']]
+df_history = df_history[['gender', 'age_range', 'nationality', 'branch', 'visitor_type',
+                         'day_preferred', 'time_of_day', 'rating', 'written_date']]
+
+# Get year and month of review
+df_history['year'] = df_history['written_date'].dt.year
+df_history['month'] = df_history['written_date'].dt.month
+
+# Drop written_date column
+df_history = df_history.drop(columns='written_date')
 
 # Reset the index and start from 1 instead of 0
 df_history = df_history.reset_index(drop=True)
@@ -1300,7 +1306,7 @@ order = ['Solo Traveller', 'Visiting With Friends', 'Families With Young Childre
 
 # Create a bar plot
 plt.figure(figsize=(10, 6))
-ax = sns.countplot(x='visitor_type', data=df_history, order=order, color="lightblue")
+ax = sns.countplot(x='visitor_type', data=df_history, order=order, color="powderblue")
 
 # Add title and labels
 plt.title('Number Of Reviewers Based On Visitor Type (Historical Data)')
@@ -1382,6 +1388,34 @@ plt.show()
 
 3) The proportion of visitors who chose School Holidays as their preferred days to visit USS for the historic dataset is significantly lower compared to the current dataset.
 
+Next, we will explore the number of reviews received each month from 2010 to 2021 by plotting a line graph.
+"""
+
+# Group by year and month and count occurrences
+monthly_counts = df_history.groupby(['year', 'month']).size().reset_index(name='count')
+
+# Pivot for easier plotting
+pivot_counts = monthly_counts.pivot(index='month', columns='year', values='count')
+
+# Plot line graph
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=monthly_counts, x='month', y='count', hue='year',
+             marker='o', palette='deep', linewidth=2)
+
+plt.title('Number of Reviews Each Month', fontsize=14)
+plt.xlabel('Month', fontsize=12)
+plt.ylabel('Number of Reviews', fontsize=12)
+plt.xticks(range(1, 13),
+           ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.legend(title='Year', fontsize=10, bbox_to_anchor=(1.1, 1))
+plt.tight_layout()
+
+plt.show()
+
+"""The graph shows that there tends to be spike in the number of reviews in the months of July and December to January for most years, with the exception of 2020 and 2021 when the pandemic was still rampant. This coincides with the long school holiday period in Singapore (June and December), suggesting that a larger number of people tend to visit USS during the holidays, even if it may not be their preferred choice.
+
 --------------------------------------------------------------------------------
 
 ###### Category 2: What time of the day constitutes the highest demand?
@@ -1448,7 +1482,7 @@ days = dfhistory_day.value_counts().reindex(order, fill_value=0)
 
 # Create a bar plot
 plt.figure(figsize=(10, 6))
-ax = sns.barplot(x=days.index, y=days.values, order=order)
+ax = sns.barplot(x=days.index, y=days.values, order=order, color='powderblue')
 
 # Add title and labels
 plt.title("Number of Reviewers Based on Preferred Days (Historical Data)")
@@ -1481,7 +1515,7 @@ We will be using the `ratings` column as a metric to measure guest satisfaction 
 
 # Create a bar plot
 plt.figure(figsize=(10, 6))
-ax = sns.countplot(x='rating', data=df_history)
+ax = sns.countplot(x='rating', data=df_history, color='darkgreen')
 
 # Add count labels on top of each bar
 for p in ax.patches:
