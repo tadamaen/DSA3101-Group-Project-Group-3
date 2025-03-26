@@ -1,0 +1,881 @@
+timestamp,zone,place,average,maximum
+10:00,Hollywood,Pantages Theater,0,0
+10:00,Hollywood,Mel's Mixtape,0,0
+10:00,Hollywood,Entrance,0,0
+10:00,Minion Land,Minion Mayhem,0,0
+10:00,Minion Land,Silly Swirly,0,0
+10:00,Minion Land,Buggie Boogie,0,0
+10:00,Far Far Away,Shrek 4D,0,0
+10:00,Far Far Away,Puss in Boots,0,0
+10:00,Far Far Away,Donkey LIVE,0,0
+10:00,Far Far Away,Magic Potion Spin,0,0
+10:00,Far Far Away,Enchanted Airways,0,0
+10:00,The Lost World,Jurassic Rapids,0,0
+10:00,The Lost World,Canopy Flyer,0,0
+10:00,The Lost World,Dino-Soarin,0,0
+10:00,The Lost World,Water World,0,0
+10:00,Ancient Egypt,Revenge of Mummy,0,0
+10:00,Ancient Egypt,Treasure Hunters,0,0
+10:00,Sci-Fi City,Transformers,0,0
+10:00,Sci-Fi City,Cylon,0,0
+10:00,Sci-Fi City,Human,0,0
+10:00,Sci-Fi City,Accelerator,0,0
+10:00,New York,Sesame Street Spaghetti Chase,0,0
+10:00,New York,Rhythm Truck,0,0
+10:00,New York,Lights Camera Action!,0,0
+10:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+10:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+10:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+10:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+10:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+10:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+10:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+10:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+10:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+10:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+10:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+10:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+10:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+10:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+10:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+10:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+10:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+10:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+10:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+10:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+10:30,Hollywood,Pantages Theater,0,0
+10:30,Hollywood,Mel's Mixtape,0,0
+10:30,Hollywood,Entrance,0.24,0.48
+10:30,Minion Land,Minion Mayhem,0,0
+10:30,Minion Land,Silly Swirly,0,0
+10:30,Minion Land,Buggie Boogie,0,0
+10:30,Far Far Away,Shrek 4D,0,0
+10:30,Far Far Away,Puss in Boots,0,0
+10:30,Far Far Away,Donkey LIVE,0,0
+10:30,Far Far Away,Magic Potion Spin,0,0
+10:30,Far Far Away,Enchanted Airways,0,0
+10:30,The Lost World,Jurassic Rapids,0,0
+10:30,The Lost World,Canopy Flyer,0,0
+10:30,The Lost World,Dino-Soarin,0,0
+10:30,The Lost World,Water World,0,0
+10:30,Ancient Egypt,Revenge of Mummy,0,0
+10:30,Ancient Egypt,Treasure Hunters,0,0
+10:30,Sci-Fi City,Transformers,0,0
+10:30,Sci-Fi City,Cylon,0,0
+10:30,Sci-Fi City,Human,0,0
+10:30,Sci-Fi City,Accelerator,0,0
+10:30,New York,Sesame Street Spaghetti Chase,0,0
+10:30,New York,Rhythm Truck,0,0
+10:30,New York,Lights Camera Action!,0,0
+10:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+10:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+10:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+10:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+10:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+10:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+10:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+10:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+10:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+10:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+10:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+10:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+10:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+10:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+10:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+10:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+10:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+10:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+10:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+10:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+11:00,Hollywood,Pantages Theater,0,0
+11:00,Hollywood,Mel's Mixtape,0,0
+11:00,Hollywood,Entrance,2.24,6.24
+11:00,Minion Land,Minion Mayhem,0,0
+11:00,Minion Land,Silly Swirly,0,0
+11:00,Minion Land,Buggie Boogie,0,0
+11:00,Far Far Away,Shrek 4D,0,0
+11:00,Far Far Away,Puss in Boots,0,0
+11:00,Far Far Away,Donkey LIVE,0,0
+11:00,Far Far Away,Magic Potion Spin,0,0
+11:00,Far Far Away,Enchanted Airways,0,0
+11:00,The Lost World,Jurassic Rapids,0,0
+11:00,The Lost World,Canopy Flyer,0,0
+11:00,The Lost World,Dino-Soarin,0,0
+11:00,The Lost World,Water World,0,0
+11:00,Ancient Egypt,Revenge of Mummy,0,0
+11:00,Ancient Egypt,Treasure Hunters,0,0
+11:00,Sci-Fi City,Transformers,0,0
+11:00,Sci-Fi City,Cylon,0,0
+11:00,Sci-Fi City,Human,0,0
+11:00,Sci-Fi City,Accelerator,0,0
+11:00,New York,Sesame Street Spaghetti Chase,0,0
+11:00,New York,Rhythm Truck,0,0
+11:00,New York,Lights Camera Action!,0,0
+11:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+11:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+11:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+11:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+11:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+11:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+11:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+11:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+11:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+11:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+11:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+11:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+11:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+11:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+11:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+11:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+11:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+11:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+11:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+11:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+11:30,Hollywood,Pantages Theater,0,0
+11:30,Hollywood,Mel's Mixtape,0,0
+11:30,Hollywood,Entrance,5.325,14.58
+11:30,Minion Land,Minion Mayhem,0,0
+11:30,Minion Land,Silly Swirly,0,0
+11:30,Minion Land,Buggie Boogie,0,0
+11:30,Far Far Away,Shrek 4D,0,0
+11:30,Far Far Away,Puss in Boots,0,0
+11:30,Far Far Away,Donkey LIVE,0,0
+11:30,Far Far Away,Magic Potion Spin,0,0
+11:30,Far Far Away,Enchanted Airways,0,0
+11:30,The Lost World,Jurassic Rapids,0,0
+11:30,The Lost World,Canopy Flyer,0,0
+11:30,The Lost World,Dino-Soarin,0,0
+11:30,The Lost World,Water World,0,0
+11:30,Ancient Egypt,Revenge of Mummy,0,0
+11:30,Ancient Egypt,Treasure Hunters,0,0
+11:30,Sci-Fi City,Transformers,0,0
+11:30,Sci-Fi City,Cylon,0,0
+11:30,Sci-Fi City,Human,0,0
+11:30,Sci-Fi City,Accelerator,0,0
+11:30,New York,Sesame Street Spaghetti Chase,6,24
+11:30,New York,Rhythm Truck,5.25,21
+11:30,New York,Lights Camera Action!,6.75,27
+11:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+11:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+11:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+11:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+11:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+11:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+11:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+11:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+11:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+11:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+11:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+11:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+11:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+11:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+11:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+11:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+11:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+11:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+11:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+11:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+12:00,Hollywood,Pantages Theater,4.8,24
+12:00,Hollywood,Mel's Mixtape,4.2,21
+12:00,Hollywood,Entrance,7.86,18
+12:00,Minion Land,Minion Mayhem,0,0
+12:00,Minion Land,Silly Swirly,0,0
+12:00,Minion Land,Buggie Boogie,0,0
+12:00,Far Far Away,Shrek 4D,0,0
+12:00,Far Far Away,Puss in Boots,0,0
+12:00,Far Far Away,Donkey LIVE,0,0
+12:00,Far Far Away,Magic Potion Spin,0,0
+12:00,Far Far Away,Enchanted Airways,0,0
+12:00,The Lost World,Jurassic Rapids,0,0
+12:00,The Lost World,Canopy Flyer,0,0
+12:00,The Lost World,Dino-Soarin,0,0
+12:00,The Lost World,Water World,0,0
+12:00,Ancient Egypt,Revenge of Mummy,0,0
+12:00,Ancient Egypt,Treasure Hunters,0,0
+12:00,Sci-Fi City,Transformers,2.4,12
+12:00,Sci-Fi City,Cylon,0,0
+12:00,Sci-Fi City,Human,0,0
+12:00,Sci-Fi City,Accelerator,0,0
+12:00,New York,Sesame Street Spaghetti Chase,9.6,24
+12:00,New York,Rhythm Truck,8.4,21
+12:00,New York,Lights Camera Action!,10.8,27
+12:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+12:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+12:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+12:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+12:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+12:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+12:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+12:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+12:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+12:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+12:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+12:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+12:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+12:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+12:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+12:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+12:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+12:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+12:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+12:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+12:30,Hollywood,Pantages Theater,8,24
+12:30,Hollywood,Mel's Mixtape,7,21
+12:30,Hollywood,Entrance,9.55,18
+12:30,Minion Land,Minion Mayhem,2.166666667,13
+12:30,Minion Land,Silly Swirly,4,24
+12:30,Minion Land,Buggie Boogie,3.5,21
+12:30,Far Far Away,Shrek 4D,0,0
+12:30,Far Far Away,Puss in Boots,0,0
+12:30,Far Far Away,Donkey LIVE,0,0
+12:30,Far Far Away,Magic Potion Spin,0,0
+12:30,Far Far Away,Enchanted Airways,0,0
+12:30,The Lost World,Jurassic Rapids,0,0
+12:30,The Lost World,Canopy Flyer,0,0
+12:30,The Lost World,Dino-Soarin,0,0
+12:30,The Lost World,Water World,0,0
+12:30,Ancient Egypt,Revenge of Mummy,0,0
+12:30,Ancient Egypt,Treasure Hunters,0,0
+12:30,Sci-Fi City,Transformers,7,30
+12:30,Sci-Fi City,Cylon,1.95,11.7
+12:30,Sci-Fi City,Human,2.3,13.8
+12:30,Sci-Fi City,Accelerator,2.644444444,15.86666667
+12:30,New York,Sesame Street Spaghetti Chase,12,24
+12:30,New York,Rhythm Truck,10.5,21
+12:30,New York,Lights Camera Action!,13.5,27
+12:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+12:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+12:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+12:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+12:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+12:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+12:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+12:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+12:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+12:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+12:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+12:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+12:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+12:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+12:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+12:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+12:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+12:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+12:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+12:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+13:00,Hollywood,Pantages Theater,10.28571429,24
+13:00,Hollywood,Mel's Mixtape,9,21
+13:00,Hollywood,Entrance,10.75714286,18
+13:00,Minion Land,Minion Mayhem,6.142857143,30
+13:00,Minion Land,Silly Swirly,6.857142857,24
+13:00,Minion Land,Buggie Boogie,6,21
+13:00,Far Far Away,Shrek 4D,0,0
+13:00,Far Far Away,Puss in Boots,0,0
+13:00,Far Far Away,Donkey LIVE,0,0
+13:00,Far Far Away,Magic Potion Spin,0,0
+13:00,Far Far Away,Enchanted Airways,2.378571429,16.65
+13:00,The Lost World,Jurassic Rapids,0,0
+13:00,The Lost World,Canopy Flyer,0,0
+13:00,The Lost World,Dino-Soarin,0,0
+13:00,The Lost World,Water World,0,0
+13:00,Ancient Egypt,Revenge of Mummy,0,0
+13:00,Ancient Egypt,Treasure Hunters,0,0
+13:00,Sci-Fi City,Transformers,10.28571429,30
+13:00,Sci-Fi City,Cylon,5.528571429,27
+13:00,Sci-Fi City,Human,5.828571429,27
+13:00,Sci-Fi City,Accelerator,5.266666667,21
+13:00,New York,Sesame Street Spaghetti Chase,13.71428571,24
+13:00,New York,Rhythm Truck,12,21
+13:00,New York,Lights Camera Action!,15.42857143,27
+13:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+13:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+13:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+13:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+13:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+13:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+13:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+13:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+13:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+13:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+13:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+13:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+13:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+13:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+13:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+13:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+13:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+13:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+13:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+13:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+13:30,Hollywood,Pantages Theater,12,24
+13:30,Hollywood,Mel's Mixtape,10.5,21
+13:30,Hollywood,Entrance,11.6625,18
+13:30,Minion Land,Minion Mayhem,9.125,30
+13:30,Minion Land,Silly Swirly,9,24
+13:30,Minion Land,Buggie Boogie,7.875,21
+13:30,Far Far Away,Shrek 4D,1.5125,12.1
+13:30,Far Far Away,Puss in Boots,0,0
+13:30,Far Far Away,Donkey LIVE,0,0
+13:30,Far Far Away,Magic Potion Spin,0.7,5.6
+13:30,Far Far Away,Enchanted Airways,5.45625,27
+13:30,The Lost World,Jurassic Rapids,0,0
+13:30,The Lost World,Canopy Flyer,0,0
+13:30,The Lost World,Dino-Soarin,0,0
+13:30,The Lost World,Water World,0,0
+13:30,Ancient Egypt,Revenge of Mummy,3.375,27
+13:30,Ancient Egypt,Treasure Hunters,2.625,21
+13:30,Sci-Fi City,Transformers,12.75,30
+13:30,Sci-Fi City,Cylon,8.2125,27
+13:30,Sci-Fi City,Human,8.475,27
+13:30,Sci-Fi City,Accelerator,7.233333333,21
+13:30,New York,Sesame Street Spaghetti Chase,15,24
+13:30,New York,Rhythm Truck,13.125,21
+13:30,New York,Lights Camera Action!,16.875,27
+13:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+13:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+13:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+13:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+13:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+13:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+13:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+13:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+13:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+13:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+13:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+13:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+13:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+13:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+13:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+13:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+13:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+13:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+13:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+13:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+14:00,Hollywood,Pantages Theater,13.33333333,24
+14:00,Hollywood,Mel's Mixtape,11.66666667,21
+14:00,Hollywood,Entrance,12.36666667,18
+14:00,Minion Land,Minion Mayhem,11.44444444,30
+14:00,Minion Land,Silly Swirly,10.66666667,24
+14:00,Minion Land,Buggie Boogie,9.333333333,21
+14:00,Far Far Away,Shrek 4D,5.011111111,33
+14:00,Far Far Away,Puss in Boots,0,0
+14:00,Far Far Away,Donkey LIVE,0,0
+14:00,Far Far Away,Magic Potion Spin,2.955555556,21
+14:00,Far Far Away,Enchanted Airways,7.85,27
+14:00,The Lost World,Jurassic Rapids,1.074074074,9.666666667
+14:00,The Lost World,Canopy Flyer,0,0
+14:00,The Lost World,Dino-Soarin,0,0
+14:00,The Lost World,Water World,0,0
+14:00,Ancient Egypt,Revenge of Mummy,6,27
+14:00,Ancient Egypt,Treasure Hunters,4.666666667,21
+14:00,Sci-Fi City,Transformers,14.66666667,30
+14:00,Sci-Fi City,Cylon,10.3,27
+14:00,Sci-Fi City,Human,10.53333333,27
+14:00,Sci-Fi City,Accelerator,8.762962963,21
+14:00,New York,Sesame Street Spaghetti Chase,16,24
+14:00,New York,Rhythm Truck,14,21
+14:00,New York,Lights Camera Action!,18,27
+14:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+14:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+14:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+14:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+14:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+14:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+14:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+14:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+14:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+14:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+14:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+14:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+14:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+14:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+14:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+14:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+14:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+14:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+14:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+14:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+14:30,Hollywood,Pantages Theater,14.4,24
+14:30,Hollywood,Mel's Mixtape,12.6,21
+14:30,Hollywood,Entrance,12.93,18
+14:30,Minion Land,Minion Mayhem,13.3,30
+14:30,Minion Land,Silly Swirly,12,24
+14:30,Minion Land,Buggie Boogie,10.5,21
+14:30,Far Far Away,Shrek 4D,7.81,33
+14:30,Far Far Away,Puss in Boots,0.36,3.6
+14:30,Far Far Away,Donkey LIVE,0,0
+14:30,Far Far Away,Magic Potion Spin,4.76,21
+14:30,Far Far Away,Enchanted Airways,9.765,27
+14:30,The Lost World,Jurassic Rapids,3.966666667,30
+14:30,The Lost World,Canopy Flyer,1.56,15.6
+14:30,The Lost World,Dino-Soarin,0.186666667,1.866666667
+14:30,The Lost World,Water World,0.086666667,0.866666667
+14:30,Ancient Egypt,Revenge of Mummy,8.1,27
+14:30,Ancient Egypt,Treasure Hunters,6.3,21
+14:30,Sci-Fi City,Transformers,16.2,30
+14:30,Sci-Fi City,Cylon,11.97,27
+14:30,Sci-Fi City,Human,12.18,27
+14:30,Sci-Fi City,Accelerator,9.986666667,21
+14:30,New York,Sesame Street Spaghetti Chase,16.8,24
+14:30,New York,Rhythm Truck,14.7,21
+14:30,New York,Lights Camera Action!,18.9,27
+14:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+14:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+14:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+14:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+14:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+14:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+14:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+14:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+14:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+14:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+14:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+14:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+14:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+14:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+14:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+14:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+14:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+14:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+14:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+14:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+15:00,Hollywood,Pantages Theater,15.27272727,24
+15:00,Hollywood,Mel's Mixtape,13.36363636,21
+15:00,Hollywood,Entrance,13.39090909,18
+15:00,Minion Land,Minion Mayhem,14.81818182,30
+15:00,Minion Land,Silly Swirly,13.09090909,24
+15:00,Minion Land,Buggie Boogie,11.45454545,21
+15:00,Far Far Away,Shrek 4D,10.1,33
+15:00,Far Far Away,Puss in Boots,2.225454545,20.88
+15:00,Far Far Away,Donkey LIVE,0.751515152,8.266666667
+15:00,Far Far Away,Magic Potion Spin,6.236363636,21
+15:00,Far Far Away,Enchanted Airways,11.33181818,27
+15:00,The Lost World,Jurassic Rapids,6.333333333,30
+15:00,The Lost World,Canopy Flyer,3.6,24
+15:00,The Lost World,Dino-Soarin,2.078787879,21
+15:00,The Lost World,Water World,1.812121212,19.06666667
+15:00,Ancient Egypt,Revenge of Mummy,9.818181818,27
+15:00,Ancient Egypt,Treasure Hunters,7.636363636,21
+15:00,Sci-Fi City,Transformers,17.45454545,30
+15:00,Sci-Fi City,Cylon,13.33636364,27
+15:00,Sci-Fi City,Human,13.52727273,27
+15:00,Sci-Fi City,Accelerator,10.98787879,21
+15:00,New York,Sesame Street Spaghetti Chase,17.45454545,24
+15:00,New York,Rhythm Truck,15.27272727,21
+15:00,New York,Lights Camera Action!,19.63636364,27
+15:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+15:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+15:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+15:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+15:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+15:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+15:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+15:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+15:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+15:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+15:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+15:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+15:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+15:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+15:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+15:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+15:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+15:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+15:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+15:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+15:30,Hollywood,Pantages Theater,16,24
+15:30,Hollywood,Mel's Mixtape,14,21
+15:30,Hollywood,Entrance,13.775,18
+15:30,Minion Land,Minion Mayhem,16.08333333,30
+15:30,Minion Land,Silly Swirly,14,24
+15:30,Minion Land,Buggie Boogie,12.25,21
+15:30,Far Far Away,Shrek 4D,12.00833333,33
+15:30,Far Far Away,Puss in Boots,4.29,27
+15:30,Far Far Away,Donkey LIVE,2.688888889,24
+15:30,Far Far Away,Magic Potion Spin,7.466666667,21
+15:30,Far Far Away,Enchanted Airways,12.6375,27
+15:30,The Lost World,Jurassic Rapids,8.305555556,30
+15:30,The Lost World,Canopy Flyer,5.3,24
+15:30,The Lost World,Dino-Soarin,3.655555556,21
+15:30,The Lost World,Water World,4.911111111,39
+15:30,Ancient Egypt,Revenge of Mummy,11.25,27
+15:30,Ancient Egypt,Treasure Hunters,8.75,21
+15:30,Sci-Fi City,Transformers,18.5,30
+15:30,Sci-Fi City,Cylon,14.475,27
+15:30,Sci-Fi City,Human,14.65,27
+15:30,Sci-Fi City,Accelerator,11.82222222,21
+15:30,New York,Sesame Street Spaghetti Chase,18,24
+15:30,New York,Rhythm Truck,15.75,21
+15:30,New York,Lights Camera Action!,20.25,27
+15:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+15:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+15:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+15:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+15:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+15:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+15:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+15:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+15:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+15:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+15:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+15:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+15:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+15:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+15:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+15:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+15:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+15:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+15:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+15:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+16:00,Hollywood,Pantages Theater,16.61538462,24
+16:00,Hollywood,Mel's Mixtape,14.53846154,21
+16:00,Hollywood,Entrance,14.1,18
+16:00,Minion Land,Minion Mayhem,17.15384615,30
+16:00,Minion Land,Silly Swirly,14.76923077,24
+16:00,Minion Land,Buggie Boogie,12.92307692,21
+16:00,Far Far Away,Shrek 4D,13.62307692,33
+16:00,Far Far Away,Puss in Boots,6.036923077,27
+16:00,Far Far Away,Donkey LIVE,4.328205128,24
+16:00,Far Far Away,Magic Potion Spin,8.507692308,21
+16:00,Far Far Away,Enchanted Airways,13.74230769,27
+16:00,The Lost World,Jurassic Rapids,9.974358974,30
+16:00,The Lost World,Canopy Flyer,6.738461538,24
+16:00,The Lost World,Dino-Soarin,4.98974359,21
+16:00,The Lost World,Water World,7.533333333,39
+16:00,Ancient Egypt,Revenge of Mummy,12.46153846,27
+16:00,Ancient Egypt,Treasure Hunters,9.692307692,21
+16:00,Sci-Fi City,Transformers,19.38461538,30
+16:00,Sci-Fi City,Cylon,15.43846154,27
+16:00,Sci-Fi City,Human,15.6,27
+16:00,Sci-Fi City,Accelerator,12.52820513,21
+16:00,New York,Sesame Street Spaghetti Chase,18.46153846,24
+16:00,New York,Rhythm Truck,16.15384615,21
+16:00,New York,Lights Camera Action!,20.76923077,27
+16:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+16:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+16:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+16:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+16:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+16:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+16:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+16:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+16:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+16:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+16:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+16:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+16:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+16:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+16:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+16:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+16:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+16:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+16:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+16:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+16:30,Hollywood,Pantages Theater,17.14285714,24
+16:30,Hollywood,Mel's Mixtape,15,21
+16:30,Hollywood,Entrance,14.37857143,18
+16:30,Minion Land,Minion Mayhem,18.07142857,30
+16:30,Minion Land,Silly Swirly,15.42857143,24
+16:30,Minion Land,Buggie Boogie,13.5,21
+16:30,Far Far Away,Shrek 4D,15.00714286,33
+16:30,Far Far Away,Puss in Boots,7.534285714,27
+16:30,Far Far Away,Donkey LIVE,5.733333333,24
+16:30,Far Far Away,Magic Potion Spin,9.4,21
+16:30,Far Far Away,Enchanted Airways,14.68928571,27
+16:30,The Lost World,Jurassic Rapids,11.4047619,30
+16:30,The Lost World,Canopy Flyer,7.971428571,24
+16:30,The Lost World,Dino-Soarin,6.133333333,21
+16:30,The Lost World,Water World,9.780952381,39
+16:30,Ancient Egypt,Revenge of Mummy,13.5,27
+16:30,Ancient Egypt,Treasure Hunters,10.5,21
+16:30,Sci-Fi City,Transformers,20.14285714,30
+16:30,Sci-Fi City,Cylon,16.26428571,27
+16:30,Sci-Fi City,Human,16.41428571,27
+16:30,Sci-Fi City,Accelerator,13.13333333,21
+16:30,New York,Sesame Street Spaghetti Chase,18.85714286,24
+16:30,New York,Rhythm Truck,16.5,21
+16:30,New York,Lights Camera Action!,21.21428571,27
+16:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+16:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+16:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+16:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+16:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+16:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+16:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+16:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+16:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+16:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+16:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+16:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+16:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+16:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+16:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+16:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+16:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+16:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+16:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+16:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+17:00,Hollywood,Pantages Theater,17.6,24
+17:00,Hollywood,Mel's Mixtape,15.4,21
+17:00,Hollywood,Entrance,14.62,18
+17:00,Minion Land,Minion Mayhem,18.86666667,30
+17:00,Minion Land,Silly Swirly,16,24
+17:00,Minion Land,Buggie Boogie,14,21
+17:00,Far Far Away,Shrek 4D,16.20666667,33
+17:00,Far Far Away,Puss in Boots,8.832,27
+17:00,Far Far Away,Donkey LIVE,6.951111111,24
+17:00,Far Far Away,Magic Potion Spin,10.17333333,21
+17:00,Far Far Away,Enchanted Airways,15.51,27
+17:00,The Lost World,Jurassic Rapids,12.64444444,30
+17:00,The Lost World,Canopy Flyer,9.04,24
+17:00,The Lost World,Dino-Soarin,7.124444444,21
+17:00,The Lost World,Water World,11.72888889,39
+17:00,Ancient Egypt,Revenge of Mummy,14.4,27
+17:00,Ancient Egypt,Treasure Hunters,11.2,21
+17:00,Sci-Fi City,Transformers,20.8,30
+17:00,Sci-Fi City,Cylon,16.98,27
+17:00,Sci-Fi City,Human,17.12,27
+17:00,Sci-Fi City,Accelerator,13.65777778,21
+17:00,New York,Sesame Street Spaghetti Chase,19.2,24
+17:00,New York,Rhythm Truck,16.8,21
+17:00,New York,Lights Camera Action!,21.6,27
+17:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+17:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+17:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+17:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+17:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+17:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+17:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+17:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+17:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+17:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+17:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+17:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+17:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+17:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+17:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+17:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+17:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+17:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+17:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+17:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+17:30,Hollywood,Pantages Theater,18,24
+17:30,Hollywood,Mel's Mixtape,15.75,21
+17:30,Hollywood,Entrance,14.83125,18
+17:30,Minion Land,Minion Mayhem,19.5625,30
+17:30,Minion Land,Silly Swirly,16.5,24
+17:30,Minion Land,Buggie Boogie,14.4375,21
+17:30,Far Far Away,Shrek 4D,17.25625,33
+17:30,Far Far Away,Puss in Boots,9.9675,27
+17:30,Far Far Away,Donkey LIVE,8.016666667,24
+17:30,Far Far Away,Magic Potion Spin,10.85,21
+17:30,Far Far Away,Enchanted Airways,16.228125,27
+17:30,The Lost World,Jurassic Rapids,13.72916667,30
+17:30,The Lost World,Canopy Flyer,9.975,24
+17:30,The Lost World,Dino-Soarin,7.991666667,21
+17:30,The Lost World,Water World,13.43333333,39
+17:30,Ancient Egypt,Revenge of Mummy,15.1875,27
+17:30,Ancient Egypt,Treasure Hunters,11.8125,21
+17:30,Sci-Fi City,Transformers,21.375,30
+17:30,Sci-Fi City,Cylon,17.60625,27
+17:30,Sci-Fi City,Human,17.7375,27
+17:30,Sci-Fi City,Accelerator,14.11666667,21
+17:30,New York,Sesame Street Spaghetti Chase,19.5,24
+17:30,New York,Rhythm Truck,17.0625,21
+17:30,New York,Lights Camera Action!,21.9375,27
+17:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+17:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+17:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+17:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+17:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+17:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+17:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+17:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+17:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+17:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+17:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+17:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+17:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+17:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+17:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+17:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+17:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+17:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+17:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+17:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+18:00,Hollywood,Pantages Theater,18.35294118,24
+18:00,Hollywood,Mel's Mixtape,16.05882353,21
+18:00,Hollywood,Entrance,15.01764706,18
+18:00,Minion Land,Minion Mayhem,20.17647059,30
+18:00,Minion Land,Silly Swirly,16.94117647,24
+18:00,Minion Land,Buggie Boogie,14.82352941,21
+18:00,Far Far Away,Shrek 4D,18.18235294,33
+18:00,Far Far Away,Puss in Boots,10.96941176,27
+18:00,Far Far Away,Donkey LIVE,8.956862745,24
+18:00,Far Far Away,Magic Potion Spin,11.44705882,21
+18:00,Far Far Away,Enchanted Airways,16.86176471,27
+18:00,The Lost World,Jurassic Rapids,14.68627451,30
+18:00,The Lost World,Canopy Flyer,10.8,24
+18:00,The Lost World,Dino-Soarin,8.756862745,21
+18:00,The Lost World,Water World,14.9372549,39
+18:00,Ancient Egypt,Revenge of Mummy,15.88235294,27
+18:00,Ancient Egypt,Treasure Hunters,12.35294118,21
+18:00,Sci-Fi City,Transformers,21.88235294,30
+18:00,Sci-Fi City,Cylon,18.15882353,27
+18:00,Sci-Fi City,Human,18.28235294,27
+18:00,Sci-Fi City,Accelerator,14.52156863,21
+18:00,New York,Sesame Street Spaghetti Chase,19.76470588,24
+18:00,New York,Rhythm Truck,17.29411765,21
+18:00,New York,Lights Camera Action!,22.23529412,27
+18:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+18:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+18:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+18:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+18:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+18:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+18:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+18:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+18:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+18:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+18:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+18:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+18:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+18:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+18:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+18:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+18:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+18:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+18:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+18:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+18:30,Hollywood,Pantages Theater,18.66666667,24
+18:30,Hollywood,Mel's Mixtape,16.33333333,21
+18:30,Hollywood,Entrance,15.18333333,18
+18:30,Minion Land,Minion Mayhem,20.72222222,30
+18:30,Minion Land,Silly Swirly,17.33333333,24
+18:30,Minion Land,Buggie Boogie,15.16666667,21
+18:30,Far Far Away,Shrek 4D,19.00555556,33
+18:30,Far Far Away,Puss in Boots,11.86,27
+18:30,Far Far Away,Donkey LIVE,9.792592593,24
+18:30,Far Far Away,Magic Potion Spin,11.97777778,21
+18:30,Far Far Away,Enchanted Airways,17.425,27
+18:30,The Lost World,Jurassic Rapids,15.53703704,30
+18:30,The Lost World,Canopy Flyer,11.53333333,24
+18:30,The Lost World,Dino-Soarin,9.437037037,21
+18:30,The Lost World,Water World,16.27407407,39
+18:30,Ancient Egypt,Revenge of Mummy,16.5,27
+18:30,Ancient Egypt,Treasure Hunters,12.83333333,21
+18:30,Sci-Fi City,Transformers,22.33333333,30
+18:30,Sci-Fi City,Cylon,18.65,27
+18:30,Sci-Fi City,Human,18.76666667,27
+18:30,Sci-Fi City,Accelerator,14.88148148,21
+18:30,New York,Sesame Street Spaghetti Chase,20,24
+18:30,New York,Rhythm Truck,17.5,21
+18:30,New York,Lights Camera Action!,22.5,27
+18:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+18:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+18:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+18:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+18:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+18:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+18:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+18:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+18:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+18:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+18:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+18:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+18:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+18:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+18:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+18:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+18:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+18:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+18:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+18:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+19:00,Hollywood,Pantages Theater,18.94736842,24
+19:00,Hollywood,Mel's Mixtape,16.57894737,21
+19:00,Hollywood,Entrance,15.33157895,18
+19:00,Minion Land,Minion Mayhem,21.21052632,30
+19:00,Minion Land,Silly Swirly,17.68421053,24
+19:00,Minion Land,Buggie Boogie,15.47368421,21
+19:00,Far Far Away,Shrek 4D,19.74210526,33
+19:00,Far Far Away,Puss in Boots,12.65684211,27
+19:00,Far Far Away,Donkey LIVE,10.54035088,24
+19:00,Far Far Away,Magic Potion Spin,12.45263158,21
+19:00,Far Far Away,Enchanted Airways,17.92894737,27
+19:00,The Lost World,Jurassic Rapids,16.29824561,30
+19:00,The Lost World,Canopy Flyer,12.18947368,24
+19:00,The Lost World,Dino-Soarin,10.04561404,21
+19:00,The Lost World,Water World,17.47017544,39
+19:00,Ancient Egypt,Revenge of Mummy,17.05263158,27
+19:00,Ancient Egypt,Treasure Hunters,13.26315789,21
+19:00,Sci-Fi City,Transformers,22.73684211,30
+19:00,Sci-Fi City,Cylon,19.08947368,27
+19:00,Sci-Fi City,Human,19.2,27
+19:00,Sci-Fi City,Accelerator,15.20350877,21
+19:00,New York,Sesame Street Spaghetti Chase,20.21052632,24
+19:00,New York,Rhythm Truck,17.68421053,21
+19:00,New York,Lights Camera Action!,22.73684211,27
+19:00,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+19:00,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+19:00,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+19:00,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+19:00,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+19:00,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+19:00,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+19:00,Hollywood,"(25, 14, 'Candylicious')",0,0
+19:00,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+19:00,Hollywood,"(28, 6, 'Minion Mart')",0,0
+19:00,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+19:00,Hollywood,"(25, 15, 'UNIVRS')",0,0
+19:00,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+19:00,Minion Land,"(39, 24, 'Pop Store')",0,0
+19:00,Minion Land,"(34, 22, 'Fun Store')",0,0
+19:00,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+19:00,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+19:00,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+19:00,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+19:00,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
+19:30,Hollywood,Pantages Theater,19.2,24
+19:30,Hollywood,Mel's Mixtape,16.8,21
+19:30,Hollywood,Entrance,15.465,18
+19:30,Minion Land,Minion Mayhem,21.65,30
+19:30,Minion Land,Silly Swirly,18,24
+19:30,Minion Land,Buggie Boogie,15.75,21
+19:30,Far Far Away,Shrek 4D,20.405,33
+19:30,Far Far Away,Puss in Boots,13.374,27
+19:30,Far Far Away,Donkey LIVE,11.21333333,24
+19:30,Far Far Away,Magic Potion Spin,12.88,21
+19:30,Far Far Away,Enchanted Airways,18.3825,27
+19:30,The Lost World,Jurassic Rapids,16.98333333,30
+19:30,The Lost World,Canopy Flyer,12.78,24
+19:30,The Lost World,Dino-Soarin,10.59333333,21
+19:30,The Lost World,Water World,18.54666667,39
+19:30,Ancient Egypt,Revenge of Mummy,17.55,27
+19:30,Ancient Egypt,Treasure Hunters,13.65,21
+19:30,Sci-Fi City,Transformers,23.1,30
+19:30,Sci-Fi City,Cylon,19.485,27
+19:30,Sci-Fi City,Human,19.59,27
+19:30,Sci-Fi City,Accelerator,15.49333333,21
+19:30,New York,Sesame Street Spaghetti Chase,20.4,24
+19:30,New York,Rhythm Truck,17.85,21
+19:30,New York,Lights Camera Action!,22.95,27
+19:30,Hollywood,"(29, 15, ""Mel's Drive-In"")",0,0
+19:30,Minion Land,"(38, 20, 'Pop-A-Nana')",0,0
+19:30,Far Far Away,"(36, 27, 'Goldilocks')",0,0
+19:30,The Lost World,"(28, 35, 'Discovery Food Court')",0,0
+19:30,Ancient Egypt,"(15, 30, 'Oasis Cafe')",0,0
+19:30,Sci-Fi City,"(12.5, 20, 'StarBot Cafe')",0,0
+19:30,New York,"(20, 10, ""Louie's NY Pizza"")",0,0
+19:30,Hollywood,"(25, 14, 'Candylicious')",0,0
+19:30,Hollywood,"(27, 6, 'Hello Kitty Studio Store')",0,0
+19:30,Hollywood,"(28, 6, 'Minion Mart')",0,0
+19:30,Hollywood,"(29, 6, 'Universal Studios Store')",0,0
+19:30,Hollywood,"(25, 15, 'UNIVRS')",0,0
+19:30,Minion Land,"(37, 19, 'Sweet Surrender')",0,0
+19:30,Minion Land,"(39, 24, 'Pop Store')",0,0
+19:30,Minion Land,"(34, 22, 'Fun Store')",0,0
+19:30,Far Far Away,"(35, 26, ""Fairy Godmother's Potion Shop"")",0,0
+19:30,The Lost World,"(27, 34, 'The Dino-Store')",0,0
+19:30,Ancient Egypt,"(16, 31, ""Carter's Curiosities"")",0,0
+19:30,Sci-Fi City,"(12, 21, 'Transformers shop')",0,0
+19:30,New York,"(21, 9, ""Big Bird's Emporium"")",0,0
