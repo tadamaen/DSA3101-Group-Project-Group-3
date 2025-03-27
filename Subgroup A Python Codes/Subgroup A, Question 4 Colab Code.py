@@ -7,13 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1CTQgJJ3dJQmwRsrum9mjqzmCXqG40fS8
 
 # Subgroup A, Question 4
-
-## Importing From Google Drive
 """
-
-# Importing From Google Drive
-from google.colab import drive
-drive.mount('/content/drive')
 
 """## Importing The Necessary Packages"""
 
@@ -54,16 +48,21 @@ pd.set_option('display.width', None)
 # Don't wrap the output to multiple lines
 pd.set_option('display.expand_frame_repr', False)
 
-"""## Reading The Excel File From Google Drive To Google Colab"""
+def load_data(file_path, is_current=True):
+    '''
+    Args:
+      file_path: path to dataset
+    Returns:
+      df: DataFrame containing dataset
+    '''
+    df = pd.read_excel(file_path)
 
-# Specify the file path of the excel file
-file_path = '/content/drive/MyDrive/uss_survey_responses.xlsx'
+    if is_current:
+      df = df.drop(['Email Address', 'time_entry'], axis=1)
+      
+    return df
 
-# Read the excel file into Google Colab using read_excel
-df = pd.read_excel(file_path)
-
-# Display the first few rows of the dataset
-print(df.head())
+df = load_data('uss_survey_responses.xlsx')
 
 """## Examining The Number Of Rows And Columns Of The Dataset
 
@@ -407,40 +406,60 @@ First, for the age of visitors, we split the visitors ages into various categori
 We can plot the number of each type of visitors using a bar chart, categrorized by age group. The column that we will be focusing on is `q2_1` (What is your age range?)
 """
 
-# Extract q2 (Age Range Column)
-df_agerange = df['q2_1']
+# Get count by age cateogry
 
-# Define the desired order of age categories
-order = ["Below 12 Years Old", "13 To 20 Years Old", "21 To 34 Years Old",
+def get_age_count(df, is_current=True):
+  '''
+  Args:
+    df: DataFrame containing dataset
+    is_current: Boolean indicating if data is current survey responses (True)
+                or historical reviews (False)
+  Returns:
+    age_count: Series containing count of each age category
+  '''
+
+  # Specify order
+  order = ["Below 12 Years Old", "13 To 20 Years Old", "21 To 34 Years Old",
          "35 To 49 Years Old", "50 To 64 Years Old", "65 Years Old And Above"]
 
-# Count occurrences and reindex to match the desired order
-person_type_counts = df_agerange.value_counts().reindex(order, fill_value=0)
+  if is_current:
+    age_count = df['q2_1'].value_counts().reindex(order, fill_value=0)
+  else:
+    age_count = df['age_range'].value_counts().reindex(order, fill_value=0)
 
-# Convert index to categorical with specified order
-person_type_counts.index = pd.Categorical(person_type_counts.index, categories=order, ordered=True)
+  age_count.index = pd.Categorical(age_count.index, categories=order, ordered=True)
 
-# Create a bar plot
-plt.figure(figsize=(10, 6))
-ax = sns.barplot(x=person_type_counts.index, y=person_type_counts.values, order=order, color="skyblue")
+  return age_count
 
-# Add title and labels
-plt.title('Number Of Respondents Based On Age Range (Current Data)')
-plt.xlabel('Age Range Categories')
-plt.ylabel('Number of Respondents')
+# Plot bar chart
 
-# Rotate x-axis labels for better readability
-plt.xticks(rotation=30, ha='right')
+def plot_bar(data, title, xlabel, ylabel, color="skyblue", rotation=30):
+  '''
+  Args:
+    data: Series containing data to be plotted
+    title: Plot title
+    xlabel: x-axis label
+    ylabel: y-axis label
+    color: Bar color
+    rotation: x-tick label rotation
+  '''
 
-# Add grid lines for better readability
-plt.grid(axis='y', linestyle='--', alpha=0.3)
+  plt.figure(figsize=(10, 6))
+  ax = sns.barplot(x=data.index, y=data.values, color=color)
 
-# Add number labels on top of bars
-for i, value in enumerate(person_type_counts.values):
-    ax.text(i, value + 1, str(value), ha='center', va='bottom', fontsize=10)
+  plt.title(title)
+  plt.xlabel(xlabel)
+  plt.ylabel(ylabel)
+  plt.xticks(rotation=rotation, ha='right')
+  plt.grid(axis='y', linestyle='--', alpha=0.3)
 
-# Show the plot
-plt.show()
+  # Add count labels
+  for p in ax.patches:
+    ax.annotate(f'{int(p.get_height())}',
+                (p.get_x() + p.get_width() / 2., p.get_height()),
+                ha='center', va='bottom', fontsize=10)
+
+  plt.show()
 
 """Key Observations And Insights:
 
@@ -461,28 +480,32 @@ We can plot the proportion of gender of visitors using a pie chart. The column t
 ***NOTE: For simplicity, we only assume two possible genders - Male and Female. We have made this question a mandatory question for the survey respondants to answer and give them only two options to choose from. We have explained to the respondants on the main page that their information will be kept confidential and will not be exposed to the public or on any websites. The information will only be used for data analysis and insights.***
 """
 
-# Extract gender column
-df_gender = df['q2_2']
+# Get count by gender
+def get_gender_count(df, is_current=True):
+  '''
+  Args:
+    df: DataFrame containing dataset
+    is_current: Boolean indicating if data is current survey responses (True)
+                or historical reviews (False)
+  Returns:
+    gender_count: Series containing count of each gender
+  '''
 
-# Count the number of Male and Female in dataset
-gender_counts = df_gender.value_counts()
+  if is_current:
+    gender_count = df['q2_2'].value_counts()
+  else:
+    gender_count = df['gender'].value_counts()
 
-# Define colors: Blue for Male, Pink for Female
-colors = ['#ff69b4', '#377eb8']
+  return gender_count
 
-# Create a pie chart
-plt.figure(figsize = (9, 9))
-plt.pie(gender_counts, labels = gender_counts.index, autopct = '%1.1f%%',
-        colors = colors, startangle = 90, wedgeprops = {'edgecolor': 'black'})
-
-# Add title
-plt.title('Proportion of Male and Female Participants (Current Data)')
-
-# Add legend
-plt.legend(title = "Gender", loc = "best")
-
-# Show the plot
-plt.show()
+# Plot pie chart
+def plot_pie(data, title, colors):
+  plt.figure(figsize=(9, 9))
+  plt.pie(data, labels=data.index, autopct='%1.1f%%',
+          colors=colors, startangle=90, wedgeprops={'edgecolor': 'black'})
+  plt.title(title)
+  plt.legend(title=data.name, loc="best")
+  plt.show()
 
 """The pie chart reveals that 61% of respondents are female, while the remaining 39% are male. This indicates that the majority of visitors to Universal Studios Singapore (USS) are female. However, to determine whether this trend is a recent development or a long-standing pattern, it is essential to compare these proportions with historical data. Analyzing past visitor demographics will help assess any shifts in gender distribution over time.
 
@@ -495,28 +518,24 @@ We can similarly plot the proportion of Nationality of visitors using a pie char
 ***NOTE: For simplicity, we only assume two possible answers - tourist or local. This is because if we ask the tourists further on which country that they are from, there will be a myriad of different answers as there are over 200 countries in the world. This might result in too many categories for us to analyze and given the limited number of survey responses that we have collected, some countries might only have 1 or 2 responses which cannot be used to compare differences subsequently in Step 3***
 """
 
-# Extract nationality column
-df_nationality = df['q3']
+# Get count by nationality
+def get_nationality_count(df, is_current=True):
+  '''
+  Args:
+    df: DataFrame containing dataset
+    is_current: Boolean indicating if data is current survey responses (True)
+                or historical reviews (False)
+  Returns:
+    nationality_count: Series containing count of locals and tourists
+  '''
 
-# Count the number of Locals and Tourists in dataset
-nationality_counts = df_nationality.value_counts()
+  if is_current:
+    nationality_count = df['q3'].value_counts()
+  else:
+    nationality_count = df['nationality'].value_counts()
 
-# Define colors: Salmon Red for Local, Pastel Blue for Tourist
-colors = ['#FA8072', '#AEC6CF']
+  return nationality_count
 
-# Create a pie chart
-plt.figure(figsize = (9, 9))
-plt.pie(nationality_counts, labels = nationality_counts.index, autopct = '%1.1f%%',
-        colors = colors, startangle = 90, wedgeprops = {'edgecolor': 'black'})
-
-# Add title
-plt.title('Proportion of Locals And Tourists (Current Data)')
-
-# Add legend
-plt.legend(title = "Nationality Type", loc = "best")
-
-# Show the plot
-plt.show()
 
 """The pie chart reveals that 55.2% of respondents are locals, while the remaining 44.8% are tourists. This indicates that the majority of visitors to Universal Studios Singapore (USS) are locals. This might at first seem a little concerning as despite the small population size of Singapore (only around 6 million compared to billions in the world), it still accounts for the majority of visitor count to USS. We need to explore further as to why there might be insufficient tourists in USS.
 
@@ -537,33 +556,29 @@ The types of visitors can be categorized as follows:
 To visualize the distribution of the above visitor types, we will plot a bar chart using column `q1` of the `uss_survey_responses.xlxs` dataset. (Which type of theme park visitor best describes you?)
 """
 
-# Specify order
-order = ['Solo Traveller', 'Visiting With Friends', 'Family With Young Children',
+# Get count by visitor type
+def get_visitor_type_count(df, is_current=True):
+  '''
+  Args:
+    df: DataFrame containing dataset
+    is_current: Boolean indicating if data is current survey responses (True)
+                or historical reviews (False)
+  Returns:
+    visitor_type_count: Series containing count of each visitor type
+  '''
+
+  # Specify order
+  order = ['Solo Traveller', 'Visiting With Friends', 'Family With Young Children',
          'Family With Teenagers', 'Family With Elderly']
 
-# Create a bar plot
-plt.figure(figsize=(10, 6))
-ax = sns.countplot(x='q1', data=df, order=order, color="lightblue")
+  if is_current:
+    visitor_type_count = df['q1'].value_counts()
+  else:
+    visitor_type_count = df['visitor_type'].value_counts()
 
-# Add title and labels
-plt.title('Number Of Respondents Based On Visitor Type')
-plt.xlabel('Visitor Categories')
-plt.ylabel('Number of Respondents')
+  visitor_type_count.index = pd.Categorical(visitor_type_count.index, categories=order, ordered=True)
 
-# Rotate x-axis labels for better readability
-plt.xticks(rotation=30, ha='right')
-
-# Add grid lines for better readability
-plt.grid(axis='y', linestyle='--', alpha=0.3)
-
-# Add number labels on top of bars
-for p in ax.patches:
-    ax.annotate(f'{int(p.get_height())}',
-                (p.get_x() + p.get_width() / 2., p.get_height()),
-                ha='center', va='bottom', fontsize=10)
-
-# Show the plot
-plt.show()
+  return visitor_type_count
 
 """Based on our survey responses, we can see that the largest group of visitors are families with young children. Guests who visit with friends form the next largest group, followed by familiy with teenagers. Solo travellers also form a sizeable group, making up 19% of the total survey respondants. Analyzing past visitor types will help us explore how the distribution of visitor types have shifted over time.
 
@@ -623,61 +638,56 @@ Data Cleaning Process:
 4) Count the total number of 1's for each column of the 7 new columns created
 """
 
-# Step 1: Extract the q10 column from the dataset
-q10_column = df['q10']
+# Get count of days when visitors usually visit USS
+def get_occasion_count(df, is_current=True):
+  '''
+  Args:
+    df: DataFrame containing dataset
+    is_current: Boolean indicating if data is current survey responses (True)
+                or historical reviews (False)
+  Returns:
+    occasion_count: Series containing count of each occasion that visitors visit USS
+  '''
 
-# Replace "Special Events (...)" with "Special Events" using regex
-q10_column = q10_column.replace(r'Special Events \(.*\)', 'Special Events', regex=True)
+  if is_current: 
+    # Replace "Special Events (...)" with "Speciak Events" using regex
+    col = df['q10'].replace(r'Special Events \(.*\)', 'Special Events', regex=True)
+    
+    # Separate the options using the comma delimiter for entries with more than 1 option
+    split_q10 = col.str.split(',', expand=True)
+    
+    # Define the categories we want to create columns for
+    categories = ['Weekdays', 'Weekends', 'Public Holidays',
+                  'School Holidays', 'Special Events', 'When I feel like it',
+                  '1 day in 25 years']
+    
+    # Create a new dataframe with columns for each category
+    one_hot_df = pd.DataFrame(0, index = df.index, columns = categories)
+    
+    # Fill the new columns with 1s where the category is present
+    for category in categories:
+        one_hot_df[category] = split_q10.apply(lambda row: 1 if category in row.values else 0, axis = 1)
+    
+    # Count the total number of 1's for each new column created
+    occasion_count = one_hot_df.sum()
+    
+    # Remove the "When I feel like it" and "1 day in 25 years" categories
+    occasion_count = occasion_count.drop(['When I feel like it', '1 day in 25 years'])
+    
+    # Sort the count_ones in descending order
+    occasion_count = occasion_count.sort_values(ascending = False)
 
-# Step 2: Separate the options using the comma delimiter for entries with more than 1 option
-# We will split the entries and expand them into separate rows and then get the unique values
-split_q10 = q10_column.str.split(',', expand=True)
+  else:
+    # Extract the day_preferred column
+    dfhistory_day = df['day_preferred']
+      
+    # Define the desired order
+    order = ["Weekdays", "Weekends", "Public Holidays", "School Holidays", "Special Events"]
+    
+    # Count occurrences and reindex to match the desired order
+    occasion_count = dfhistory_day.value_counts().reindex(order, fill_value=0)
 
-# Step 3: Perform One-Hot Encoding
-# Define the categories we want to create columns for
-categories = ['Weekdays', 'Weekends', 'Public Holidays',
-              'School Holidays', 'Special Events', 'When I feel like it',
-              '1 day in 25 years']
-
-# Create a new dataframe with columns for each category
-one_hot_df = pd.DataFrame(0, index = df.index, columns = categories)
-
-# Step 4: Fill the new columns with 1s where the category is present
-for category in categories:
-    one_hot_df[category] = split_q10.apply(lambda row: 1 if category in row.values else 0, axis = 1)
-
-# Step 5: Count the total number of 1's for each new column created
-count_ones = one_hot_df.sum()
-
-# Display the result
-print("Total Count Of Preferred Day Of Visitation:\n")
-print(count_ones)
-
-"""We can see that there are 7 unique categories, but two of them - "When I feel like it" and "1 day in 25 years" contain only one response, so we will exclude these two categories. We will proceed to plot a bar chart showcasing the total count for the remaining 5 categories having considerable number of responses."""
-
-# Remove the "When I feel like it" and "1 day in 25 years" categories
-count_ones = count_ones.drop(['When I feel like it', '1 day in 25 years'])
-
-# Sort the count_ones in descending order
-count_ones = count_ones.sort_values(ascending = False)
-
-# Plot the bar chart with a color
-plt.figure(figsize = (10, 8))
-ax = count_ones.plot(kind = 'bar', color = "skyblue")
-
-# Add labels and title
-plt.title('Total Count of Preferred Day of Visitation (Current Data)')
-plt.xlabel('Day Type')
-plt.ylabel('Number Of Respondants')
-plt.xticks(rotation = 45, ha = 'right')
-
-# Step 7: Add number labels on top of the bars
-for i in range(len(count_ones)):
-    ax.text(i, count_ones.iloc[i] + 2, str(count_ones.iloc[i]), ha = 'center',
-            va = 'bottom', fontsize = 10)
-
-# Show the plot
-plt.show()
+  return occasion_count
 
 """Key Observations And Insights:
 
@@ -722,87 +732,68 @@ The Possible Options Include:
 For these questions, users are not allowed to select any other option or type other suitable timings. Hence, there are only six categories that we will consider.
 """
 
-# Extract the relevant columns for time ranges
-popular_time_range = df[['q14_1', 'q14_2', 'q14_3', 'q14_4', 'q14_5', 'q14_6', 'q14_7', 'q14_8']]
+# Get count of each time slot
+def get_time_slot_count(df, is_current=True):
+  '''
+  Args:
+    df: DataFrame containing dataset
+    is_current: Boolean indicating if data is current survey responses (True)
+                or historical reviews (False)
+  Returns:
+    time_slot_count: Series containing count of each time slot
+  '''
 
-# Flatten the DataFrame and split entries with commas into separate values
-flattened_time_range = popular_time_range.values.flatten()
+  if is_current:
+    # Extract the relevant columns for time ranges
+    popular_time_range = df[['q14_1', 'q14_2', 'q14_3', 'q14_4', 'q14_5', 'q14_6', 'q14_7', 'q14_8']]
 
-# Split by commas for entries with multiple options
-split_time_range = [item.strip() for sublist in flattened_time_range for item in str(sublist).split(',')]
+    # Flatten the DataFrame and split entries with commas into separate values
+    flattened_time_range = popular_time_range.values.flatten()
 
-# Convert to a pandas Series for easier counting
-time_range_series = pd.Series(split_time_range)
+    # Split by commas for entries with multiple options
+    split_time_range = [item.strip() for sublist in flattened_time_range for item in str(sublist).split(',')]
 
-# Count the occurrences of each time slot
-time_slot_counts = time_range_series.value_counts()
+    # Convert to a pandas Series for easier counting
+    time_range_series = pd.Series(split_time_range)
 
-# Display the results
-print("Combined Total Count for Each Time Slot:")
-print(time_slot_counts)
+    # Count the occurrences of each time slot
+    time_slot_count = time_range_series.value_counts()
 
-"""From the result count obtained, we can see that the data is not clean and there are several entries that do not fit into the seven given categories. The improper results include 10 null values, 3 "i Do Not Visit" entries where the letter i is in small letter and a "Lunch (11am to 2pm)" entry with the wrong time period.
+    # Remove invalid entries
+    time_slot_count = time_slot_count[~time_slot_count.index.isin(['', 'Lunch (11am to 2pm)', 'i Do Not Visit'])]
 
-We need to process this further by:
+    # Add 3 "i Do Not Visit" entries to the count of "I Do Not Visit"
+    time_slot_count = time_slot_count.rename(index = {'i Do Not Visit': 'I Do Not Visit'})
+    time_slot_count['I Do Not Visit'] += 3
 
-1) Removing all the incorrect entries
+    # Remove the "I Do Not Visit" category for plotting
+    time_slot_count = time_slot_count.drop(['I Do Not Visit'])
 
-2) All the number of "i Do Not Visit" entries, which is 3, to the "I Do Not Visit" entry
-"""
+    # Define the desired order of time categories
+    order = ["Early Morning (8am to 10am)", "Late Morning (10am to 12pm)",
+            "Early Afternoon (12pm to 2pm)", "Late Afternoon (2pm to 4pm)",
+            "Evening (4pm to 6pm)", "Night (6pm to 9pm)"]
 
-# Remove invalid entries
-time_slot_counts = time_slot_counts[~time_slot_counts.index.isin(['', 'Lunch (11am to 2pm)', 'i Do Not Visit'])]
+    # Reindex the time_slot_count to ensure the desired order
+    time_slot_count = time_slot_count.reindex(order, fill_value=0)
 
-# Add 3 to the count of "I Do Not Visit"
-time_slot_counts = time_slot_counts.rename(index = {'i Do Not Visit': 'I Do Not Visit'})
-time_slot_counts['I Do Not Visit'] += 3
+  else:
+    # Extract the time_of_day column
+    dfhistory_time = df['time_of_day']
 
-# Display the cleaned results
-print("Cleaned Combined Total Count for Each Time Slot:\n")
-print(time_slot_counts)
+    # Define the desired order of time categories
+    order = ["Early Morning (8am To 10am)", "Late Morning (10am To 12pm)",
+            "Early Afternoon (12pm To 2pm)", "Late Afternoon (2pm To 4pm)",
+            "Evening (4pm To 6pm)", "Night (6pm To 9pm)"]
 
-"""The result is now cleaned and correct and we can proceed to plot the bar graph. We will order the bars of the graph by the time of the day - Leftmost bar represents Early Morning (8am to 10am) and the rightmost bar represents Night (6pm to 9pm). Also, we will exclude the I Do Not Visit entries as we are only interested in the visitation timings of USS.
+    # Count occurrences and reindex to match the desired order
+    time_slot_count = dfhistory_time.value_counts().reindex(order, fill_value=0)
 
-**NOTE: The y-axis values of the bars do not truly reflect the actual number of respondants who visited USS due to the manipulation of the column values, as well as it is not possible for a certain visitor to be in multiple attractions at one time. There might be certain inaccuracies. Instead, we will just note the trend of the bars over time from early morning to night and observe which bars are the longest/shortest.**
-"""
+  # Convert index to categorical with specified order
+  time_slot_count.index = pd.Categorical(time_slot_count.index,
+                                         categories = order, ordered = True)
 
-# Remove the "I Do Not Visit" category for plotting
-time_slot_counts = time_slot_counts.drop(['I Do Not Visit'])
-
-# Define the desired order of time categories
-order = ["Early Morning (8am to 10am)", "Late Morning (10am to 12pm)",
-         "Early Afternoon (12pm to 2pm)", "Late Afternoon (2pm to 4pm)",
-         "Evening (4pm to 6pm)", "Night (6pm to 9pm)"]
-
-# Reindex the time_slot_counts to ensure the desired order
-time_period_counts = time_slot_counts.reindex(order, fill_value=0)
-
-# Convert index to categorical with specified order
-time_period_counts.index = pd.Categorical(time_period_counts.index,
-                                          categories = order, ordered = True)
-
-# Create a bar plot
-plt.figure(figsize = (10, 8))
-ax = sns.barplot(x = time_period_counts.index, y = time_period_counts.values,
-                 order = order)
-
-# Add title and labels
-plt.title('Number Of Visitations Based On Time Periods (Current Data)')
-plt.xlabel('Time Periods')
-plt.ylabel('Number of Respondents')
-
-# Rotate x-axis labels for better readability
-plt.xticks(rotation = 30, ha = 'right')
-
-# Add grid lines for better readability
-plt.grid(axis = 'y', linestyle = '--', alpha = 0.3)
-
-# Add number labels on top of bars
-for i, value in enumerate(time_period_counts.values):
-    ax.text(i, value + 1, str(value), ha='center', va='bottom', fontsize=10)
-
-# Show the plot
-plt.show()
+  return time_slot_count
 
 """Key Observations And Insights:
 
