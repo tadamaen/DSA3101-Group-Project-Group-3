@@ -37,9 +37,11 @@ import seaborn as sns
 # 5. sklearn - to be used for Machine Learning implementation
 import sklearn
 
-# 6. to generate Sankey diagram
+# 6. NetworkX - to be used for graph-related operations 
+import networkx as nx
+
+# 7. Counter - to be used for counting how often each transition occurs
 from collections import Counter
-import plotly.graph_objects as go
 
 """## Other Settings Implemented Using Pandas
 
@@ -709,9 +711,6 @@ def is_valid_transition(src, tgt):
         return False
 
 """Next, we generate a list of visitor transitions between time/activity pairs and then count how frequently each transition occurs. It iterates through the `first_only_string` column of the `df_clean` DataFrame, which contains paths representing visitors' time/activity sequences. For each path, the code splits the string into individual time/activity steps and creates pairs of consecutive steps (representing transitions). These pairs are added to a list, `transition_pairs`. After collecting all the transitions, the `Counter` from the `collections` module is used to count how often each transition occurs, producing a frequency distribution stored in `transition_counts`."""
-
-# Import NetworkX for graph-related operations (not used yet)
-import networkx as nx
 
 # Create an empty list to store all the transitions between time/activity pairs
 transition_pairs = []
