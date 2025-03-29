@@ -3,7 +3,8 @@
   "nbformat_minor": 0,
   "metadata": {
     "colab": {
-      "provenance": []
+      "provenance": [],
+      "toc_visible": true
     },
     "kernelspec": {
       "name": "python3",
@@ -34,7 +35,7 @@
     },
     {
       "cell_type": "code",
-      "execution_count": 993,
+      "execution_count": null,
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/"
@@ -95,14 +96,16 @@
         "# 5. sklearn - to be used for Machine Learning implementation\n",
         "import sklearn\n",
         "\n",
-        "# 6. to generate Sankey diagram\n",
-        "from collections import Counter\n",
-        "import plotly.graph_objects as go"
+        "# 6. networkx - to be used for graph-related operations\n",
+        "import networkx as nx\n",
+        "\n",
+        "# 7. Counter - to be used for counting how often each transition occurs\n",
+        "from collections import Counter"
       ],
       "metadata": {
         "id": "hUvOZnmcsAOo"
       },
-      "execution_count": 994,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -144,7 +147,7 @@
       "metadata": {
         "id": "oCYUr2q2yZa7"
       },
-      "execution_count": 995,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -176,7 +179,7 @@
         "id": "6oQA72eDrvGh",
         "outputId": "94e14c13-5e3a-436d-a935-fec459d33c42"
       },
-      "execution_count": 996,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -227,7 +230,7 @@
         "id": "g75kzYoYzi8B",
         "outputId": "2031237d-d40d-4cd6-85b8-5fada62b8ad9"
       },
-      "execution_count": 997,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -268,7 +271,7 @@
         "id": "GA3UkYSIzoJ8",
         "outputId": "db25728a-953b-4174-d45f-f0759ae2f2db"
       },
-      "execution_count": 998,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -665,7 +668,7 @@
         },
         "outputId": "8dcbbf96-1a26-4939-a9ce-505973f6ee04"
       },
-      "execution_count": 999,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -757,7 +760,7 @@
         "id": "gBQSu5GuU8qY",
         "outputId": "7d70ad96-8600-4e04-a864-2a298c96dc0b"
       },
-      "execution_count": 1000,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -803,7 +806,7 @@
         "id": "MFFKJ03OVAro",
         "outputId": "f9bef0cd-e23f-483f-dd34-ae6c58aaddeb"
       },
-      "execution_count": 1001,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -864,7 +867,7 @@
         "id": "GJY5NJnrt6Hm",
         "outputId": "48210180-e5ec-40e5-99ac-18f5131f13f1"
       },
-      "execution_count": 1002,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -903,7 +906,7 @@
         },
         "outputId": "def67930-7736-4ab8-d4be-5cfbadb7680c"
       },
-      "execution_count": 1003,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -985,7 +988,7 @@
         "id": "zrqHkM535IRl",
         "outputId": "a4c8ff28-3199-4b80-e0ca-27af55a7b61e"
       },
-      "execution_count": 1004,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -1044,7 +1047,7 @@
         "id": "q_2951Pbche5",
         "outputId": "7eacf2e4-88ab-463a-ea4e-cd4254292a28"
       },
-      "execution_count": 1005,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -1093,7 +1096,7 @@
         "id": "h0vm8h09ck9x",
         "outputId": "81086279-160a-4c6e-8de1-bf8169f90da1"
       },
-      "execution_count": 1006,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -1204,7 +1207,7 @@
       "metadata": {
         "id": "CErjXhVf6Ssm"
       },
-      "execution_count": 1007,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -1254,7 +1257,7 @@
         },
         "outputId": "bd8be0e3-62e1-419d-da7d-1c8b9038469b"
       },
-      "execution_count": 1008,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -1335,7 +1338,7 @@
       "metadata": {
         "id": "DdbNGU_ESA1q"
       },
-      "execution_count": 1009,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -1365,11 +1368,11 @@
         "id": "jFr-7DvJSCjW",
         "colab": {
           "base_uri": "https://localhost:8080/",
-          "height": 570
+          "height": 677
         },
         "outputId": "4895520c-a52c-489f-c109-0faedd32ebe0"
       },
-      "execution_count": 1010,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -1778,12 +1781,12 @@
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/",
-          "height": 272
+          "height": 324
         },
         "id": "lM29NaHcIMea",
         "outputId": "ce58907e-02ed-4615-9b0b-7c649cdc40a1"
       },
-      "execution_count": 1011,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -1950,7 +1953,7 @@
       "metadata": {
         "id": "8sSLrhLXXn-F"
       },
-      "execution_count": 1012,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -1965,9 +1968,6 @@
     {
       "cell_type": "code",
       "source": [
-        "# Import NetworkX for graph-related operations (not used yet)\n",
-        "import networkx as nx\n",
-        "\n",
         "# Create an empty list to store all the transitions between time/activity pairs\n",
         "transition_pairs = []\n",
         "\n",
@@ -1985,7 +1985,7 @@
       "metadata": {
         "id": "w_Af1XbHUcrB"
       },
-      "execution_count": 1013,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -2046,7 +2046,7 @@
         "id": "WpFSk8QsUeV5",
         "outputId": "e937930a-f133-45c8-90c8-ec906705fbe0"
       },
-      "execution_count": 1014,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "display_data",
@@ -2135,7 +2135,7 @@
       "metadata": {
         "id": "ARZ_BTdRtNse"
       },
-      "execution_count": 1015,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -2178,7 +2178,7 @@
         "id": "dT2nEim2VMtn",
         "outputId": "d8c2e96c-295d-4290-db80-9670c100a73f"
       },
-      "execution_count": 1016,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "display_data",
@@ -2274,7 +2274,7 @@
         "id": "pY4Hyp9efcFl",
         "outputId": "3a1665f4-487e-4593-9e00-f0cbb3e2b856"
       },
-      "execution_count": 1017,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -2309,7 +2309,7 @@
         },
         "outputId": "5ccc56e1-d3e4-47d3-f048-6271cbe6ce5b"
       },
-      "execution_count": 1018,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -2407,7 +2407,7 @@
         "id": "MGQMSP1DdkQT",
         "outputId": "932940b4-fe4f-4766-eee8-585b5dd935fb"
       },
-      "execution_count": 1019,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "display_data",
