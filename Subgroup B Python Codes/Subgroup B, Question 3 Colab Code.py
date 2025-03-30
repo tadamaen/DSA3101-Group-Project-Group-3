@@ -13,7 +13,35 @@ Addressing Subgroup B Question 3: Resource Allocation for demand variability
 
 *   Simulate guest flow using agent-based modeling and mobilise more staff accordingly to meet the needs of the visitors
 
-# Loading libraries
+## Overview of the Simulation Process:
+
+* Agents involved are Visitors and Staff, which are split into ride operating staff, food stall staff, souvenir shop staff, cleaning staff, security staff.
+
+* The environment of the model is the Universal Studios Singapore(USS) map.
+
+The simulation flow is as such:
+* Visitors enter the park when USS opens, choose to visit attractions and queue before getting on their rides or choose to visit souvenir shops to browse the merchandise and eat at food stalls when hungry.
+Rides have capacities and wait times.
+
+* When there are long wait times for attractions, more dynamic ride operating staff will be mobilised to the attraction.
+
+* When there are many visitors in souvenir shops or food stalls, more dynamic staff will be mobilised as well to better cater to the needs of the visitors.
+
+* When there are many visitors within a zone, more dynamic cleaning and security staff will be mobilised to the areas as well to better maintain cleanliness and safety of visitors.
+
+* Visitors leave the park as USS approach closing time.
+
+## Running the simulation
+The simulation is run in the order of code chunks and if there are changes to various aspects of USS like the size, types of rides, their capacity et cetera, changes can be made to the *Features of USS in Model* code chunk accordingly in their respective dictionaries. To change the number of visitors, input a different number under num_visitors to the Themepark class code chunk in the line:
+ > def _ _init__(self, width=50, height=50, num_visitors= 9000):
+
+
+## Interpreting the output
+The simulation outputs a map of USS with the visitor movements in 30minutes intervals and a heatmap overlaying it for ease of visualising the high visitor concentration areas. A staffing recommendation is also printed alongside the map to advice the changes in staffing allocation in response to changes in visitor volumes at the various loactions throughout the day.
+
+# Loading & installing libraries
+
+Installation instructions: This is the list of required instalation versions and libraries that will be used to run the Agent Based Model(ABM) simulation
 """
 
 !pip install mesa==1.2.1
