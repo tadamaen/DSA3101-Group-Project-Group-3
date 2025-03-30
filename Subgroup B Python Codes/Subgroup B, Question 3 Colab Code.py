@@ -57,7 +57,7 @@ ride_popularity = calculate_popularity(df)
 
 """### Features of USS in Model:
 
-We are modelling the 25ha Universal Studios Singapore(USS) with a circular map that has a radius of 20 grids that is split into its respective zones and populated by the attractions, souvenir shops and food stalls. The baseline staff roster is also created and more staff will be added should there be an increase in demand, caused by increased visitor concentrations.
+We are modelling the 20ha Universal Studios Singapore(USS) with a circular map that has a radius of 20 grids that is split into its respective zones and populated by the attractions, souvenir shops and food stalls. The baseline staff roster is also created and more staff will be added should there be an increase in demand, caused by increased visitor concentrations.
 
 
 There were certain assumptions to be made due to insufficient data about the newest zone in USS. The following assumption was made to help with modeling.
@@ -140,6 +140,7 @@ ride_properties = {
     "New York": {"Sesame Street Spaghetti Chase": {"capacity": 20, "duration": 3}, "Rhythm Truck": {"capacity": 10, "duration": 2}, "Lights Camera Action!": {"capacity": 25, "duration": 4}},
 }
 
+# Baseline staffing of ride operators when there is no crowd
 Ride_operators_record ={
     "Hollywood": {"Pantages Theater": 3, "Mel's Mixtape": 3, "Entrance": 2},
     "Minion Land": {"Minion Mayhem": 3, "Silly Swirly": 3, "Buggie Boogie": 3},
@@ -150,6 +151,7 @@ Ride_operators_record ={
     "New York": {"Sesame Street Spaghetti Chase": 3, "Rhythm Truck": 3, "Lights Camera Action!": 3},
 }
 
+# Baseline staffing of cleaning staff when there is no crowd
 Cleaning_staff_record ={
     "Hollywood": 1,
     "Minion Land": 1,
@@ -160,6 +162,7 @@ Cleaning_staff_record ={
     "New York": 1,
 }
 
+# Baseline staffing of security staff when there is no crowd
 Security_staff_record ={
     "Hollywood": 1,
     "Minion Land": 1,
@@ -170,6 +173,7 @@ Security_staff_record ={
     "New York": 1,
 }
 
+# Baseline staffing of food stalls when there is no crowd
 Food_stall_staff_record ={
     "Hollywood": {"Mel's Drive-In":1},
     "Minion Land": {"Pop-A-Nana":1},
@@ -180,6 +184,7 @@ Food_stall_staff_record ={
     "New York": {"Louie's NY Pizza":1},
 }
 
+# Baseline staffing of souvenir shops when there is no crowd
 Souvenir_shop_staff_record ={
     "Hollywood": {"Candylicious":1,"Hello Kitty Studio Store":1, "Minion Mart":1,"Universal Studios Store":1,"UNIVRS":1},
     "Minion Land": {"Sweet Surrender":1,"Pop Store":1, "Fun Store":1},
@@ -219,26 +224,26 @@ There were certain assumptions to be made due to lack of data about souvenir sho
 class Visitor(Agent):
     def __init__(self, unique_id, model):
         super().__init__(unique_id, model)
-        self.time_in_park = 0
-        self.destination = None
-        self.riding_time = 0
-        self.current_zone = None
-        self.hunger = 0
-        self.eating_time = 0
-        self.last_ride = None
-        self.browsing = 0
-        self.shop_prob = 0.05
-        self.eat_count = 0
+        self.time_in_park = 0   #Attribute keeping track of how long visitor has been in the themepark.
+        self.destination = None   # Attribute keeping track of destination of visitor
+        self.riding_time = 0   # Attribute keeping track of how long the visitor has been riding rides
+        self.current_zone = None   # Attribute keeping track of the visitor's current zone
+        self.hunger = 0   # Attribute keeping track of hunger levels of a visitor and increases throughout the day until visitor eats
+        self.eating_time = 0   # Attribute keeping track of how long a visitor has been eating
+        self.last_ride = None   #Attribute keeping track of last ride visitor has taken
+        self.browsing = 0   # Attribute keeping track of how long a visitor has been browsing souvenir shops
+        self.shop_prob = 0.05  # Attribute storing the probability of a visitor visiting a souvenir shop
+        self.eat_count = 0  # Attribute storing number of times the visitor has eaten
         self.exponential = 2
 
     def step(self):
       self.time_in_park += 1
 
-      if self.riding_time > 0:
+      if self.riding_time > 0:  # if visitor is on a ride from previous step, finish the ride
           self.riding_time = 0
           return
 
-      if self.browsing > 0:
+      if self.browsing > 0:  # if visitor is browsing souvenir shops from previous step, finish browsing
           self.browsing -= 1
           self.destination = None
           return
@@ -247,18 +252,18 @@ class Visitor(Agent):
       if self.eating_time == 0 and self.eat_count == 0:
           self.hunger += 1
 
-      if self.eating_time == 0 and self.eat_count == 1:
+      if self.eating_time == 0 and self.eat_count == 1:  # if visitor has already eaten once in the ethemepark, their hunger levels increase more slowly
           self.hunger += 0.5
 
-      if self.hunger >= 5 and self.riding_time == 0:
+      if self.hunger >= 5 and self.riding_time == 0:  # if visitor has hunger level >= 5, they are hungry and make them go to the nearest food stall if they are not currently on a ride
         food = self.find_nearest_food()  #(zone, stall_name)
         if food:
             self.destination = food
             self.move_towards(food)
 
-      if self.eating_time > 0:
+      if self.eating_time > 0:  # if visitor is eating, reduce eating time
           self.eating_time -= 1
-          if self.eating_time == 0:
+          if self.eating_time == 0:  # when visitor finished eating, decrease hunger levels to 0 and update eating count
             self.hunger = 0
             self.eat_count += 1
             self.destination = None
@@ -347,7 +352,7 @@ class Visitor(Agent):
       for zone, data in uss_zones.items():
           start_angle, end_angle = data["angle_range"]
           if start_angle <= angle < end_angle:
-              return zone  # Return the corresponding zone name
+              return zone  # Return the corresponding zone
       return None
 
     def move_towards(self, destination):
@@ -376,7 +381,7 @@ class Visitor(Agent):
                   target_x, target_y = x, y
                   break
 
-      # If neither food stall nor souvenir shop, treat it as a ride (attraction)
+      # If neither food stall nor souvenir shop, treat it as an attraction
       if not (food_stall_found or souvenir_shop_found) and zone in attractions:
           for x, y, attraction_name in attractions[zone]:
               if attraction_name == name:
@@ -384,23 +389,18 @@ class Visitor(Agent):
                   target_x, target_y = x, y
                   break
 
-      # If none of the destinations are found, print an error
-      if not (food_stall_found or souvenir_shop_found or ride_found):
-          #print(f"Error: {name} not found in {zone}")
-          return
-
-      # Introduce slight randomness in the final target position (±1 in x or y)
+      # Introduce slight randomness in the final target position (±1 in x or y) due to plotting constraints
       target_x += random.choice([-1, 0, 1])
       target_y += random.choice([-1, 0, 1])
 
       dest_pos = (target_x, target_y)
-      if (abs(self.pos[0] - target_x) <= 2) and (abs(self.pos[1] - target_y) <= 2):  # test
+      if (abs(self.pos[0] - target_x) <= 2) and (abs(self.pos[1] - target_y) <= 2):
         # Visitor is close enough, so handle the post-arrival actions
-        if ride_found:
+        if ride_found:  # if destination is an attraction, make visitor queue or take ride
             self.enter_ride(zone, name)
-        elif food_stall_found:
+        elif food_stall_found:  # if destination is a food stall, make visitor start eating
             self.start_eating()
-        elif souvenir_shop_found:
+        elif souvenir_shop_found:  #if destination is a souvenir shop, make visitor satrt browsing
             self.start_browsing()
       else:
           # Visitor is not at the target yet, so move towards it
@@ -418,10 +418,10 @@ class Visitor(Agent):
         ride_queue = self.model.ride_queues[zone][ride]
         ride_capacity = ride_properties[zone][ride]["capacity"]
 
-        if ride_data["occupied"] >= ride_capacity or ride_data["timer"] > 0:
+        if ride_data["occupied"] >= ride_capacity or ride_data["timer"] > 0:  # if ride is completely full or ride is currently operating with other visitors, make visitor join queue
             ride_queue.append(self)
         else:
-            ride_data["occupied"] += 1
+            ride_data["occupied"] += 1  # else, add visitor onto ride and start the ride
             self.riding_time = ride_properties[zone][ride]["duration"]
 
 """### Staff class
@@ -432,10 +432,10 @@ class Staff(Agent):
     def __init__(self, unique_id, model, stationed_at=None, dynamic=False, ride = None, food = None, shop = None):
         super().__init__(unique_id, model)
         self.stationed_at = stationed_at  # Fixed location
-        self.dynamic = dynamic  # True if it's a dynamically assigned cleaning staff
-        self.ride = ride
-        self.food = food
-        self.shop = shop
+        self.dynamic = dynamic  # True if it's a dynamically assigned staff
+        self.ride = ride  # if staff is ride operating staff, attribute will be the attraction they are stationed at, else would be None
+        self.food = food  # if staff is food stall staff, attribute will be the food stall they are stationed at, else would be None
+        self.shop = shop  # if staff is souvenir shop staff, attribute will be the souvenir shop they are stationed at, else would be None
 
         # Fixed staff stay at their assigned positions
         if self.stationed_at:
@@ -455,14 +455,14 @@ Rationale for 900 visitors, an average of the total annumal visitors, is mention
 class ThemePark(Model):
     def __init__(self, width=50, height=50, num_visitors= 9000):
 
-        self.grid = MultiGrid(width, height, torus=False)
+        self.grid = MultiGrid(width, height, torus=False)  # dimensions of themepark plot
         self.schedule = SimultaneousActivation(self)
-        self.zone_population = {zone: 0 for zone in uss_zones}
+        self.zone_population = {zone: 0 for zone in uss_zones}  # Attribute keeping track of the visitor counts in each zone
         self.dynamic_staff = []  # Track dynamically added staff
         self.start_time = datetime.datetime(2025, 1, 1, 10, 0)  # Start at 10:00 AM
-        self.time_per_step = datetime.timedelta(minutes=30)
+        self.time_per_step = datetime.timedelta(minutes=30)  # Attribute for the duration of each step of simulation
 
-        # queue states
+        # queue states of rides
         self.ride_queues = {zone: {ride: deque() for ride in rides} for zone, rides in ride_properties.items()}
         self.ride_active = {zone: {ride: {"occupied": 0, "timer": 0} for ride in rides} for zone, rides in ride_properties.items()}
 
@@ -471,17 +471,21 @@ class ThemePark(Model):
         self.remaining_visitors = num_visitors
         self.entrance_queue = list(range(num_visitors))  # List of visitor IDs to enter
 
+        # dictionaries keeping track of dynamic staffs added to the respective jobs
         self.staff_by_shop = defaultdict(list)
         self.staff_by_food = defaultdict(list)
         self.staff_by_ride = defaultdict(list)
         self.staff_by_sec = defaultdict(list)
         self.staff_by_clean = defaultdict(list)
+
+        # dictionary keeping track of the queue lengths of each ride
         self.queue_lengths = {}
 
         # Shuffle for randomness in entry order
         random.shuffle(self.entrance_queue)
 
         last_staff_id = num_visitors
+
         # Assign three staff to each attraction
         for zone, locations in attractions.items():
             for location in locations:
@@ -528,6 +532,7 @@ class ThemePark(Model):
 
 
     def calculate_wait_time(self, zone, ride):
+      """Calculates the wait time for a ride."""
       ride_data = self.ride_active[zone][ride]
       ride_queue = self.ride_queues[zone][ride]
       ride_duration = ride_properties[zone][ride]["duration"]
@@ -538,6 +543,7 @@ class ThemePark(Model):
       return wait_time
 
     def update_queue_lengths(self):
+      """Updates the queue lengths for each ride."""
       for zone, rides in self.ride_queues.items():
           for ride_name, queue in rides.items():
               self.queue_lengths[(zone, ride_name)] = len(queue)
@@ -637,7 +643,7 @@ class ThemePark(Model):
                         data["timer"] = ride_duration
 
     def manage_cleaning_staff(self):
-      # Assign cleaning staff to zones where population > 100
+      # Assign more dynamic cleaning staff to zones accordingly where population > 100
       for zone, count in self.zone_population.items():
         if count > 500:
             required_cleaning_staff = 3
@@ -647,11 +653,11 @@ class ThemePark(Model):
             required_cleaning_staff = 1
         else:
             required_cleaning_staff = 0
-        # Count existing cleaning staff in the zone
+        # Count existing dynamic cleaning staff in the zone
         existing_cleaning_staff = Cleaning_staff_record[zone] - 1
-        # Add missing cleaning staff
+        # Add missing dynamic cleaning staff
         while existing_cleaning_staff < required_cleaning_staff:
-            # Compute a central location for cleaning staff
+            # Compute a central location for dynamic cleaning staff
             zone_positions = attractions.get(zone, []) + food_stalls.get(zone, []) + souvenir_shops.get(zone, [])
             if zone_positions:
                 x_coords, y_coords = zip(*[pos[:2] for pos in zone_positions])
@@ -659,7 +665,7 @@ class ThemePark(Model):
                 center_y = int(sum(y_coords) // len(y_coords))  # Ensure integer
                 center_position = (center_x, center_y)
 
-                # Create new cleaning staff
+                # Create new dynamic cleaning staff
                 new_staff_id = max((agent.unique_id for agent in self.schedule.agents), default=0) + 1
                 new_staff = Staff(new_staff_id, self, stationed_at=zone, dynamic=True)
                 self.grid.place_agent(new_staff, center_position)
@@ -671,7 +677,7 @@ class ThemePark(Model):
                       self.staff_by_clean[zone] = []
                 self.staff_by_clean[zone].append(new_staff)
 
-        # Remove extra cleaning staff if visitors decrease
+        # Remove extra dynamic cleaning staff if visitors decrease
         while existing_cleaning_staff > required_cleaning_staff:
             staff_list = self.staff_by_clean.get(zone, [])
             if staff_list:
@@ -693,11 +699,11 @@ class ThemePark(Model):
                     self.schedule.remove(staff)
                     self.grid.remove_agent(staff)
                     self.dynamic_staff.remove(staff_to_remove)
-          Cleaning_staff_record[zone] = 1  # Reset to baseline security
+          Cleaning_staff_record[zone] = 1  # Reset to baseline cleaning staff
 
 
     def manage_security_staff(self):
-      # Assign security staff to zones where population > 100
+      # Assign more dynamic security staff accordingly to zones where population > 100
       # 1 to about 100 visitors ratio
       self.update_zone_population()
       for zone, count in self.zone_population.items():
@@ -711,11 +717,11 @@ class ThemePark(Model):
             required_security_staff = 1
         else:
             required_security_staff = 0
-        # Count existing security staff in the zone
+        # Count existing dynamic security staff in the zone
         existing_security_staff = Security_staff_record[zone] - 1
-        # Add missing security staff
+        # Add missing dynamic security staff
         while existing_security_staff < required_security_staff:
-            # Compute a central location for security staff
+            # Compute a central location for dynamic security staff
             zone_positions = attractions.get(zone, []) + food_stalls.get(zone, []) + souvenir_shops.get(zone, [])
             if zone_positions:
                 x_coords, y_coords = zip(*[pos[:2] for pos in zone_positions])
@@ -723,7 +729,7 @@ class ThemePark(Model):
                 center_y = int(sum(y_coords) // len(y_coords))  # Ensure integer
                 center_position = (center_x, center_y)
 
-                # Create new security staff
+                # Create new dynamic security staff
                 new_staff_id = max((agent.unique_id for agent in self.schedule.agents), default=0) + 1
                 new_staff = Staff(new_staff_id, self, stationed_at=zone, dynamic=True)
                 self.grid.place_agent(new_staff, center_position)
@@ -735,7 +741,7 @@ class ThemePark(Model):
                       self.staff_by_sec[zone] = []
                 self.staff_by_sec[zone].append(new_staff)
 
-        # Remove extra security staff if visitors decrease
+        # Remove extra dynamic security staff if visitors decrease
         while existing_security_staff > required_security_staff:
             staff_list = self.staff_by_sec.get(zone, [])
             if staff_list:
@@ -745,7 +751,7 @@ class ThemePark(Model):
                       self.grid.remove_agent(staff_to_remove)
                       self.dynamic_staff.remove(staff_to_remove)
                       existing_security_staff -= 1
-                      # Update cleaning staff record
+                      # Update security staff record
                       Security_staff_record[zone] -= 1
             else:
                 break
@@ -758,11 +764,11 @@ class ThemePark(Model):
                     self.schedule.remove(staff)
                     self.grid.remove_agent(staff)
                     self.dynamic_staff.remove(staff)
-          Security_staff_record[zone] = 1  # Reset to baseline security
+          Security_staff_record[zone] = 1  # Reset to baseline security staff
 
 
     def manage_dynamic_staff(self):
-      # Check each ride for wait times and adjust staff accordingly
+      # Check each ride for wait times and adjust ride operating staff accordingly
       for zone, rides in self.ride_queues.items():
           for ride, queue in rides.items():
               wait_time = self.calculate_wait_time(zone, ride)
@@ -775,10 +781,10 @@ class ThemePark(Model):
               elif wait_time > 0: # requires 1 step to clear queue
                   required_staff = 1  # need 1 more staff
 
-              # Count how many staff are already dynamically assigned to this ride
+              # Count how many dynamic staff are already dynamically assigned to this ride
               current_staff_count = Ride_operators_record[zone][ride] - 3
 
-              # Add staff if needed
+              # Add dynamic staff if needed
               while current_staff_count < required_staff:
                 if ride == "Entrance":  # Entrances function differently
                   break
@@ -801,7 +807,7 @@ class ThemePark(Model):
                         self.staff_by_ride[(zone, ride)] = []
                     self.staff_by_ride[(zone, ride)].append(new_staff)
 
-              # Remove extra staff if needed
+              # Remove extra dynamic staff if needed
               while current_staff_count > required_staff:
                 if ride == "Entrance":  # Entrances function differently
                     break
@@ -870,9 +876,10 @@ class ThemePark(Model):
         """Handle food and souvenir shop operations."""
         food_visitors = {} # Track number of visitors per food stall
         shop_visitors = {}  # Track number of visitors per shop
-        required_staff1 = {}
-        required_staff2 = {}
+        required_staff1 = {}  # Track number of required dynamic staff for souvenir shops
+        required_staff2 = {}  # Track number of required dynamic staff for food stalls
 
+        # counting number of visitors browsing in each souvenir shop
         for agent in self.schedule.agents:
             if isinstance(agent, Visitor):
               visitor_x, visitor_y = agent.pos
@@ -887,6 +894,7 @@ class ThemePark(Model):
                             shop_visitors[zone][shop_name] = 0
                         shop_visitors[zone][shop_name] += 1
 
+              # counting number of visitors eating in each food stall
               for zone, stalls in food_stalls.items():
                   for stall in stalls:
                       stall_x, stall_y, stall_name = stall
@@ -898,7 +906,7 @@ class ThemePark(Model):
                               food_visitors[zone][stall_name] = 0
                           food_visitors[zone][stall_name] += 1
 
-        # Adjust staff allocation based on visitors
+        # Adjust dynamic staff allocation based on number of visitors
         for zone, shop_count in shop_visitors.items():
             for shop_name, visitor_count in shop_count.items():
               if shop_name not in required_staff1:
@@ -909,7 +917,7 @@ class ThemePark(Model):
                   required_staff1[shop_name] = 1
               # Count how many staff are already dynamically assigned to this shop.
               current_dstaff_count = Souvenir_shop_staff_record[zone][shop_name] - 1
-              # Add staff if needed
+              # Add dynamic staff if needed
               while current_dstaff_count < required_staff1[shop_name]:
                   for shop in souvenir_shops[zone]:
                     if shop[2] == shop_name:  # If the shop name matches
@@ -923,13 +931,13 @@ class ThemePark(Model):
                   self.schedule.add(new_staff)
                   self.dynamic_staff.append(new_staff)
                   current_dstaff_count += 1
-                  # Update shop record
+                  # Update sovenir shp staffing record
                   Souvenir_shop_staff_record[zone][shop_name] += 1
                   if (zone, shop_name) not in self.staff_by_shop:
                       self.staff_by_shop[(zone, shop_name)] = []
                   self.staff_by_shop[(zone, shop_name)].append(new_staff)
 
-              # Remove extra staff if needed
+              # Remove extra dynamic staff when visitors decrease
               while current_dstaff_count > required_staff1[shop_name]:
                   staff_list = self.staff_by_shop.get((zone, shop_name), [])
                   if staff_list:
@@ -939,7 +947,7 @@ class ThemePark(Model):
                         self.grid.remove_agent(staff_to_remove)
                         self.dynamic_staff.remove(staff_to_remove)
                         current_dstaff_count -= 1
-                        # Update ride opreator record
+                        # Update sovenir shp staffing record
                         Souvenir_shop_staff_record[zone][shop_name] -= 1
                   else:
                       break
@@ -954,7 +962,7 @@ class ThemePark(Model):
                 # Reset this specific shop to baseline staff
                 Souvenir_shop_staff_record[zone][shop_name] = 1
 
-
+        # Adjust dynamic staff allocation based on number of visitors
         for zone, food_count in food_visitors.items():
             for food_stall, visitor_count in food_count.items():
               if food_stall not in required_staff2:
@@ -966,9 +974,9 @@ class ThemePark(Model):
               else:
                   required_staff2[food_stall] = 0  # If less than 3 visitors, no extra staff
 
-              # Count how many staff are already dynamically assigned to this shop
+              # Count how many staff are already dynamically assigned to this food stall
               current_dstaff_countf = Food_stall_staff_record[zone][food_stall] - 1
-              # Add staff if needed
+              # Add dynamic staff if needed
               while current_dstaff_countf < required_staff2[food_stall]:
                   for food_tuple in food_stalls[zone]:
                       if food_tuple[2] == food_stall:  # If the shop name matches
@@ -982,13 +990,13 @@ class ThemePark(Model):
                   self.schedule.add(new_staff)
                   self.dynamic_staff.append(new_staff)
                   current_dstaff_countf += 1
-                  # Update shop record
+                  # Update food stall staffing record
                   Food_stall_staff_record[zone][food_stall] += 1
                   if (zone, food_stall) not in self.staff_by_food:
                       self.staff_by_food[(zone, food_stall)] = []
                   self.staff_by_food[(zone, food_stall)].append(new_staff)
 
-              # Remove extra staff if needed
+              # Remove extra dynamic staff when visitors leave
               while current_dstaff_countf > required_staff2[food_stall]:
                   staff_list = self.staff_by_food.get((zone, food_stall), [])
                   if staff_list:
@@ -1031,15 +1039,16 @@ class ThemePark(Model):
           if visitor and visitor.unique_id in self.schedule._agents and visitor.pos is not None:
             self.grid.remove_agent(visitor)
             self.schedule.remove(visitor)
-            self.total_visitors -= 1
+            self.total_visitors -= 1   # Update the count of total visitors
             self.remaining_visitors -= 1  # Update the count of remaining visitors
 
-            self.update_zone_population()  # Update visitor counts
-            self.update_queue_lengths()  # Update queue lengths
-            self.update_rides()  # Update ride operations
-            self.manage_cleaning_staff()
-            self.manage_security_staff()
-            self.update_shop_food()
+      self.update_zone_population()  # Update visitor counts
+      self.update_queue_lengths()  # Update queue lengths
+      self.update_rides()  # Update ride operations
+      self.manage_cleaning_staff()  # Update cleaning staff
+      self.manage_security_staff()  # Update security staff
+      self.update_shop_food()  # Update souvenir shops and food stalls
+      self.manage_dynamic_staff()  # Update ride staff
 
 
     def step(self):
@@ -1049,10 +1058,11 @@ class ThemePark(Model):
         # Handle visitor entrance in the first two steps
         if self.schedule.time < 2:  # Step 0 and Step 1
             if self.schedule.time == 0:
-                num_to_enter = int(0.8 * self.total_visitors)  # 80% enter in step 0
+                num_to_enter = int(0.8 * self.total_visitors)  # 80% of visitors enter in step 0
             else:
                 num_to_enter = self.remaining_visitors  # The rest enter in step 1
 
+            # different entry points that act as gantries
             entry_points = [(25, 5), (24, 5), (26, 5)]
             for _ in range(num_to_enter):
                 if self.entrance_queue:
@@ -1060,7 +1070,7 @@ class ThemePark(Model):
                   personality = random.choice(["explorer", "thrill-seeker", "family-oriented"])
                   visitor = Visitor(visitor_id, self)
 
-                  # Choose a random entry point
+                  # Choose a random gantry to enter by
                   entry_point = random.choice(entry_points)
 
                   # Place the visitor at the chosen entry point
@@ -1069,17 +1079,17 @@ class ThemePark(Model):
 
             self.remaining_visitors -= num_to_enter  # Update count of visitors left to enter
 
-        if self.schedule.time >= 20:
+        if self.schedule.time >= 20:  #if its close to themepark closing time, visitors will leave gradually
           self.make_visitors_leave()
           self.schedule.step()
 
         self.schedule.step()
         self.update_zone_population()  # Update visitor counts
         self.update_rides()  # Update ride operations
-        self.manage_cleaning_staff()
-        self.manage_security_staff()
-        self.manage_dynamic_staff()
-        self.update_shop_food()
+        self.manage_cleaning_staff()  # Update cleaning staff
+        self.manage_security_staff()  # Update security staff
+        self.manage_dynamic_staff()  # Update ride operating staff
+        self.update_shop_food()  # Update food and souvenir shop staff
 
         # Print the number of workers at each ride in each zone
         print("\nRide operating staff at each ride per zone:")
@@ -1116,6 +1126,8 @@ class ThemePark(Model):
 
 """# Running simulation:
 Each step is a 30 minutes interval from 10 am to 8pm and staff allocations in various zones, attractions, souvenir shops, food stalls will be printed when number of guests increase and queues increase.
+
+A heatmap is also plotted on top of the map so as to better understand visitor concentration in the various zones.
 """
 
 def plot_theme_park(model, step):
@@ -1238,6 +1250,6 @@ for s in range(TIME_STEPS):
 
 """With the insights from the ABM, we can better allocate staff throughout the day to the high traffic areas as adviced from the dynamic staff rostering generated and improve experience.
 
-By deploying more staff to high-traffic areas, we Improve guest experience through faster service, enhance operational efficiency by preventing overcrowding and ensure better cleanliness and safety management with timely interventions.
+By deploying more staff to high-traffic areas, we can improve guest experience through faster service, enhance operational efficiency by preventing overcrowding and ensure better cleanliness and safety management with timely interventions.
 
 """
