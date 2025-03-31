@@ -16,9 +16,7 @@ Addressing Subgroup B Question 2: Optimization of Attraction Layouts and Schedul
 
 
 
-Key Factors affecting demand of attraction/services (From Subgroup B Question 1):
-
-*  idk what cheryl blahblah
+Key Factors affecting demand of attraction/services (From Subgroup B Question 1):h
 
 ## Loading Libraries
 """
@@ -125,12 +123,12 @@ souvenir_shops = {
 
 # Popularity weights for attractions (Higher values mean more popular-based off of wait time predictions)
 attraction_weights = {
-    "Hollywood": {"Pantages Theater": 2, "Mel's Mixtape": 1, "Entrance": 1},
-    "Minion Land": {"Minion Mayhem": 5, "Silly Swirly": 3, "Buggie Boogie": 3},
-    "Far Far Away": {"Shrek 4D": 4, "Puss in Boots": 3, "Donkey LIVE": 3, "Magic Potion Spin": 2, "Enchanted Airways": 3},
-    "The Lost World": {"Jurassic Rapids": 4, "Canopy Flyer": 3, "Dino-Soarin": 2, "Water World": 5},
-    "Ancient Egypt": {"Revenge of Mummy": 5, "Treasure Hunters": 3},
-    "Sci-Fi City": {"Transformers": 5, "Cylon": 4, "Human": 4, "Accelerator": 3},
+    "Hollywood": {"Pantages Theater": 5, "Mel's Mixtape": 4, "Entrance": 0},
+    "Minion Land": {"Minion Mayhem": 3, "Silly Swirly": 2, "Buggie Boogie": 3},
+    "Far Far Away": {"Shrek 4D": 9, "Puss in Boots": 12, "Donkey LIVE": 3, "Magic Potion Spin": 1, "Enchanted Airways": 5},
+    "The Lost World": {"Jurassic Rapids": 11, "Canopy Flyer": 8, "Dino-Soarin": 6, "Water World": 5},
+    "Ancient Egypt": {"Revenge of Mummy": 10, "Treasure Hunters": 7},
+    "Sci-Fi City": {"Transformers": 14, "Cylon": 13, "Human": 15, "Accelerator": 2},
     "New York": {"Sesame Street Spaghetti Chase": 3, "Rhythm Truck": 2, "Lights Camera Action!": 4},
 }
 
@@ -197,8 +195,22 @@ class Visitor(Agent):
 
     def choose_attraction(self):
         """Selects an attraction based on popularity weights."""
-        all_zones = list(attraction_weights.keys())
-        chosen_zone = random.choice(all_zones)  # Pick a random zone
+        # Calculate total popularity for each zone
+      	zone_popularity = {zone: sum(attraction_weights[zone].values()) for zone in attraction_weights}
+
+      	# Create lists of zones and their corresponding popularity weights
+      	all_zones = list(zone_popularity.keys())
+      	weights = [zone_popularity[zone] ** self.exponential for zone in all_zones]
+
+      	# Select a zone based on the calculated weights
+      	chosen_zone = random.choices(all_zones, weights=weights, k=1)[0]
+
+      	# Get the list of rides and their weights for the chosen zone
+      	rides = list(attraction_weights[chosen_zone].keys())
+      	ride_weights = [attraction_weights[chosen_zone][ride] ** self.exponential for ride in rides]
+      	# Normalize the ride weights
+      	total_weight = sum(ride_weights)
+      	normalized_weights = [w / total_weight for w in ride_weights 
 
         rides = list(attraction_weights[chosen_zone].keys())
         weights = [attraction_weights[chosen_zone][ride] for ride in rides]  # Use weights for probability
