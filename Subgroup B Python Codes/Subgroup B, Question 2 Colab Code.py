@@ -56,7 +56,7 @@ import scipy.stats as stats
 
 USS Attraction/Services Data:
 
-1.   List of all rides and restaurant or shop services present and operating in 2025.
+1.  List of all rides and restaurant or shop services present and operating in 2025.
 2.  Data includes Name of Attraction/Services, Type, Capacity, Interval and Distance from Entrance.
 
 Capacity and Interval of the attraction/services are estimated. (Online pictures and a typical average of operations)
