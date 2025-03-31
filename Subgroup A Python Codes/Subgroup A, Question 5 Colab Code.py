@@ -94,19 +94,19 @@ Local events and holidays also play a significant role in shaping visitor segmen
 
 Additionally, weather conditions contribute to variations in visitor numbers and satisfaction. Rainy months or extreme heat may deter some guests, leading to fluctuating attendance patterns. Visitors tend to be more satisfied during pleasant weather conditions, as it enhances the overall park experience. Unfavorable weather, combined with high crowd levels, can result in lower satisfaction due to ride closures and discomfort.
 
-By analyzing these external factors, USS can better predict visitor segmentation patterns and optimize resource allocation to maintain high satisfaction levels. Implementing crowd control measures, adjusting operational schedules, and enhancing guest services during peak periods can help mitigate the negative impact of external influences on the guest experience.
+By analysing these external factors, USS can better predict visitor segmentation patterns and optimise resource allocation to maintain high satisfaction levels. Implementing crowd control measures, adjusting operational schedules, and enhancing guest services during peak periods can help mitigate the negative impact of external influences on the guest experience.
 
 To tackle this business question, we need to
 
-Step 1: Analyze and explore the `themepark_weather_holiday` dataset, identifying factors that affect the average crowd level of USS.
+Step 1: Analyse and explore the `themepark_weather_holiday` dataset, identifying factors that affect the average crowd level of USS.
 
-Step 2: Performing Machine Learning (eg: Linear Regression, Random Forest) to predict average crowd level for various contexts
+Step 2: Performing Machine Learning (e.g. Linear Regression, Random Forest) to predict average crowd level for various contexts
 
 Step 3: Determining Other Factors That Affect Average Crowd Levels Of USS (Besides Weather)
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-#### Step 1: Analyze and explore the `themepark_weather_holiday` dataset, identifying factors that affect the average crowd level of USS.
+#### Step 1: Analyse and explore the `themepark_weather_holiday` dataset, identifying factors that affect the average crowd level of USS.
 
 We will delve into various important columns that affect the average crowd level from the columns of the `themepark_weather_holiday` dataset:
 
@@ -122,13 +122,13 @@ Dependent Variable:
 
 However, before we extract the relevant columns from the dataset, it is important to note to this dataset involves universal studios from various countries (not only Singapore). This results in highly different temperature ranges - for instance some universal studios in Europe has very low temperatures during winter time while other universal studios in tropical climate areas have consistently high temperatures throughout the year.
 
-Without standardizing the temperature, it will lead to inaccuracies in the analysis, as well as the model we will implement later. We first need to standardize the `avg_temp` column.
+Without standardising the temperature, it will lead to inaccuracies in the analysis, as well as the model we will implement later. We first need to standardise the `avg_temp` column.
 
 --------------------------------------------------------------------------------
 
-##### Standardize The Average Temperature Column
+##### Standardise The Average Temperature Column
 
-The function `standardise_temperature` standardizes the `avg_temp` column using z-score normalization for each country separately. Since different countries have varying temperature ranges, this ensures fair comparison by converting the temperatures into a standardized scale within each country. The function groups the dataset by the country column and applies the transformation:
+The function `standardise_temperature` standardises the `avg_temp` column using z-score normalisation for each country separately. Since different countries have varying temperature ranges, this ensures fair comparison by converting the temperatures into a standardised scale within each country. The function groups the dataset by the country column and applies the transformation:
 
 Z = (X - 𝜇) / σ
 
@@ -139,23 +139,23 @@ X is the original temperature, μ is the mean temperature for that country, and
 This results in a new column, `standardised_temp`, where values indicate how many standard deviations the original temperature is from the country's mean. The function is then applied to the dataset, modifying it in place.
 """
 
-# Function to standardize the avg_temp column using z-score normalization
+# Function to standardise the avg_temp column using z-score normalisation
 def standardise_temperature(df, temp_column="avg_temp", country_column="country"):
-    # Apply z-score normalization within each country group
+    # Apply z-score normalisation within each country group
     df["standardised_temp"] = df.groupby(country_column)[temp_column].transform(
         lambda x: (x - x.mean()) / x.std()
     )
     return df
 
-# Apply function to dataset to standardize avg_temp across different countries
+# Apply function to dataset to standardise avg_temp across different countries
 df = standardise_temperature(df, temp_column="avg_temp", country_column="country")
 
-# Display the first few rows of the dataframe with the standardized temperatures
+# Display the first few rows of the dataframe with the standardised temperatures
 print(df.head())
 
-"""We observe that there is the additional column `standardised_temp` that is added to the resulting dataset, having standardized temperature values (Many values are close to 0).
+"""We observe that there is the additional column `standardised_temp` that is added to the resulting dataset, having standardised temperature values (Many values are close to 0).
 
-For simplicity, we will not standardize the `avg_precipitation` and `avg_humidity` columns of the datset as location does not affect the amount of precipitation and humidity as much compared to the temperature. Temperature varies significantly between countries due to climate differences, making standardization necessary for fair comparison. However, precipitation and humidity are more influenced by local weather patterns rather than broad geographical differences, so keeping their raw values should still provide meaningful insights.
+For simplicity, we will not standardise the `avg_precipitation` and `avg_humidity` columns of the datset as location does not affect the amount of precipitation and humidity as much compared to the temperature. Temperature varies significantly between countries due to climate differences, making standardisation necessary for fair comparison. However, precipitation and humidity are more influenced by local weather patterns rather than broad geographical differences, so keeping their raw values should still provide meaningful insights.
 
 --------------------------------------------------------------------------------
 
@@ -172,13 +172,13 @@ These Columns Are:
 
 Why These Columns Are Unimportant:
 
-`themepark`  -  This column contains the name of the theme park, but since we are analyzing general trends rather than making park-specific predictions, it does not add much value. Including it in the model could introduce unnecessary complexity and noise. If we were performing park-specific analysis, this column might be useful, but for general crowd and satisfaction trends, it can be removed.
+`themepark`  -  This column contains the name of the theme park, but since we are analysing general trends rather than making park-specific predictions, it does not add much value. Including it in the model could introduce unnecessary complexity and noise. If we were performing park-specific analysis, this column might be useful, but for general crowd and satisfaction trends, it can be removed.
 
-`country` - While country differences may affect temperature and crowd behavior, we have already accounted for this by standardizing temperature within each country. Additionally, other weather-related features like precipitation and humidity are more relevant for predicting attendance patterns. Keeping the country column could lead to overfitting, as the model might memorize country-specific patterns instead of learning general trends.
+`country` - While country differences may affect temperature and crowd behavior, we have already accounted for this by standardising temperature within each country. Additionally, other weather-related features like precipitation and humidity are more relevant for predicting attendance patterns. Keeping the country column could lead to overfitting, as the model might memorise country-specific patterns instead of learning general trends.
 
 `month` - The month column may seem relevant because of seasonality, but this information is already indirectly captured by factors like temperature, precipitation, public holidays, and school holidays. Keeping month as a standalone categorical variable could lead to redundant information in the model, increasing complexity without significant predictive power.
 
-`avg_temp` - The column is now irrelavant as we are now using the standardized version of the temperature.
+`avg_temp` - The column is now irrelavant as we are now using the standardised version of the temperature.
 
 We first remove the first three columns (`themepark`, `country`, and `month`) from the dataset, as they are deemed unnecessary for the analysis. The remaining dataset (`df_corr`) contains only numerical columns relevant to the analysis.
 """
@@ -248,11 +248,11 @@ plot_cor_matrix(df_corr)
 
 **Why Is Machine Learning Important For Enhanced Guest Satisfaction?**
 
-Performing machine learning to predict average crowd levels is a crucial step for optimizing operations, enhancing visitor experience, and improving resource allocation in various contexts, such as theme parks, public events, and tourist attractions.
+Performing machine learning to predict average crowd levels is a crucial step for optimising operations, enhancing visitor experience, and improving resource allocation in various contexts, such as theme parks, public events, and tourist attractions.
 
-By leveraging historical data that includes weather conditions, holidays, and other influencing factors, machine learning models can identify complex patterns and trends that may not be immediately apparent through traditional statistical analysis. Accurate crowd predictions enable better decision-making, such as optimizing staff schedules, managing ride wait times, and implementing dynamic pricing strategies.
+By leveraging historical data that includes weather conditions, holidays, and other influencing factors, machine learning models can identify complex patterns and trends that may not be immediately apparent through traditional statistical analysis. Accurate crowd predictions enable better decision-making, such as optimising staff schedules, managing ride wait times, and implementing dynamic pricing strategies.
 
-Additionally, predicting crowd levels helps in enhancing safety measures by preventing overcrowding and ensuring a comfortable visitor experience. For theme park operators, machine learning-driven insights facilitate proactive planning, reducing operational costs while maximizing revenue.
+Additionally, predicting crowd levels helps in enhancing safety measures by preventing overcrowding and ensuring a comfortable visitor experience. For theme park operators, machine learning-driven insights facilitate proactive planning, reducing operational costs while maximising revenue.
 
 Moreover, visitors can benefit from predictive models through mobile applications or websites that provide real-time forecasts, allowing them to plan their trips accordingly. By integrating machine learning into crowd forecasting, businesses and municipalities can ensure a seamless balance between demand and capacity, leading to an overall improved and efficient service experience.
 
@@ -284,9 +284,9 @@ Multiple Linear Regression (MLR) helps to quantify the relationship between mult
 
 For instance, in the case of predicting crowd levels, MLR can reveal how variables like temperature, public holidays, school holidays, precipitation, and humidity affect the crowd size.
 
-By analyzing the model's coefficients, we can determine the strength and direction of these relationships — whether an increase in temperature or precipitation, for example, leads to a higher or lower crowd level. Additionally, the R-squared value can indicate how much of the variance in crowd levels is explained by these factors.
+By analysing the model's coefficients, we can determine the strength and direction of these relationships — whether an increase in temperature or precipitation, for example, leads to a higher or lower crowd level. Additionally, the R-squared value can indicate how much of the variance in crowd levels is explained by these factors.
 
-This understanding allows businesses or event organizers to predict crowd behaviors, optimize resource allocation, and plan better for peak times based on environmental conditions, making MLR a valuable tool for data-driven decision-making.
+This understanding allows businesses or event organizers to predict crowd behaviors, optimise resource allocation, and plan better for peak times based on environmental conditions, making MLR a valuable tool for data-driven decision-making.
 
 **Key Benefits Of Using Multiple Linear Rgression Model To Predict Crowd Levels:**
 
@@ -307,7 +307,7 @@ This understanding allows businesses or event organizers to predict crowd behavi
 *   The features (`X`) are independent variables that might influence the target.
 *   The target (`y`) is what we are trying to predict.
 
-In the context of our weather data, the features are variables such as `standardized_temp`, `avg_precipitation`, `avg_humidity`, `public_holiday` and `school_holiday`.
+In the context of our weather data, the features are variables such as `standardised_temp`, `avg_precipitation`, `avg_humidity`, `public_holiday` and `school_holiday`.
 
 The target that we are obtaining is `avg_crowd_level`.
 """
@@ -399,7 +399,7 @@ print("Model Intercept:", intercept_rounded)
 
 A Random Forest model is a type of ensemble learning algorithm that combines multiple decision trees to make more accurate and robust predictions. It operates on the principle of "many models are better than one," where multiple individual models (decision trees) are trained on random subsets of the data, and their predictions are aggregated (typically by averaging for regression tasks or voting for classification tasks). This approach reduces the risk of overfitting and improves the model's generalization ability compared to a single decision tree, which might be too sensitive to small changes in the training data.
 
-A Random Forest model can be highly effective in predicting crowd levels at Universal Studios Singapore (USS), as it can handle the complex relationships and interactions between various input features. For example, factors like temperature, precipitation, school holidays, public holidays, and humidity all play a role in determining how crowded the theme park might be on a given day. These features can have nonlinear relationships with the target variable (crowd level), and Random Forest is particularly well-suited for capturing such complex patterns.
+A Random Forest model can be highly effective in predicting crowd levels at USS, as it can handle the complex relationships and interactions between various input features. For example, factors like temperature, precipitation, school holidays, public holidays, and humidity all play a role in determining how crowded the theme park might be on a given day. These features can have nonlinear relationships with the target variable (crowd level), and Random Forest is particularly well-suited for capturing such complex patterns.
 
 **Key Benefits Of Using Random Forest Model To Predict Crowd Levels:**
 
@@ -420,7 +420,7 @@ A Random Forest model can be highly effective in predicting crowd levels at Univ
 *   The features (`X`) are independent variables that might influence the target.
 *   The target (`y`) is what we are trying to predict.
 
-In the context of our weather data, the features are variables such as `standardized_temp`, `avg_precipitation`, `avg_humidity`, `public_holiday` and `school_holiday`.
+In the context of our weather data, the features are variables such as `standardised_temp`, `avg_precipitation`, `avg_humidity`, `public_holiday` and `school_holiday`.
 
 The target that we are obtaining is `avg_crowd_level`.
 """
@@ -572,7 +572,7 @@ To determine which model is better (Multiple Linear Regression vs. Random Forest
 
 The Mean Absolute Error (MAE) measures the average magnitude of errors between the models predictions and the actual values, without considering their direction. A lower MAE indicates better predictive accuracy.
 
-The Random Forest model has a lower MAE (8.15) compared to the Multiple Linear Regression model (10.11), meaning that on average, the Random Forest model's predictions are closer to the actual crowd levels. Therefore, Random Forest performs better in terms of minimizing the average error in prediction.
+The Random Forest model has a lower MAE (8.15) compared to the Multiple Linear Regression model (10.11), meaning that on average, the Random Forest model's predictions are closer to the actual crowd levels. Therefore, Random Forest performs better in terms of minimising the average error in prediction.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -581,7 +581,7 @@ The Random Forest model has a lower MAE (8.15) compared to the Multiple Linear R
 *   Multiple Linear Regression (MLR): 170.96
 *   Random Forest (RF): 130.16
 
-The Mean Squared Error (MSE) penalizes larger errors more than MAE by squaring the differences. Like MAE, a lower MSE indicates better performance.
+The Mean Squared Error (MSE) penalises larger errors more than MAE by squaring the differences. Like MAE, a lower MSE indicates better performance.
 
 The Random Forest model has a lower MSE (130.16) than the Multiple Linear Regression model (170.96), indicating that Random Forest tends to produce fewer large errors. This suggests that the Random Forest model is more robust and stable, as it is less sensitive to extreme deviations from the actual crowd levels.
 
@@ -619,7 +619,7 @@ This analysis gives insight into what factors influence crowd levels at USS the 
 
 **Final Conclusion:**
 
-Random Forest appears to be the better model for predicting crowd levels at USS, as it performs better in terms of both predictive accuracy (lower MAE and MSE) and model fit (higher R² score). It also provides valuable insights into feature importance, helping identify which factors are most influential in determining crowd levels. Multiple Linear Regression, while simpler and more interpretable, fails to capture the complexities of the data, as shown by its poor R² score and higher error metrics.
+Random Forest appears to be the better model for predicting crowd levels at USS, as it performs better in terms of both predictive accuracy (lower MAE and MSE) and model fit (higher R² score). It also provides valuable insights into feature importance, helping to identify which factors are most influential in determining crowd levels. Multiple Linear Regression, while simpler and more interpretable, fails to capture the complexities of the data, as shown by its poor R² score and higher error metrics.
 
 --------------------------------------------------------------------------------
 
@@ -910,7 +910,7 @@ The Columns That Are Relevant Are:
 
 
 
-However, before we can analyze the customer's sensitivity to the following factors listed in `q6`, `q7` and `q8`, we need to understand about the clusters that we have (cluster 0, cluster 1, cluster 2, ..., cluster 6) as well as figuring out the characteristics of each cluster using certain other columns of the cluster dataset.
+However, before we can analyse the customer's sensitivity to the following factors listed in `q6`, `q7` and `q8`, we need to understand the features and characteristics of the clusters that we have (cluster 0, cluster 1, cluster 2, ..., cluster 6) as well using data from other columns of the cluster dataset.
 
 The Columns That We Will Explore More Are:
 
@@ -933,7 +933,7 @@ data['cluster'] = data['cluster'].astype(int)
 # Display the first few rows of the dataset with extracted columns
 print(data.head())
 
-"""We can count the occurrences of each unique value in the cluster column using `value_counts()`, then sorts the counts in ascending order of the cluster values with `sort_index()`. This allows for a clear display of how many observations are in each cluster, with the results shown in ascending order of the cluster values."""
+"""We can count the occurrences of each unique value in the cluster column using `value_counts()`, then sorts the counts in ascending order of the cluster values with `sort_index()`. This allows for a clear display of how many observations are in each cluster."""
 
 # Count the occurrences of each unique value in the 'cluster' column
 cluster_counts = data['cluster'].value_counts().sort_index()
@@ -943,18 +943,20 @@ print("Number Of Visitors By Cluster Number:")
 print()
 print(cluster_counts)
 
-"""--------------------------------------------------------------------------------
+"""We observe that there is a difference in number of observations per cluster. For instance, cluster 2 has 142 observations while cluster 4 has only 17 observations. Since the difference in clusters is quite huge, when creating visualizations to analyze the demographics of each cluster, we will use the proportions instead of counts.
 
-##### Create Visualizations To Analyze Demographics Of Each Cluster For Better Understanding Of Guest Segmentation
+--------------------------------------------------------------------------------
+
+##### Create Visualisations To Analyse Demographics Of Each Cluster For Better Understanding Of Guest Segmentation
 
 We will define a function, `plot_bar_per_cluster` that creates a bar chart showing the distribution of responses to a specified survey question (question) across different clusters (`cluster_col`) in the given DataFrame (`df`).
 
 It first extracts the unique cluster values and response labels, excluding `NaN` values. For each cluster, it counts the occurrences of each response to the question, and ensures that all possible response labels are included, filling in missing responses with a count of 0. These response counts for each cluster are stored in a new DataFrame (`plot_data`), with each cluster becoming a new column.
 
-The function then generates a bar plot, displaying the counts of each response for each cluster. This function is useful for visualizing how different clusters respond to a specific question in a survey or dataset.
+The function then generates a bar plot, displaying the proportions of each response for each cluster. This function is useful for visualising how different clusters respond to a specific question in a survey or dataset.
 """
 
-# Define the function plot_bar_per_cluster
+# Define the function to plot bar charts per cluster with proportions
 def plot_bar_per_cluster(df, question, cluster_col='cluster', title=None):
     # Get a sorted list of unique cluster values, excluding NaN
     clusters = sorted(df[cluster_col].dropna().unique())
@@ -962,18 +964,21 @@ def plot_bar_per_cluster(df, question, cluster_col='cluster', title=None):
     # Get unique response labels from the specified question column, excluding NaN
     all_labels = df[question].dropna().unique()
 
-    # Create an empty DataFrame to store the count of responses for each cluster
+    # Create an empty DataFrame to store the proportion of responses for each cluster
     plot_data = pd.DataFrame(index=all_labels)
 
-    # Loop through each cluster to compute the response distribution for that cluster
+    # Loop through each cluster to compute the response proportion for that cluster
     for c in clusters:
         # Get the value counts of responses for the current cluster
         responses = df[df[cluster_col] == c][question].value_counts()
 
+        # Normalize by dividing by the total number of responses in this cluster
+        responses = responses / responses.sum()
+
         # Reindex to ensure all possible response labels are included, filling missing labels with 0
         responses = responses.reindex(all_labels, fill_value=0)
 
-        # Add the response counts for the current cluster to the plot_data DataFrame
+        # Add the response proportions for the current cluster to the plot_data DataFrame
         plot_data[f'Cluster {c}'] = responses
 
     # Create a bar plot of the data
@@ -981,11 +986,11 @@ def plot_bar_per_cluster(df, question, cluster_col='cluster', title=None):
 
     # Use the provided title or default title if none is provided
     if title is None:
-        title = f"Distribution of '{question}' Responses by Cluster"
+        title = f"Proportion of '{question}' Responses by Cluster"
 
     plt.title(title)
     plt.xlabel("Responses")
-    plt.ylabel("Count")
+    plt.ylabel("Proportion")
     plt.xticks(rotation=45)
     plt.legend(title="Cluster")
     plt.tight_layout()
@@ -1002,19 +1007,19 @@ plot_bar_per_cluster(data, 'q1', title="Distribution Of Visitor Type By Cluster"
 
 This graph shows the distribution of visitor types across different clusters at Universal Studios Singapore.
 
-1) Cluster 2 (green) has an extremely high proportion of visitors "Visiting with Friends" compared to other clusters - this appears to be its dominant visitor demographic.
+1) Cluster 1 (orange) is dominated by visitors who come with friends, with nearly 80% of this cluster consisting of this visitor type.
 
-2) Cluster 6 (pink) is strongly characterized by "Family with Young Children" visitors, suggesting this cluster might represent family-friendly attractions or areas.
+2) Cluster 5 (brown) also has a strong preference for visiting with friends, with about 65% of visitors in this group.
 
-3) Cluster 4 (purple) has a notable concentration of "Solo Traveller" visitors, distinguishing it from other clusters.
+3) Families with young children are most prevalent in Clusters 4 and 6 (purple and pink), each with proportions around 45-46%.
 
-4) "Family with Teenagers" appears relatively evenly distributed across Clusters 0, 3, and 4, suggesting these areas might appeal to families with older children.
+4) Cluster 0 (blue) shows the most balanced distribution across visitor types, with higher proportions of families with teenagers (28%) and families with young children (25%).
 
-5) "Family with Elderly" has the lowest overall visitor count across all clusters, but Cluster 3 (red) shows the highest proportion of this demographic.
+5) Solo travelers are most common in Cluster 6 (pink) at about 31%, followed by Clusters 2 and 4 (green and purple) at around 22-23%.
 
-6) Clusters 0 (blue) and 3 (red) show more balanced visitor distributions across different types, suggesting these might be areas with broader appeal.
+6) Families with elderly represent the smallest proportion across all clusters, with Cluster 3 (red) having the highest proportion at about 12%.
 
-7) Cluster 2's overwhelming popularity with friend groups and Cluster 6's dominance with families with young children indicate clear audience targeting or natural audience preferences for specific areas of the park.
+7) Cluster 3 (red) shows a strong preference for families with young children (40%) but also has the highest proportion of families with elderly.
 
 --------------------------------------------------------------------------------
 
@@ -1027,21 +1032,19 @@ plot_bar_per_cluster(data, 'q2_1', title="Distribution Of Visitor Age By Cluster
 
 This graph shows the distribution of visitor ages across different clusters at Universal Studios Singapore.
 
-1) Cluster 2 (green) has an extremely high concentration of visitors aged 21-34, aligning with the previous finding that this cluster attracts primarily friend groups.
+1) Cluster 1 (orange) is predominantly composed of visitors aged 21-34 years old, with approximately 80% of this cluster falling into this age group.
 
-2) Cluster 4 (purple) shows strong representation in both the 13-20 age group and the Below 12 years age group, suggesting it appeals to teenagers and younger children.
+2) Cluster 5 (brown) is also heavily dominated by young adults (21-34 years old), making up about 71% of this cluster.
 
-3) Cluster 6 (pink) has significant numbers of visitors in the Below 12 years category and peaks in the 35-49 years group, matching its earlier identification as appealing to families with young children.
+3) Cluster 4 (purple) has the highest proportion of children below 12 years old, at around 53%, suggesting this cluster represents family groups with young children.
 
-4) Cluster 1 (orange) shows strong presence in the 21-34 age bracket but minimal representation in older age categories, suggesting it appeals to young adults.
+4) Cluster 0 (blue) has the highest proportion of teenagers and young adults (13-20 years old) at about 35%, making it the most youth-oriented cluster.
 
-5) Cluster 3 (red) has the most balanced distribution across all age groups, including the highest representation in the 65+ category, indicating attractions with broad age appeal.
+5) Cluster 6 (pink) shows a relatively balanced age distribution with notable proportions across multiple age categories: below 12 years old (32%), 35-49 years old (24%), and 13-20 years old (22%).
 
-6) The 21-34 age group has the highest overall visitor count across clusters, making it the park's core demographic.
+6) Cluster 3 (red) has the most significant presence of older adults, with the highest proportions in both the 50-64 age group (13%) and the 65+ age group (8%).
 
-7) Cluster 0 (blue) maintains moderate representation across all age groups, suggesting attractions that have universal appeal.
-
-8) Older demographics (50-64 and 65+) have lower overall representation across all clusters, with Cluster 3 showing the strongest appeal to these age groups.
+7) Elderly visitors (65 years and above) constitute the smallest proportion across all clusters, with minimal representation in most clusters.
 
 --------------------------------------------------------------------------------
 
@@ -1054,17 +1057,19 @@ plot_bar_per_cluster(data, 'q2_2', title="Distribution Of Visitor Gender By Clus
 
 This graph shows the distribution of visitor gender across different clusters at Universal Studios Singapore.
 
-1) Overall, female visitors outnumber male visitors across most clusters, particularly in Clusters 2, 3, and 4 - where female visitors outnumber males by nearly 2:1.
+1) All clusters have more female than male visitors overall, though the gender balance varies significantly across clusters.
 
-2) Cluster 3 (red) shows the highest proportion of female visitors and a relatively low proportion of male visitors, suggesting attractions that particularly appeal to women.
+2) Cluster 1 (orange) has the highest proportion of female visitors at approximately 70%, with only about 30% male visitors.
 
-3) Cluster 6 (pink) is unique in having more male visitors than female visitors, making it the only male-dominated cluster.
+3) Cluster 3 (red) also shows a strong female majority at about 67%, compared to 33% male visitors.
 
-4) Cluster 0 (blue) has a relatively balanced gender distribution, though still with slightly more female visitors.
+4) Cluster 6 (pink) has the most balanced gender distribution, with more males (53%) than females (47%).
 
-5) Clusters 2 and 4 (green and purple) both show strong female representation with approximately 52-53 female visitors compared to about 27-30 male visitors.
+5) Cluster 4 (purple) and Cluster 0 (blue) both have similar gender distributions with approximately 65% female and 35% male visitors.
 
-6) The general female skew across most clusters may indicate that Universal Studios Singapore overall has features or attractions that appeal more strongly to female visitors.
+6) Cluster 2 (green) shows a unique pattern with a higher proportion of male visitors (43%) compared to most other clusters, though females still represent the majority at 57%.
+
+7) Cluster 5 (brown) has a similar gender proportion to Cluster 6, with a slightly higher female percentage (56%) compared to male (44%).
 
 --------------------------------------------------------------------------------
 
@@ -1077,19 +1082,17 @@ plot_bar_per_cluster(data, 'q3', title="Distribution Of Visitor Nationality By C
 
 This graph shows the distribution of visitor nationality (Local vs. Tourist) across different clusters at Universal Studios Singapore.
 
-1) Cluster 0 (blue) is dominated by tourists with approximately 70 tourist visitors and no local visitors, making it exclusively tourist-oriented.
+1) The clusters show very distinct patterns of local versus tourist visitors, with most clusters being predominantly one type.
 
-2) Cluster 3 (red) shows the highest number of local visitors (about 82) and no tourists, indicating it strongly appeals to the local Singapore population.
+2) Clusters 3, 4, and 5 (red, purple, and brown) are almost entirely composed of local visitors, with proportions near 100%.
 
-3) Cluster 6 (pink) has a high tourist count (around 65) and no local visitors, making it another tourist-focused area.
+3) Clusters 2 and 6 (green and pink) are almost exclusively tourists, with proportions near 100%.
 
-4) Cluster 4 (purple) has a more balanced distribution but still skews toward tourists, with about 49 tourists and 34 locals.
+4) Cluster 0 (blue) is predominantly local visitors at approximately 92%, with only about 8% tourists.
 
-5) Clusters 1 and 2 (orange and green) both attract predominantly local visitors (about 48 and 58 respectively) with smaller numbers of tourists (around 19 and 21).
+5) Cluster 1 (orange) has a mix of both, though still dominated by locals at about 72%, with tourists making up roughly 28%.
 
-6) Cluster 5 (brown) shows a strong preference among local visitors (around 54) with no tourist representation.
-
-The distinct separation between tourist-exclusive (Clusters 0 and 6) and local-exclusive (Clusters 3 and 5) areas suggests different zones of the park cater to different visitor origins.
+There appears to be a strong segmentation in the visitor experience based on whether visitors are local residents or international tourists. The sharp division between local and tourist clusters suggests potentially different behavioral patterns, preferences, or park experiences between these two visitor types.
 
 --------------------------------------------------------------------------------
 
@@ -1102,19 +1105,17 @@ plot_bar_per_cluster(data, 'q12', title="Distribution Of Visitor Navigation Pref
 
 This graph shows the distribution of visitor navigation preferences across different clusters at Universal Studios Singapore.
 
-1) "Spontaneous Exploration" is the dominant navigation preference across most clusters, particularly in Cluster 2 (green) which shows the highest count at approximately 53 visitors.
+1) Clusters 1 and 3 (orange and red) strongly prefer "Spontaneous Exploration," with approximately 87% of visitors in both clusters choosing this navigation style.
 
-2) Cluster 4 (purple) stands out for having "Following Shortest Queue" as its primary navigation strategy (around 45 visitors), suggesting these visitors prioritize efficiency and minimizing wait times.
+2) Cluster 0 (blue) is most likely to "Follow Shortest Queue" at about 54%, showing a more opportunistic approach to enjoying the park.
 
-3) Cluster 0 (blue) shows a balanced approach with strong representation in both "Spontaneous Exploration" (about 41 visitors) and "Pre-Planned Route" (about 21 visitors).
+3) Cluster 4 (purple) displays a balanced distribution between "Pre-Planned Route" (47%) and "Following Shortest Queue" (47%), with minimal spontaneous exploration.
 
-4) Cluster 6 (pink) has the strongest preference for "Spontaneous Exploration" (around 47 visitors) with much lower counts for other strategies.
+4) Cluster 2 (green) shows a preference for "Spontaneous Exploration" (55%), but also has notable proportions using "Pre-Planned Route" (28%) and "Following Shortest Queue" (17%).
 
-5) The "Mix of pre-planning and spontaneous exploration" option is barely represented across all clusters, with only Cluster 2 showing minimal preference for this hybrid approach.
+5) Cluster 5 (brown) is balanced between "Spontaneous Exploration" (43%) and "Following Shortest Queue" (39%), with less emphasis on pre-planned routes.
 
-6) Cluster 3 (red) shows relatively balanced preferences between "Spontaneous Exploration" (about 39 visitors) and the other two main strategies.
-
-7) Cluster 5 (brown) visitors strongly prefer "Spontaneous Exploration" (around 32 visitors) with lower numbers for other navigation methods.
+6) Cluster 6 (pink) has the most even distribution across all three navigation methods, though still favoring "Spontaneous Exploration" (48%).
 
 --------------------------------------------------------------------------------
 
@@ -1122,11 +1123,11 @@ This graph shows the distribution of visitor navigation preferences across diffe
 
 To assess the degree to which various factors are prevalent in each cluster, we will visualise their relative frequencies using heatmaps.
 
-To visualize the relative frequencies of various factors across clusters using a heatmap, we can follow these steps:
+To visualise the relative frequencies of various factors across clusters using a heatmap, we can follow these steps:
 
 **1) Compute the frequency of each factor: Calculate the frequency of each unique factor (e.g., responses, features) in each cluster.**
 
-**2) Normalize the data: Convert the frequencies into relative frequencies (e.g., by dividing by the total count of responses in each cluster), so that the values are in the range [0, 1].**
+**2) Normalise the data: Convert the frequencies into relative frequencies (e.g., by dividing by the total count of responses in each cluster), so that the values are in the range [0, 1].**
 
 **3) Create a heatmap: Use a heatmap to represent the relative frequencies across clusters, with color intensity indicating the prevalence of each factor.**
 
@@ -1134,7 +1135,7 @@ The columns that we will be exploring are `q6`, `q7` and `q8` for the different 
 
 The function `plot_multiselect_heatmap` generates a DataFrame containing the relative frequencies of options selected in a multiselect question across different clusters.
 
-It begins by extracting all unique options from the responses in the specified question column and stores them in a sorted list. It then retrieves the unique clusters from the `cluster_col` column and initializes a DataFrame (`heatmap_data`) with clusters as rows and options as columns.
+It begins by extracting all unique options from the responses in the specified question column and stores them in a sorted list. It then retrieves the unique clusters from the `cluster_col` column and initialises a DataFrame (`heatmap_data`) with clusters as rows and options as columns.
 
 For each cluster, it filters the data, calculates the total number of entries in the cluster, and splits the multiselect responses into individual options. The frequency of each option is counted, and the relative frequency (proportion of the total entries) for each option is computed and stored in the `heatmap_data`. The function returns this DataFrame with the relative frequencies, rounded to two decimal places, allowing for analysis of how frequently each option is selected in each cluster.
 """
@@ -1187,7 +1188,7 @@ def plot_multiselect_heatmap(df, question, cluster_col='cluster', title=None):
 
 ###### Question 6: The type of attractions you enjoy the most when visiting USS
 
-The function `clean_q6` is designed to clean and standardize responses for the q6 column in the data DataFrame, which contains multiselect options. It first splits the response string by commas to isolate individual options, and then strips any leading or trailing spaces from each option and converts them to title case (e.g., "carousel rides" becomes "Carousel Rides").
+The function `clean_q6` is designed to clean and standardise responses for the q6 column in the data DataFrame, which contains multiselect options. It first splits the response string by commas to isolate individual options, and then strips any leading or trailing spaces from each option and converts them to title case (e.g., "carousel rides" becomes "Carousel Rides").
 
 The function then iterates through these cleaned options, applying specific corrections: it replaces "Other Rides (Teacup Ride" with "Other rides," skips (does not include) the options "Carousel Rides)" and "Suspended Coasters," and appends the other valid options to the cleaned list.
 
@@ -1226,29 +1227,29 @@ plot_multiselect_heatmap(data, question='q6', title = "Heatmap Of Most Enjoyable
 
 This heatmap shows the preference intensity for different attractions across the seven clusters at Universal Studios Singapore.
 
-1) Cluster 2 shows extremely strong preference for Roller Coasters (0.92) and Water Rides (0.71), as well as 3D and 4D Experiences (0.66), aligning with its demographic of 21-34 year-old friend groups.
+1) Cluster 1 shows the strongest preferences overall, with extremely high enjoyment of Roller Coasters (0.89) and strong preferences for Water Rides (0.67) and 3D and 4D Experiences (0.65).
 
-2) Roller Coasters are particularly popular in Clusters 1 (0.72) and 2 (0.92), but much less appealing to Cluster 6 (0.14), which makes sense given Cluster 6's high proportion of families with young children.
+2) Cluster 5 also strongly favors Roller Coasters (0.81), followed by 3D and 4D Experiences (0.64) and Water Rides (0.57), while showing very low interest in Roadshows (0.09).
 
-3) Cluster 5 shows the strongest preference for Roadshows (0.56), distinguishing it from other clusters where this attraction type ranks lower.
+3) Cluster 4 has distinct preferences for Roadshows (0.65) and Other rides (0.53), but notably dislikes Roller Coasters (0.12) and Water Rides (0.06) - the lowest rating for water rides among all clusters.
 
-4) Cluster 6 shows notable preference for Souvenir Shops (0.48), higher than most other clusters, matching its previously identified tourist-heavy demographic.
+4) Cluster 6 particularly enjoys Roadshows (0.52) and Eateries And Restaurants (0.43), with minimal interest in Roller Coasters (0.16) and Water Rides (0.10).
 
-5) Cluster 4, which had many families with teenagers and children, shows balanced preferences across several attractions, with highest interest in Other rides (0.40) and Roadshows (0.37).
+5) Cluster 3 shows moderate enjoyment across most attractions with highest preference for Eateries And Restaurants (0.45) and Other rides (0.41).
 
-6) Water Rides are highly enjoyed in Clusters 0 (0.43), 1 (0.49), 2 (0.71), and 3 (0.43), but less popular in Clusters 4 and 6 (both 0.20).
+6) Cluster 0 has balanced preferences with strongest enjoyment of Roller Coasters (0.48), 3D and 4D Experiences (0.46), and Water Rides (0.44).
 
-7) Eateries and Restaurants receive modest preference ratings across all clusters, with highest appreciation in Cluster 0 (0.39) and Cluster 6 (0.38)
+7) Cluster 2 displays the most even distribution of preferences across all attraction types, with no strong dislikes or standout favorites.
 
-8) Performances show relatively consistent but moderate appeal across all clusters, indicating they're universally appreciated but not the main attraction for any particular group.
+8) Souvenir Shops received relatively consistent but moderate ratings (0.19-0.35) across all clusters, suggesting they are not primary drivers of visitor enjoyment.
 
 --------------------------------------------------------------------------------
 
 ###### Question 7: Factors that will influence your decision to visit a theme park like USS
 
-The `clean_q7` function processes and standardizes responses in the `q7` column of the data DataFrame. It begins by splitting each response (a string of multiple options) by commas, trimming any extra spaces, and converting each option to title case.
+The `clean_q7` function processes and standardises responses in the `q7` column of the data DataFrame. It begins by splitting each response (a string of multiple options) by commas, trimming any extra spaces, and converting each option to title case.
 
-The function then checks each option and applies specific modifications: it removes the option "Thrill Factor (Not To Be Confused With Scare Factor)," standardizes variations of "Holiday Seasons" and "Weather Conditions" to consistent titles, and appends other valid options without modification.
+The function then checks each option and applies specific modifications: it removes the option "Thrill Factor (Not To Be Confused With Scare Factor)," standardises variations of "Holiday Seasons" and "Weather Conditions" to consistent titles, and appends other valid options without modification.
 
 Finally, the cleaned list of options is joined into a single string with commas separating them, which is returned. The function is applied to the `q7` column using `apply()`, effectively cleaning and standardizing the responses for that column in the dataset.
 """
@@ -1263,10 +1264,10 @@ def clean_q7(response):
         # Step 3: If the option is "Thrill Factor (Not To Be Confused With Scare Factor)", skip it (remove it)
         if opt == "Thrill Factor (Not To Be Confused With Scare Factor)":
             continue
-        # Step 4: If the option is "Holiday Seasons" or "Holiday seasons", standardize it to "Holiday Seasons"
+        # Step 4: If the option is "Holiday Seasons" or "Holiday seasons", standardise it to "Holiday Seasons"
         elif opt == "Holiday Seasons" or opt == "Holiday seasons":
             cleaned.append("Holiday Seasons")
-        # Step 5: If the option is "Weather Conditions" or "Weather conditions", standardize it to "Weather Condition"
+        # Step 5: If the option is "Weather Conditions" or "Weather conditions", standardise it to "Weather Condition"
         elif opt == "Weather Conditions" or opt == "Weather conditions":
             cleaned.append("Weather Condition")
         # Step 6: For all other valid options, append them to the cleaned list
@@ -1283,17 +1284,21 @@ plot_multiselect_heatmap(data, question='q7', title = "Heatmap Of Factors Affect
 
 """Key Insights:
 
-This heatmap visualizes factors affecting decisions to visit Universal Studios Singapore across different clusters.  
+This heatmap visualises factors affecting decisions to visit Universal Studios Singapore across different clusters.  
 
-1) Cluster 2 shows the strongest correlations, particularly with "Cost And Ticket Prices" (0.90), "Weather Condition" (0.84), and "Wait Times For Rides" (0.68). This suggests a highly price-sensitive group that also considers weather and wait times before making decisions.
+1) Cluster 1 shows very strong influence from "Cost And Ticket Prices" (0.85) and "Weather Condition" (0.81), suggesting this group is highly price-sensitive and weather-dependent when making decisions.
 
-2) Cluster 1 is moderately influenced by "Weather Condition" (0.61), "Cost And Ticket Prices" (0.63), and "Wait Times For Rides" (0.55), showing similar but less intense priorities than Cluster 2.
+2) Cluster 5 shows a similar pattern to Cluster 1, with high values for "Cost And Ticket Prices" (0.79) and "Weather Condition" (0.72), indicating another price and weather-sensitive segment.
 
-3) Clusters 3-6 show generally weaker correlations across all factors, with most values below 0.40, indicating these groups have less strong preferences or are influenced by a more diverse set of factors not fully captured in this analysis.
+3) "Reputation And Reviews" consistently shows low influence across all clusters (highest is only 0.35 in Cluster 1), suggesting that reputation is not a primary decision driver for any group.
 
-4) "Special Events" (column 7) strongly influences Clusters 5 and 6 (both at 0.40) compared to other factors for these clusters.
+4) Cluster 4 is uniquely influenced by "Special Events" (0.59), unlike other clusters, suggesting this group makes decisions based on event availability.
 
-5) "Location And Accessibility" shows the highest value (0.40) for Cluster 6, suggesting this group prioritizes convenience.
+5) Clusters 2 and 3 show moderate values across all factors (mostly 0.2-0.4 range), indicating these segments have more balanced consideration of multiple factors without any single strong driver.
+
+6) "Wait Times For Rides" shows high importance for Clusters 1 (0.65) and 5 (0.64), suggesting these groups are particularly concerned with efficiency and time management.
+
+7) Cluster 6 seems most influenced by "Special Events" (0.50) and "Location And Accessibility" (0.43), suggesting this group prioritizes convenience and special attractions.
 
 --------------------------------------------------------------------------------
 
@@ -1306,17 +1311,19 @@ plot_multiselect_heatmap(data, question='q8', title = "Heatmap Of Types Of Event
 
 This heatmap displays preferences across different clusters for event types at Universal Studios Singapore
 
-1) Cluster 5 shows the strongest overall preference for visiting USS, particularly for the Minion Land Grand Opening (0.59), followed closely by A Universal Christmas (0.57) and Halloween Horror Night (0.56).
+1) Cluster 0 shows consistent interest across special events, with relatively high values for all three major events (0.51-0.53), indicating this group enjoys seasonal and new attractions uniformly.
 
-2) Cluster 4 also demonstrates strong interest, especially for Halloween Horror Night (0.58) and both Christmas and Minion Land events (0.55 and 0.54).
+2) Cluster 4 shows the strongest interest in "Minion Land Grand Opening" (0.59), suggesting this is a group particularly attracted to new attractions and family-oriented experiences.
 
-3) Clusters 3 and 0 show moderate interest, with particular preference for Minion Land (0.54) and Halloween Horror Night (0.50) in Cluster 3, and Minion Land (0.50) in Cluster 0.
+3) Cluster 3 has the highest interest in "A Universal Christmas" (0.57), indicating this group is most drawn to holiday-themed experiences.
 
-4) Clusters 1, 2, and 6 display lower overall preference, though Cluster 6 shows moderate interest in all events except Universal Christmas.
+4) "Halloween Horror Night" has consistently strong appeal across most clusters (0.45-0.53), with only Cluster 1 showing slightly lower interest (0.48), suggesting this is a broadly popular event.
 
-5) The "None Of The Above" option receives consistently lower scores across most clusters, suggesting these specific events are indeed attractive to visitors.
+5) Cluster 1 shows the lowest overall interest in special events, with particularly low values for "A Universal Christmas" (0.28) and "Minion Land Grand Opening" (0.26), indicating this group may be less motivated by special attractions.
 
-6) Halloween Horror Night and Minion Land Grand Opening generally receive higher preference scores across clusters than Universal Christmas, indicating these might be more compelling attractions for driving visits.
+6) Cluster 5, which was highly price-sensitive in the previous heatmap, shows moderate interest in events (0.30-0.45) but seems most interested in "Halloween Horror Night" (0.45).
+
+7) The "None Of The Above" category has relatively consistent values (0.30-0.43) across clusters, suggesting a significant portion of each segment visits regardless of special events.
 
 --------------------------------------------------------------------------------
 
@@ -1329,90 +1336,96 @@ A cleaning function, `clean_category`, is applied to standardize and filter the 
 The function is applied to each entry in the exploded DataFrame, and the resulting `None` values (representing the removed categories) are filtered out, leaving only valid, cleaned categories for further analysis.
 """
 
-# First, create a copy of your original dataframe
-df_cleaned = data.copy()
+def clean_q10(response):
+    # Step 1: Split the response string by commas and strip any extra spaces, then convert to title case
+    options = [opt.strip().title() for opt in response.split(',')]
+    cleaned = []
 
-# Step 1: Split the q10 column and explode it into multiple rows
-exploded_df = df_cleaned['q10'].str.split(', ').explode()
+    # Step 2: Iterate over each option in the cleaned list
+    for opt in options:
+        # Step 3: If the option is "Other Rides (Teacup Ride", change it to "Other rides"
+        if opt == "Christmas Etc.)":
+            cleaned.append("Special Events")
+        # Step 4: If the option is "Carousel Rides)", skip it and don't add it to the cleaned list
+        elif opt == "Special Events (Halloween" or opt == "Summer Festival":
+            cleaned.append("Special Events")
+        # Step 5: If the option is "Suspended Coasters", skip it and don't add it to the cleaned list
+        elif opt == "Weather Conditions" or opt == "Special Events (Christmas Etc.)":
+            continue
+        # Step 6: Otherwise, keep the option as is and add it to the cleaned list
+        else:
+            cleaned.append(opt)
 
-# Step 2: Clean up and remap the categories
-def clean_category(category):
-    # Replace "Special Events (Halloween" with "Special Events"
-    if "Special Events (Halloween" in category:
-        return "Special Events"
-    # Replace "Christmas etc.)" with "Christmas"
-    elif "Christmas etc.)" in category:
-        return "Christmas"
-    # Remove the entries "Special Events (Christmas etc.)" and "Weather Conditions"
-    elif category in ["Special Events (Christmas etc.)", "Weather Conditions"]:
-        return None
-    else:
-        return category
+    # Step 7: Join the cleaned list of options into a single string, separated by commas, and return it
+    return ', '.join(cleaned)
 
-# Apply the cleaning function
-exploded_df = exploded_df.apply(clean_category)
+# Apply the clean_q6 function to each entry in the 'q6' column of the 'data' DataFrame
+data['q10'] = data['q10'].apply(clean_q10)
 
-# Step 3: Remove None values (the entries we want to exclude)
-exploded_df = exploded_df[exploded_df.notna()]
+"""The function `clean_special_events` processes each value in the `q10` column by first splitting the string using commas, stripping extra spaces, and removing duplicates while maintaining the original order using `dict.fromkeys()`. Then, it ensures that "Special Events" appears only once in the list by first removing all occurrences and appending it back at the end if it was originally present. Finally, the cleaned list is joined back into a comma-separated string. This function is applied to every row in the `q10` column of the data DataFrame to standardize the values, ensuring consistency in how "Special Events" is represented while preserving the order of other options."""
 
-# Step 4: Reset the index of exploded_df so it matches the original DataFrame
-exploded_df = exploded_df.reset_index(drop=True)
+def clean_special_events(q10_value):
+    # Split the values by comma, strip spaces, and remove duplicates
+    options = list(dict.fromkeys([opt.strip() for opt in q10_value.split(',')]))
 
-# Now, assign the cleaned data back to df_cleaned, creating a new column or adjusting an existing one
-df_cleaned['q10'] = exploded_df
+    # Ensure "Special Events" appears only once
+    if "Special Events" in options:
+        options = [opt for opt in options if opt != "Special Events"] + ["Special Events"]
 
-plot_multiselect_heatmap(df_cleaned, question='q10', title="Time Of Visitation To USS By Cluster")
+    return ', '.join(options)
+
+# Apply the function to the 'q10' column
+data['q10'] = data['q10'].apply(clean_special_events)
+
+plot_multiselect_heatmap(data, question='q10', title="Time Of Visitation To USS By Cluster")
 
 """Key Insights:
 
-This heatmap shows the preferred visitation times to Universal Studios Singapore across different clusters.
+1) Special Events Have Moderate Visitation Across Clusters
 
-Each cluster has distinct visitation preferences:
+Unlike the previous version of the heatmap where "Special Events" had disproportionately high values, now they remain within a reasonable range (≤0.6). This suggests that special events attract visitors, but their impact is more balanced across different clusters.
 
-*  Cluster 0: Prefers weekdays (0.20) and Christmas (0.17)
-*  Cluster 1: Strongly favors weekdays (0.21) and school holidays (0.21), with very low interest in public holidays (0.03)
-*  Cluster 2: Shows strongest preference for weekdays (0.25)
-*  Cluster 3: Has balanced preferences across school holidays, special events, summer festival, and weekdays (all 0.16)
-*  Cluster 4: Prefers special events (0.20) and public holidays (0.17)
-*  Cluster 5: Strongest preference for school holidays (0.22), with equal interest in weekdays and weekends (0.19)
-*  Cluster 6: Favors summer festival (0.22) and Christmas (0.17)
+2) Cluster 4 Has the Highest Visitation on Public Holidays
 
-Overall patterns:
+The darkest blue in the "Public Holidays" column (0.65) belongs to Cluster 4.
+This indicates that visitors in this cluster strongly prefer attending on public holidays, possibly due to work schedules or family availability.
 
-*  Weekdays show consistently high preference across most clusters
-*  School holidays are popular, particularly with clusters 1 and 5
-*  Public holidays generally receive lower preference scores except for cluster 4
-*  Summer festival is particularly important to cluster 6
-*  Christmas has moderate appeal across several clusters
+3) Weekdays See High Visitation in Certain Clusters (0 & 4)
 
-The strongest preferences in the entire heatmap are:
+Clusters 0 and 4 have strong attendance on weekdays (0.57 & 0.59, respectively).
+This could indicate students, tourists, or individuals with flexible schedules visiting during off-peak times.
 
-*  Cluster 2's preference for weekdays (0.25)
-*  Cluster 5's preference for school holidays (0.22)
-*  Cluster 6's preference for summer festival (0.22)
-*  Cluster 1's equal preference for weekdays and school holidays (0.21)
+4) Weekends Show a More Even Distribution Across Clusters
+
+No single cluster dominates weekend visitation.Most values in the "Weekends" column hover around 0.35-0.54, suggesting that weekend attendance is common across all visitor types.
+
+5) Cluster 5 is the Least Likely to Visit on Public Holidays
+
+Cluster 5 has the lowest value (0.17) for Public Holidays, meaning this group avoids peak times.They may prefer quieter days or have work commitments.
 
 --------------------------------------------------------------------------------
 
 #### Operational Adjustments That Can Be Made During High-Impact Periods
 
-To manage high-impact periods (when there are more visitors) effectively at a tourist destination like Universal Studios Singapore (USS), we can consider implementing the following operational adjustments:
+To manage high-impact periods (when there are more visitors) effectively at a tourist destination like Universal Studios Singapore (USS), we can consider implementing the following operational adjustments based on the characteristics and preferences of identified clusters:
 
 1) **Crowd Management and Visitor Flow Optimization**
 
-*   Timed Entry or Reservation System: Introduce timed entry slots or reservation systems to manage the number of visitors entering the park during peak hours. This can help spread out the crowd and reduce overcrowding.
+*   Timed Entry or Reservation System: Introduce timed entry slots or reservation systems to manage the number of visitors entering the park during peak periods (eg. School holidays). This can help spread out the crowd and reduce overcrowding.
 *   Increase Staff at Critical Points: Deploy additional staff to manage queues at popular attractions, entrances, and food areas, ensuring smooth visitor flow and reducing congestion.
 *   Dynamic Pathways or Queuing Systems: Use barriers to create clear pathways or adjust the queuing systems at high-traffic attractions to optimize space and keep visitors moving efficiently.
 
 2) **Optimizing Staffing and Resources**
 
-*   Flexible Staffing Plans: Increase the number of staff during high-impact periods, such as weekends or holidays, to manage crowds effectively, especially at popular attractions, food counters, and guest services.
+*   Flexible Staffing Plans: Increase the number of staff during high-impact periods, such as weekends or holidays, to manage crowds effectively, especially at popular attractions, food counters, and guest services.  For example, since clusters 2, 4, and 6 show the highest interest in visiting souvenir shops, more staff can be deployed to souvenir shops on days when these cluaters are predicted to comprise a significant proportion of visitors.
 *   Cross-Training Employees: Ensure staff is cross-trained in various roles so they can step into high-demand areas (such as ticketing or ride assistance) as needed during peak periods.
 *   Guest Assistance Zones: Establish dedicated areas where visitors can easily approach staff for information, issues, or guidance during high-traffic times.
 
 3) **Attraction Management**
 
-*  Virtual Queue Systems: Implement virtual queues for high-demand rides or attractions, allowing visitors to reserve a time slot on their phones rather than waiting in long physical lines.
+*  Virtual Queue Systems: Implement virtual queues for high-demand rides or attractions, allowing visitors to reserve a time slot on their phones rather than waiting in long physical lines. For example, when Clusters 1 and 5 are
+predicted to make up a significant portion of visitors, virtual queues should be implemented for roller coasters, as they are rated highly enjoyable by both
+clusters (with scores of 0.89 and 0.81 respectively).
 *  Attraction Scheduling: For particularly popular attractions, consider staggered showtimes or timed experiences to reduce bottlenecks at ride entrances.
 
 4) **Crowd Control Through Entertainment**
@@ -1424,6 +1437,15 @@ To manage high-impact periods (when there are more visitors) effectively at a to
 
 *  Optimize Restroom and Dining Areas: Increase the number of open dining areas and restrooms during peak hours to prevent overcrowding and improve comfort.
 *  Additional Merchandise and Food Stalls: Add temporary food stands or mobile food trucks in areas with high foot traffic to reduce long lines at regular dining spots. Also, ensure there are adequate merchandise booths around the park.
+
+6) **Targeted Promotions**
+
+*   Cluster-specific Value Bundles: Promotions should be tailored to align with
+the priorities of different visitor clusters. For instance, during school holidays, discounted ticket bundles consisting of discounted tickets can be offered to attract Clusters 0, 1 and 4, who are more likely to visit during school holidays, as well as clusters 1 and 5 which are the most cost sensitive (with cost and ticket price influence scores of 0.85 and 0.79 respectively).
+*   To sustain visitor numbers during rainy days, wet weather promotions can be
+aimed at Clusters 1 and 5, who are least weather-resilient (weather condition
+influence scores of 0.81 and 0.72). Examples include free ponchos, indoor
+activity highlights, or discounted express passes. On the other hand, Clusters 4 and 6 are less sensitive to weather (with scores of 0.12 and 0.19), and can be engaged through themed pop-ups or special event tie-ins to maintain their interest regardless of weather conditions.
 
 --------------------------------------------------------------------------------
 """
