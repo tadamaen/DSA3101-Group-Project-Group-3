@@ -17,7 +17,7 @@ drive.mount('/content/drive')
 
 """## Importing The Necessary Packages
 
-For this question, we will need to import several packages, inclding pandas for data cleaning and transformation, numpy for numefical computation, matplotlib and seaborn for data visualizations.
+For this question, we will need to import several packages, including pandas for data cleaning and transformation, numpy for numerical computation, matplotlib and seaborn for data visualizations.
 """
 
 # Importing The Necessary Packages
@@ -77,7 +77,7 @@ num_rows, num_columns = df.shape
 print("Number of Rows:", num_rows)
 print("Number of Columns:", num_columns)
 
-"""We observe that there are 505 rows and 56 columns in the dataset.
+"""We observe that there are 505 rows and 57 columns in the dataset.
 The columns include the email address of the survey responders, as well as their responses to the 20 questions in the survey (some of the survey questions have various subparts, hence more than 20 columns altogether). We currently have 505 survey responses in our dataset.
 
 Since the email address is considered highly confidential, in order to maintain data integrity to prevent exposure of information and privacy leaks, we should remove the `email address` column. Also, the `time_entry` column is not really important in our analysis as this column just represents when the respondants have completed the survey (within a period of a few days, all recent entries). We can also remove the column.
