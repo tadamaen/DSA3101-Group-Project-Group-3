@@ -17,7 +17,7 @@ drive.mount('/content/drive')
 
 """## Importing The Necessary Packages
 
-For this question, we will need to import several packages, inclding pandas for data cleaning and transformation, numpy for numefical computation, matplotlib and seaborn for data visualizations, sklearn for Machine Learning Model implementation, as well as plotly to generate Sankey diagrams.
+For this question, we will need to import several packages, including pandas for data cleaning and transformation, numpy for numefical computation, matplotlib and seaborn for data visualizations, sklearn for Machine Learning Model implementation, as well as plotly to generate Sankey diagrams.
 """
 
 # Importing The Necessary Packages
@@ -37,11 +37,30 @@ import seaborn as sns
 # 5. sklearn - to be used for Machine Learning implementation
 import sklearn
 
-# 6. NetworkX - to be used for graph-related operations 
+# 6. networkx - to be used for graph-related operations
 import networkx as nx
 
 # 7. Counter - to be used for counting how often each transition occurs
 from collections import Counter
+
+# # To download requirement.txt onto local computer
+
+# import pkg_resources
+
+# # List only the packages you imported
+# used_packages = ['pandas', 'numpy', 'matplotlib', 'seaborn', 'scikit-learn', 'networkx']
+
+# with open("requirements.txt", "w") as f:
+#     for pkg in used_packages:
+#         try:
+#             version = pkg_resources.get_distribution(pkg).version
+#             f.write(f"{pkg}=={version}\n")
+#         except:
+#             print(f"⚠️ Package '{pkg}' not found")
+
+# # Download it
+# from google.colab import files
+# files.download("requirements.txt")
 
 """## Other Settings Implemented Using Pandas
 
@@ -86,7 +105,7 @@ num_rows, num_columns = df.shape
 print("Number of Rows:", num_rows)
 print("Number of Columns:", num_columns)
 
-"""We observe that there are 505 rows and 56 columns in the dataset.
+"""We observe that there are 505 rows and 57 columns in the dataset.
 The columns include the email address of the survey responders, as well as their responses to the 20 questions in the survey (some of the survey questions have various subparts, hence more than 20 columns altogether). We currently have 505 survey responses in our dataset.
 
 Since the email address is considered highly confidential, in order to maintain data integrity to prevent exposure of information and privacy leaks, we should remove the `email address` column. Also, the `time_entry` column is not really important in our analysis as this column just represents when the respondants have completed the survey (within a period of a few days, all recent entries). We can also remove the column.
@@ -838,27 +857,24 @@ plt.axis('off')
 plt.tight_layout()
 plt.show()
 
-"""Key Insights from the Top 10 Visitor Journey Transitions Graph:
+"""**Key Insights from the Top 10 Visitor Journey Transitions Graph:**
 
-1) **Popular Attractions Throughout the Day:**
+This graph shows the top 10 visitor journey transitions between different attractions and time slots at what appears to be a theme park.
 
-*   Water rides appear multiple times in different time slots (Early Afternoon, Evening, and Night), suggesting they are a consistent attraction for visitors across the day.
-*   Souvenir shops also appear in the Evening (4 PM - 6 PM), indicating that visitors tend to shop before leaving or transitioning to nighttime entertainment.
+1) Early Morning (8AM-10AM) appears to be dominated by roller coasters, suggesting visitors prioritize these popular thrill rides when lines are potentially shorter.
 
-2) **Strong Sequential Flow:**
+2) There is a significant flow (43) from Late Afternoon roadshows (2PM-4PM) to Evening other rides (4PM-6PM), indicating a common pattern where visitors attend shows before ending their day on rides.
 
-*   Visitors tend to follow a logical progression of activities, moving from eateries (Late Morning 10 AM - 12 PM) → souvenirs (Early Afternoon 12 PM - 2 PM) → thrill rides (Roller Coasters, 2 PM - 4 PM).
-*   This suggests a break pattern where visitors eat before engaging in high-energy activities.
+3) Late Morning (10AM-12PM) shows two distinct visitor behaviors: attending roadshows or experiencing 3D/4D attractions, suggesting this is a time when visitors start diversifying their experiences.
 
-3) **Transition to Evening Activities:**
+4) The transitions to and from "Early Afternoon (12PM-2PM) - other rides" show this is a central hub time slot with multiple incoming and outgoing visitor flows, likely representing a midday decision point for many visitors.
 
-*   A clear trend shows movement towards entertainment-oriented attractions (3D/4D shows, performances, and souvenirs) in the evening (4 PM - 6 PM) and night (6 PM - 9 PM).
-*   Nighttime visits often include 3D/4D shows and water rides, possibly indicating relaxation after intense activities earlier in the day.
+5) Visitors tend to end their day (Evening 4PM-6PM) with either roller coasters, other rides, or souvenir shopping, showing distinct exit patterns.
+Late Afternoon (2PM-4PM) appears to be a popular time for eateries, suggesting this is when most visitors take their main meal break.
 
-4) **High-Frequency Transitions:**
+6) The strongest single transition (45) is between Early Morning roller coasters and Late Afternoon roadshows, indicating many visitors bookend their day with these contrasting experiences.
 
-*   The thickness of the edges suggests that certain transitions are extremely common, such as: **Late Afternoon (2 PM - 4 PM) - Other Rides → Evening (4 PM - 6 PM) - Souvenir** and **Late Afternoon (2 PM - 4 PM) - Roller Coasters → Night (6 PM - 9 PM) - 3D/4D**
-*   This could mean visitors prefer winding down with more passive activities after engaging in thrill rides.
+7) Roller coasters appear in multiple time slots (early morning, early afternoon, and evening), highlighting their importance throughout the visitor experience.
 
 --------------------------------------------------------------------------------
 
@@ -876,7 +892,7 @@ Before visualizing by cluster, we need to perform some data cleaning steps first
 # Check for NA values in the cluster column
 print(f"Number Of NA Values In Cluster Column: {df_clean['cluster'].isna().sum()}")
 
-"""We observe that there are 5 `NA` values in the `cluster` column, which might affect our results. We now proceed to drop these rows with NA values using the `.dropna()` method."""
+"""We observe that there are 9 `NA` values in the `cluster` column, which might affect our results. We now proceed to drop these rows with NA values using the `.dropna()` method."""
 
 # Drop rows with missing cluster categorization values
 df_clean = df_clean.dropna(subset=['cluster'])
@@ -991,58 +1007,58 @@ Results Obtained:
               <tr>
                   <th>0</th>
                   <th>-</th>
-                  <th>Other Rides -> 3D4D</th>
-                  <th>Water Rides -> Other Rides</th>
-                  <th>Other Rides/Performances -> Souvenir</th>
-                  <th>Souvenir -> 3D4D</th>
+                  <th>3D4D -> Other Rides</th>
+                  <th>Other Rides -> Eateries/Roadshows</th>
+                  <th>Eateries -> Souvenir</th>
+                  <th>Souvenir -> Eateries</th>
               </tr>
               <tr>
                   <th>1</th>
                   <th>-</th>
                   <th>-</th>
-                  <th>Water Rides/3D4D -> Other Rides</th>
-                  <th>Other Rides/Roller Coasters -> Souvenir</th>
-                  <th>Souvenir -> 3D4D</th>
+                  <th>Roller Coasters/Other Rides -> Roadshows, Eateries -> Performances</th>
+                  <th>Roadshows-> Performances/Souvenir</th>
+                  <th>-</th>
               </tr>
               <tr>
                   <th>2</th>
                   <th>-</th>
-                  <th>-</th>
-                  <th>3D4D/Water Rides -> Other Rides, Souvenir -> Roller Coasters</th>
-                  <th>Other Rides/Roller Coasters -> Souvenir</th>
+                  <th>3D4D -> Other Rides</th>
+                  <th>Other Rides -> Roadshows</th>
+                  <th>Roadshows -> Souvenir/Other Rides/Roller Coasters</th>
                   <th>-</th>
               </tr>
               <tr>
                   <th>3</th>
                   <th>-</th>
-                  <th>Other Rides -> Souvenir</th>
-                  <th>Souvenir -> Roller Coasters</th>
-                  <th>Roller Coasters -> Souvenir, Other Rides -> Water Rides</th>
-                  <th>Souvenir -> 3D4D</th>
+                  <th>Other Rides -> Roller Coasters</th>
+                  <th>Roller Coasters/Other Rides -> Roadshows</th>
+                  <th>Roadshows -> Water Rides</th>
+                  <th>Souvenir -> Water Rides</th>
               </tr>
               <tr>
                   <th>4</th>
+                  <th>Water Rides -> 3D4D, Roller Coasters -> Other Rides/3D4D</th>
+                  <th>Roadshows -> Other Rides</th>
                   <th>-</th>
-                  <th>Roadshows -> Souvenir</th>
-                  <th>Water Rides -> Other Rides</th>
-                  <th>Other Rides -> Souvenir</th>
-                  <th>Souvenir -> 3D4D/Water Rides</th>
+                  <th>Roadshows -> Roller Coasters</th>
+                  <th>-</th>
               </tr>
               <tr>
                   <th>5</th>
                   <th>-</th>
-                  <th>Eateries -> Souvenir</th>
-                  <th>Souvenir -> Roller Coasters/Other Rides</th>
-                  <th>Roller Coasters/Other Rides -> Souvenir</th>
+                  <th>3D4D -> Other Rides</th>
+                  <th>Other Rides -> Performances/Roadshows</th>
+                  <th>Performances -> Other Rides, Roadshows -> Souvenir</th>
                   <th>-</th>
               </tr>
               <tr>
                   <th>6</th>
                   <th>-</th>
-                  <th>Eateries -> Souvenir</th>
+                  <th>3D4D -> Other Rides/Souvenir, </th>
+                  <th>Other Rides -> Eateries/Roadshows</th>
+                  <th>Roadshows -> Water Rides</th>
                   <th>-</th>
-                  <th>Other Rides -> 3D4D, Roller Coasters -> Souvenir</th>
-                  <th>Souvenir -> 3D4D/Water Rides</th>
               </tr>
       </table>
   </body>
@@ -1052,28 +1068,27 @@ Key insights From The Top 5 Transition Routes By Cluster At USS:
 
 1) **Souvenir Purchases Are Common in the Evening**
 
-Across multiple clusters, visitors tend to buy souvenirs later in the day, especially in the late afternoon to evening and evening to night transitions.
-This suggests that visitors prefer shopping for memorabilia before leaving the park.
+Many clusters show visitors transitioning from eateries or roadshows to souvenir purchases in the late afternoon to evening period. This suggests that visitors prefer buying memorabilia before leaving the park.
 
 2) **Roller Coasters Gain Popularity in the Afternoon**
 
-Many clusters show a transition from other rides or attractions to roller coasters in the early afternoon to late afternoon period. This indicates that visitors are likely engaging in thrill rides after exploring other attractions earlier in the day.
+Several clusters (such as Cluster 2 and Cluster 3) show a transition from other rides to roller coasters in the early afternoon to late afternoon. This indicates that visitors prefer thrill rides after engaging in other attractions earlier in the day.
 
-3) **Water Rides Are Popular in the Afternoon**
+3) **Water Rides Are Popular Later in the Day**
 
-Several clusters show visitors transitioning to water rides from other rides or 3D/4D experiences around early afternoon to late afternoon. This suggests that visitors may seek cooling-off experiences as the day gets hotter.
+In clusters like Cluster 4 and Cluster 6, visitors transition into water rides in the late afternoon to evening. This suggests that visitors might be looking for a refreshing experience as temperatures peak or before winding down their day.
 
-4) **3D/4D Attractions Have a Strong Night Appeal**
+4) **3D/4D Attractions Are a Midday Favorite**
 
-In multiple clusters, transitions into 3D/4D experiences (like Shrek 4D or Transformers: The Ride) are evident in the night period. This implies that visitors may prefer immersive cinematic experiences as they wind down towards the end of their visit.
+Many clusters (Clusters 0, 2, 5, and 6) show visitors engaging with 3D/4D attractions in the late morning to early afternoon period. This suggests that immersive cinematic experiences are a popular choice during the middle of the day.
 
-5) **Eateries and Shows Influence Midday Choices**
+5) **Roadshows Play a Key Role in Visitor Engagement**
 
-A few clusters show transitions from eateries or shows to souvenir shops during the late morning to early afternoon period. This suggests that visitors take breaks for food and entertainment before continuing their park exploration.
+Roadshows appear frequently in transitions, often from eateries or roller coasters, especially in Clusters 1, 3, 4, and 5. This suggests that live performances and shows significantly influence visitor movement, acting as a popular choice for breaks between ride experiences.
 
 --------------------------------------------------------------------------------
 
-**Why Are There No Transitions From Early Morning To Late Morning?**
+**Why Are There Very Few Transitions From Early Morning To Late Morning?**
 
 There are several possible reasons why no transitions are recorded in the early morning to late morning category at USS:
 
