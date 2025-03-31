@@ -1084,11 +1084,22 @@ class ThemePark(Model):
         current_time = self.start_time + self.time_per_step * self.schedule.time  # Calculate time
         print(f"Time: {current_time.strftime('%I:%M %p')}")
         # Handle visitor entrance in the first two steps
-        if self.schedule.time < 2:  # Step 0 and Step 1
+        if self.schedule.time < 4:  # Step 0 to 4
             if self.schedule.time == 0:
-                num_to_enter = int(0.8 * self.total_visitors)  # 80% of visitors enter in step 0
+                num_to_enter = int(0.2 * self.total_visitors)  # 20% enter in step 0
+            
+            if self.schedule.time == 1:
+                num_to_enter = int(0.2 * self.total_visitors)  # 20% enter in step 0
+
+            if self.schedule.time == 2:
+                num_to_enter = int(0.2 * self.total_visitors)  # 20% enter in step 0
+
+            if self.schedule.time == 3:
+                num_to_enter = int(0.2 * self.total_visitors)  # 20% enter in step 0
+
             else:
-                num_to_enter = self.remaining_visitors  # The rest enter in step 1
+                num_to_enter = self.remaining_visitors  # The rest enter after that
+
 
             # different entry points that act as gantries
             entry_points = [(25, 5), (24, 5), (26, 5)]
