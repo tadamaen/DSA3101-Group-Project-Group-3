@@ -30,8 +30,19 @@ The insights gleaned from our analysis of the data we collected through our surv
 
 #### Benefits of the project 
 
-#### Limitations of the project
-For the optimization model, the results were significant in demonstrating the impact on ride attractions, however, there are limited information to how the changes made an impact to the eateries and souvenir shops. This is mainly due to the lack of comprehensive information that could possibly account for the crowd present at these places, causing the model to be limited in reflecting accurate wait times (wait time results showed little to zero wait times for these places) for these places.
+#### Limitations of the project 😔
+
+While the optimization model provided valuable insights into the impact of changes on ride attractions, there are several limitations that affect the accuracy and comprehensiveness of the results obtained. 
+
+1) Limited Impact Assessment on Eateries and Souvenir Shops – The model effectively analyzed ride attraction efficiency, but due to the lack of comprehensive data on crowd distribution in eateries and souvenir shops, it was unable to accurately reflect wait times for these locations. As a result, the model reported little to zero wait times, which may not be an accurate representation of real-world conditions.
+
+2) Lack of Sufficient Survey Data – The analysis relied on survey responses, but only around 500+ responses were collected, which may not be statistically representative of the full range of visitor experiences at USS. A larger sample size would improve the reliability of insights into customer satisfaction, preferences and pain points.
+
+3) Limited Scope of Machine Learning Models – Due to data constraints, only a select number of Machine Learning models were applied to analyze trends and predict guest experiences. A wider selection of models, including deep learning techniques and reinforcement learning, could have provided more nuanced insights but were not feasible within the project's scope.
+
+4) Use of External Datasets – Some datasets used in the analysis were sourced from Universal Studios locations outside of Singapore, which may not fully reflect USS’s unique visitor behaviors, crowd flow patterns or operational challenges. While data cleaning and preprocessing were conducted to enhance accuracy, differences in park layouts, local visitor demographics and cultural preferences may still introduce inconsistencies in the findings.
+
+5) Challenges in Forecasting Future Visitor Trends – The project primarily focused on analyzing historical and current data, making it difficult to accurately forecast future visitor flow and satisfaction trends. Additionally, external factors such as seasonal events, economic conditions, global travel restrictions and new attraction launches were not explicitly modeled, potentially impacting the long-term applicability of the results.
 
 #### Challenges faced during the project 
 
