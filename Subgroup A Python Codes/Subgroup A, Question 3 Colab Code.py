@@ -679,7 +679,7 @@ df_clean.loc[:, 'first_only_journey'] = df_clean['attraction_journey'].apply(fir
 df_clean.loc[:, 'first_only_string'] = df_clean['first_only_journey'].apply(lambda x: ' ➝ '.join(x))
 
 # Displaying the first few rows of the df_clean dataset
-df_clean.head()
+print(df_clean.head())
 
 """The code `df_clean['first_only_string'].value_counts().head(5)` will give us the top 5 most frequent values in the `first_only_string` column of the `df_clean` DataFrame. It counts the occurrences of each unique value and then selects the top 5 most common ones."""
 
@@ -1134,26 +1134,6 @@ Most clusters show transitions from roller coasters to performances and 3D/4D in
 Since multiple clusters share similar transition behaviors, USS can improve flow by geographically spreading out attractions of the same category, especially Other Rides, which consistently draw crowds in the early afternoon.
 
 Additionally, the park can introduce personalized nudges via the USS app or signage to divert visitors to alternative attractions during peak hours. For instance, families might be recommended nearby eateries or shows, while thrill-seekers could be encouraged to explore underutilized thrill rides with shorter queues.
-
-**Why Are There Very Few Transitions From Early Morning To Late Morning?**
-
-There are several possible reasons why no transitions are recorded in the early morning to late morning category at USS:
-
-1) **Visitors Are Just Entering the Park**
-
-Many guests arrive at the park during this period and spend time getting oriented, taking photos, or planning their day rather than moving between attractions.
-
-2) **Shorter Ride Queues Reduce Transitions**
-
-In the morning, wait times are generally shorter, allowing visitors to stay at individual attractions for longer periods instead of frequently transitioning between rides.
-
-3) **Breakfast or Leisurely Starts**
-
-Some visitors may start their day with breakfast at eateries or take their time exploring Main Street areas before engaging in multiple ride transitions.
-
-4) **Limited Show or Parade Schedules**
-
-Many stage shows and parades only begin later in the day, reducing movement between entertainment options in the early morning.
 
 --------------------------------------------------------------------------------
 
