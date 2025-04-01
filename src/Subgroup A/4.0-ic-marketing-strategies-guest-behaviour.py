@@ -56,7 +56,7 @@ pd.set_option('display.expand_frame_repr', False)
 """## Reading The Excel File From Google Drive To Google Colab"""
 
 # Specify the file path of the excel file
-file_path = 'uss_survey_responses.xlsx'
+file_path = '../../data/processed/uss_survey_responses.xlsx'
 
 # Read the excel file into Google Colab using read_excel
 df = pd.read_excel(file_path)
@@ -1029,7 +1029,7 @@ To achieve this, we will utilize a survey dataset from Kaggle, which contains vi
 """
 
 # Specify the file path of the excel file
-file_path_two = 'uss_historical_reviews.xlsx'
+file_path_two = '../../data/External/uss_historical_reviews.xlsx'
 
 # Read the excel file into Google Colab using read_excel
 df_history = pd.read_excel(file_path_two)
