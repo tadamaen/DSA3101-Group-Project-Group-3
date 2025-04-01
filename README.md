@@ -20,15 +20,15 @@ The motivation behind this project stems from USS’s need to accurately identif
 
 Another crucial motivation is to better understand changing visitor demographics and their evolving expectations. With shifting consumer behaviors and preferences, USS must be able to segment guests based on their interests, behaviors and visit patterns, allowing for a more personalized and efficient approach to park management. Through advanced analytics and predictive modeling, this project seeks to identify market trends and develop strategic initiatives tailored to different customer segments. By optimizing guest flow, enhancing operational efficiency and designing customized experiences for various demographics, the project ultimately aims to boost visitor satisfaction, increase attendance and maximize revenue for USS in an increasingly competitive entertainment industry.
 
-#### What problems the project hopes to solve?
+#### What problems the project hopes to solve? 💰
 
 This project aims to conduct an in-depth analysis of the various factors influencing guest experiences at USS, both positively and negatively. By examining these aspects, the project seeks to not only identify key drivers of visitor satisfaction and dissatisfaction but also to quantify the relative impact of each factor on the overall guest journey. Understanding the significance of these factors such as wait times, attraction availability, crowd density, staff interactions, pricing, and amenities is crucial in developing effective strategies to enhance visitor experiences. More importantly, by determining the weight and influence of each contributing element, USS can make data-driven decisions to optimize park operations, improve guest engagement and implement targeted improvements. This insight will help USS prioritize enhancements that yield the highest impact on customer satisfaction, ultimately leading to a more seamless, enjoyable and memorable theme park experience.
 
-#### What is the intended use of the project?
+#### What is the intended use of the project? ❓
 
 The insights gleaned from our analysis of the data we collected through our survey and datasets available online would provide insights into the various factors affecting guest satisfaction levels at USS. Through guest segmentation, we can learn about different guest behaviours and how they respond to changes in certain aspects, both park-related (e.g. variety of rides, quality of customer service) and external (e.g. weather, holidays). These insights can then help USS tailor their promotions and operational strategies to better meet the needs of distinct guest segments. 
 
-#### Project Content
+#### Project Content 📒
 
 | Sections                                      | Business Question To Analyze                                                                 | Strategy/Approach Used To Tackle The Section |
 |-----------------------------------------------|--------------------------------------------------------------------------------------------|----------------------------------------------|
@@ -43,7 +43,19 @@ The insights gleaned from our analysis of the data we collected through our surv
 | **Predicting Guest Complaints and Service Recovery** | How can USS leverage historical review data to proactively detect and address guest complaints, improving satisfaction, protecting its online reputation, and driving repeat visits? | |
 | **IoT Data Integration for Experience Optimization** | How willing are people to wear a digital watch and how feasible and impactful is IoT in a theme park? | |
 
-#### Benefits of the project 
+#### Benefits of the project ⭐
+
+The project offers several potential benefits for Universal Studios Singapore (USS), primarily focusing on enhancing guest satisfaction, improving operational efficiency, and boosting revenue. 
+
+1) Improved Guest Satisfaction – By identifying the key factors that contribute to both positive and negative guest experiences, the project provides actionable insights that can help optimize guest journeys across the park. These insights can be used to improve areas such as ride experiences, wait times, staff interactions and overall park layout, leading to a more enjoyable and seamless experience for visitors.
+
+2) Optimized Park Operations – Through the use of data-driven optimization models, the project helps USS identify operational bottlenecks, particularly around ride attractions and other high-traffic areas. This allows for better resource allocation, such as adjusting staffing levels or optimizing ride throughput, ultimately improving the efficiency of park operations and reducing unnecessary delays.
+
+3) Targeted Customer Segmentation – By analyzing visitor demographics and behavior patterns, the project enables USS to segment its audience based on interests, preferences and behaviors. This allows for the development of personalized experiences, such as tailored marketing campaigns, targeted promotions or customized park experiences that cater to different customer segments, improving visitor retention and engagement.
+
+4) Increased Revenue and Profitability – Improving guest satisfaction and operational efficiency directly impacts USS's bottom line. With optimized guest flow, shorter wait times and personalized offerings, visitors are likely to spend more time and money within the park, whether on rides, eateries or souvenir shops. By increasing guest spending and enhancing retention, the project can drive higher attendance rates and greater overall revenue.
+
+5) Data-Driven Decision Making – The project empowers USS to make more informed, data-driven decisions when it comes to strategic planning and operational improvements. With a clearer understanding of guest needs, preferences and pain points, USS can prioritize investments in infrastructure, attractions and services that are most likely to enhance the guest experience and generate a strong return on investment.
 
 #### Limitations of the project 😔
 
@@ -75,10 +87,33 @@ This project provided valuable insights into guest experiences at USS by leverag
 
 Despite limitations such as survey response biases, reliance on external datasets and forecasting challenges, our findings offer actionable recommendations to enhance visitor satisfaction. By implementing targeted strategies—such as optimizing ride schedules, personalizing guest experiences and dynamically allocating resources — USS can improve operational efficiency, elevate guest engagement and ultimately drive higher revenue and profitability. Moving forward, future iterations of this project could integrate real-time IoT data, incorporate more advanced machine learning models and refine predictive analytics to further enhance decision-making. With continuous improvements, USS can stay ahead of evolving guest expectations and maintain its reputation as a top-tier entertainment destination.
 
-#### GitHub Repository Navigation (Recommended)
+#### GitHub Repository Navigation 🧑‍💻
 
 
-#### Subgroup Members  
+Explanation of Directories and Files:
+
+- **Notebooks/**: Contains Google Colab Notebooks for analysis and experiments.
+  - **Subgroup A/**: Notebooks specific to subgroup A.
+  - **Subgroup B/**: Notebooks specific to subgroup B.
+  
+- **data/**: Contains datasets used in the project.
+  - **Raw/**: Raw, unprocessed data (survey data)
+  - **External/**: External datasets from other sources (online, internet)
+  - **Processed/**: Cleaned and processed data
+  
+- **src/**: Contains source code for the project.
+  - **Subgroup A/**: Source code for subgroup A (in python)
+  - **Subgroup B/**: Source code for subgroup B (in python)
+  
+- **.gitignore**: Git ignore file to exclude unnecessary files from version control.
+
+- **Dockerfile**: Defines the environment and dependencies for the project using Docker.
+
+- **README.md**: This file with information about the project.
+
+- **requirements.txt**: Lists the required Python packages for the project.
+
+#### Subgroup Members 👯
 
 | **Subgroup A**              | GitHub Profile                                      |
 |-----------------------------|-----------------------------------------------------|
