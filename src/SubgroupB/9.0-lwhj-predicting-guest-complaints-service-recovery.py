@@ -103,7 +103,7 @@ def plot_wordcloud(tfidf):
 
 if __name__ == "__main__":
     # Load and prepare data
-    filename = "universal_studio_branches.csv.zip"
+    filename = "/app/data/External/universal_studio_branches.csv.zip"
     df = load_data(filename)
 
     # Split data into training and test sets (stratified to preserve label balance)
