@@ -264,22 +264,22 @@ class Visitor(Agent):
 
     def choose_attraction(self):
         """Selects an attraction based on popularity weights."""
-        # Calculate total popularity for each zone
-      	zone_popularity = {zone: sum(attraction_weights[zone].values()) for zone in attraction_weights}
+        zone_popularity = {zone: sum(attraction_weights[zone].values()) for zone in attraction_weights}
 
-      	# Create lists of zones and their corresponding popularity weights
-      	all_zones = list(zone_popularity.keys())
-      	weights = [zone_popularity[zone] ** self.exponential for zone in all_zones]
+        # Create lists of zones and their corresponding popularity weights
+        all_zones = list(zone_popularity.keys())
+        weights = [zone_popularity[zone] ** self.exponential for zone in all_zones]
 
-      	# Select a zone based on the calculated weights
-      	chosen_zone = random.choices(all_zones, weights=weights, k=1)[0]
+        # Select a zone based on the calculated weights
+        chosen_zone = random.choices(all_zones, weights=weights, k=1)[0]
 
-      	# Get the list of rides and their weights for the chosen zone
-      	rides = list(attraction_weights[chosen_zone].keys())
-      	ride_weights = [attraction_weights[chosen_zone][ride] ** self.exponential for ride in rides]
-      	# Normalize the ride weights
-      	total_weight = sum(ride_weights)
-      	normalized_weights = [w / total_weight for w in ride_weights]
+        rides = list(attraction_weights[chosen_zone].keys())
+
+        ride_weights = [attraction_weights[chosen_zone][ride] ** self.exponential for ride in rides]
+
+        # Normalize the ride weights
+        total_weight = sum(ride_weights)
+        normalized_weights = [w / total_weight for w in ride_weights]
 
         # Remove the last ride if it exists
         if self.last_ride in rides and len(rides) > 1:
@@ -291,7 +291,6 @@ class Visitor(Agent):
         chosen_ride = random.choices(rides, weights=normalized_weights, k=1)[0]
 
         return chosen_zone, chosen_ride
-
     def get_zone_from_position(self, pos):
       """Determines which USS zone a given position belongs to."""
       x, y = pos
