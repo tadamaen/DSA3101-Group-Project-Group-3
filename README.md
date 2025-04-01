@@ -25,8 +25,26 @@ Another crucial motivation is to better understand changing visitor demographics
 This project aims to conduct an in-depth analysis of the various factors influencing guest experiences at USS, both positively and negatively. By examining these aspects, the project seeks to not only identify key drivers of visitor satisfaction and dissatisfaction but also to quantify the relative impact of each factor on the overall guest journey. Understanding the significance of these factors such as wait times, attraction availability, crowd density, staff interactions, pricing, and amenities is crucial in developing effective strategies to enhance visitor experiences. More importantly, by determining the weight and influence of each contributing element, USS can make data-driven decisions to optimize park operations, improve guest engagement and implement targeted improvements. This insight will help USS prioritize enhancements that yield the highest impact on customer satisfaction, ultimately leading to a more seamless, enjoyable and memorable theme park experience.
 
 #### What is the intended use of the project?
+
 The insights gleaned from our analysis of the data we collected through our survey and datasets available online would provide insights into the various factors affecting guest satisfaction levels at USS. Through guest segmentation, we can learn about different guest behaviours and how they respond to changes in certain aspects, both park-related (e.g. variety of rides, quality of customer service) and external (e.g. weather, holidays). These insights can then help USS tailor their promotions and operational strategies to better meet the needs of distinct guest segments. 
-#### CONTENT OF THE PROJECT (INFORMATION + DESCRIPTION OF PROCESS) 
+
+#### Project Content
+
+| Sections                                      | Business Question To Analyze                                                                 | Strategy/Approach Used To Tackle The Section |
+|-----------------------------------------------|--------------------------------------------------------------------------------------------|----------------------------------------------|
+| **Key Factors Influencing Guest Satisfaction** | Which categories related to USS have the highest dissatisfaction, and what key factors should be improved to enhance guest experience? | - Conducted a survey gathering approximately 500 responses to assess overall guest satisfaction at USS  <br> <br> - Leveraged business metrics like Customer Satisfaction Score (CSAT) and Net Promoter Score (NPS) to determine overall satisfaction rates of USS, as well as various sections in USS such as Ticketing and Rides & Attractions. <br> <br> - Created bar plots to identify most important reasons for customer unsatisfaction rates for various sections of USS and ranked mean importance of factors which affect customers' satisfaction rates <br> <br> - Identified the top 3 reasons for customers' current unsatisfaction for various sections of USS <br> <br> - Implemented appropriate and relevant strategies to address the most common pain points in customers. |
+| **Guest Segmentation Model**                  | What are the key guest segments and their traits?                                          | |
+| **Guest Journey Patterns**                    | How do common guest journey patterns provide opportunities for personalization and operational improvements? | |
+| **Impact Of Marketing Strategies On Guest Behaviour** | How have marketing strategies changed guest segments and satisfaction over time? | |
+| **External Factors and Guest Segmentation**   | Investigate the influence of external factors on segment size and behavior. Suggest operational adjustments for high-impact periods. | |
+| **Demand Prediction for Attractions and Services** | How can we predict visitor demand for attractions and services using historical trends, weather, and events to optimize resources and enhance customer experience? | |
+| **Optimization of Attraction Layouts and Schedules** | How can we optimize attraction layouts and schedules to enhance guest satisfaction at USS? | |
+| **Resource Allocation for Demand Variability** | How can we allocate staff dynamically to meet the variability in demand of visitors throughout the day to ensure a pleasant visitor experience? | |
+| **Predicting Guest Complaints and Service Recovery** | How can USS leverage historical review data to proactively detect and address guest complaints, improving satisfaction, protecting its online reputation, and driving repeat visits? | |
+| **IoT Data Integration for Experience Optimization** | How willing are people to wear a digital watch and how feasible and impactful is IoT in a theme park? | |
+
+
+
 
 #### Benefits of the project 
 
@@ -44,7 +62,15 @@ While the optimization model provided valuable insights into the impact of chang
 
 5) Challenges in Forecasting Future Visitor Trends – The project primarily focused on analyzing historical and current data, making it difficult to accurately forecast future visitor flow and satisfaction trends. Additionally, external factors such as seasonal events, economic conditions, global travel restrictions and new attraction launches were not explicitly modeled, potentially impacting the long-term applicability of the results.
 
-#### Challenges faced during the project 
+#### Challenges faced during the project 🤯
+
+Throughout the project, several challenges emerged, affecting the data collection, model implementation and overall analysis process. These challenges had to be carefully managed to ensure the accuracy and reliability of the findings.
+
+1) Survey Response Accuracy and Bias – One of the major challenges was the potential inaccuracy of survey responses. Since there were no incentives for completing the survey, some respondents might have rushed through or provided random answers, reducing the reliability of the data. Additionally, majority-minority bias was a concern, where responses could be skewed towards certain categories, making it difficult to obtain a balanced representation of guest experiences at Universal Studios Singapore (USS).
+
+2) Difficulty in Collecting Sufficient Responses – Gathering enough survey responses for model implementation was a time-consuming and labor-intensive task. The team had to manually reach out to friends, family, passersby and online survey platforms, which required significant effort. Due to the limited number of responses, data augmentation techniques such as imputation were applied to increase dataset size, but this introduced a risk of reducing the authenticity of the data.
+
+3) Selecting the Best Machine Learning Model – Another key challenge was determining the most suitable Machine Learning model for analyzing guest satisfaction and predicting visitor flow. This required an exhaustive cost-benefit analysis of different models, balancing factors such as accuracy, evaluation metrics (precision, recall, F1-score), efficiency, model complexity and risk of overfitting. Some models performed well in terms of accuracy but were computationally expensive, while others were efficient but had weaker predictive performance, making it difficult to decide on an optimal approach.
 
 #### Conclusion 
 
