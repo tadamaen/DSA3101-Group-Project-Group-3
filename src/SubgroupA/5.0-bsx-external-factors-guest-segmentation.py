@@ -57,7 +57,7 @@ pd.set_option('display.expand_frame_repr', False)
 """## Reading The Excel File From Google Drive To Google Colab"""
 
 # Specify the file path of the excel file
-file_path = '/content/drive/MyDrive/themepark_weather_holiday.csv'
+file_path = '/app/data/External/themepark_weather_holiday.csv'
 
 # Read the excel file into Google Colab using read_excel
 df = pd.read_csv(file_path)
@@ -629,7 +629,7 @@ To determine other factors that affect average crowd levels of USS, we can make 
 """
 
 # Specify the file path of the excel file
-file_path = '/content/drive/MyDrive/dsa3101_clustered_data.csv'
+file_path = '/app/data/processed/dsa3101_clustered_data.csv'
 
 # Read the excel file into Google Colab using read_excel
 df2 = pd.read_csv(file_path)
