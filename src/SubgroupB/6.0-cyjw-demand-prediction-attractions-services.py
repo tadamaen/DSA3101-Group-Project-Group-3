@@ -10,8 +10,8 @@ warnings.filterwarnings("ignore")
 # ## 1. Load data from CSVs
 
 # %%
-weather_df = pd.read_csv('../data/weather_cleandata.csv')
-waittime_df = pd.read_csv('../data/waittime_cleandata.csv')
+weather_df = pd.read_csv('/app/data/processed/weather_cleandata.csv')
+waittime_df = pd.read_csv('/app/data/processed/waittime_cleandata.csv')
 
 # %% [markdown]
 # ## 2. Generate External Factors (Date Sensitive Factors)
