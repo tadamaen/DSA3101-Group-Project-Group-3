@@ -85,7 +85,7 @@ pd.set_option('display.expand_frame_repr', False)
 """## Reading The Excel File From Google Drive To Google Colab"""
 
 # Specify the file path of the excel file
-file_path = '/content/drive/MyDrive/uss_survey_responses.xlsx'
+file_path = '/app/data/processed/uss_survey_responses.xlsx'
 
 # Read the excel file into Google Colab using read_excel
 df = pd.read_excel(file_path)
@@ -408,7 +408,7 @@ In addition to the `uss_survey_responses` excel file, we will also import the cl
 """
 
 # Read in clustered data from Subgroup A, Question 2
-clustered_df = pd.read_csv('/content/drive/MyDrive/uss_clustered_data_Q2.csv')
+clustered_df = pd.read_csv('/app/data/processed/uss_clustered_data_Q2.csv')
 
 # Display the first few rows of the dataset
 print(clustered_df.head())
