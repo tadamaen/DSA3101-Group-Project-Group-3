@@ -20,11 +20,11 @@ Key Factors affecting demand of attraction/services (From Subgroup B Question 1)
 
 ## Loading Libraries
 """
-
-!pip install simpy
-!pip install mesa==1.2.1
-!pip install matplotlib
-!pip install adjustText
+# Add to requirement.txt
+# !pip install simpy
+# !pip install mesa==1.2.1
+# !pip install matplotlib
+# !pip install adjustText
 
 # Importing Libraries
 from mesa import Agent, Model
