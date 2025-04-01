@@ -210,11 +210,16 @@ class Visitor(Agent):
       	ride_weights = [attraction_weights[chosen_zone][ride] ** self.exponential for ride in rides]
       	# Normalize the ride weights
       	total_weight = sum(ride_weights)
-      	normalized_weights = [w / total_weight for w in ride_weights 
+      	normalized_weights = [w / total_weight for w in ride_weights]
 
-        rides = list(attraction_weights[chosen_zone].keys())
-        weights = [attraction_weights[chosen_zone][ride] for ride in rides]  # Use weights for probability
-        chosen_ride = random.choices(rides, weights=weights, k=1)[0]
+        # Remove the last ride if it exists
+        if self.last_ride in rides and len(rides) > 1:
+            last_ride_index = rides.index(self.last_ride)
+            rides.remove(self.last_ride)
+            normalized_weights.pop(last_ride_index)  # Remove the corresponding weight
+
+        # Choose a ride based on the normalized weights
+        chosen_ride = random.choices(rides, weights=normalized_weights, k=1)[0]
 
         return chosen_zone, chosen_ride
 
