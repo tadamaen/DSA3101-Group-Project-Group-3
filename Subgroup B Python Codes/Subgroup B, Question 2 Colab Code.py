@@ -49,6 +49,8 @@ import random
 import math
 import datetime
 import scipy.stats as stats
+import heapq
+from collections import defaultdict
 
 """## Loading Dataset
 
@@ -75,7 +77,7 @@ survey_data.head()
 PARK_CENTER = (25, 25)
 PARK_RADIUS = 20
 WATER_RADIUS = 5  # The central water body
-TIME_STEPS = 20  # 10 AM to 8 PM in 30 min intervals
+TIME_STEPS = 21  # 10 AM to 8 PM in 30 min intervals
 
 # Define USS zones with angles and colors
 uss_zones = {
@@ -178,20 +180,87 @@ class Visitor(Agent):
         self.destination = None
         self.riding_time = 0
         self.current_zone = None
+        self.hunger = 0
+        self.eating_time = 0
+        self.last_ride = None
+        self.browsing = 0
+        self.shop_prob = 0.1
 
     def step(self):
         self.time_in_park += 1
 
-        if self.riding_time > 0:  # If on a ride, decrement ride time
-            self.riding_time -= 1
-            return
-        # Check which zone the visitor is in
-        self.current_zone = self.model.get_zone_from_position(self.pos)
+        if self.hunger > 5 and self.riding_time == 0:
+            food = self.find_nearest_food()  #(zone, stall_name)
+            if food:
+                self.destination = food
+                self.move_towards(food)
+                # print(f"Visitor {self.unique_id} is hungry and going to {food[1]}")
 
-        if not self.destination or random.random() < 0.2:  # 20% chance to reconsider destination
-            self.destination = self.choose_attraction()
+        if self.eating_time > 0:
+            # print(f"Visitor {self.unique_id} is eating for {self.eating_time} more steps.")
+            self.eating_time -= 1
+            if self.eating_time == 0:
+                self.hunger = 0
+                # print(f"Visitor {self.unique_id} is no longer hungry.")
+                self.destination = None
+                return
+
+        if self.riding_time > 0: # This line had inconsistent indentation. Fixed by adjusting to match other blocks.
+            # print(f"Visitor {self.unique_id} is riding for {self.riding_time} more steps.")
+            self.riding_time = 0
+            return
+
+        if self.browsing > 0:
+            # print(f"Visitor {self.unique_id} is browsing for {self.browsing} more steps.")
+            self.browsing -= 1
+            self.destination = None
+            return
+
+        # Increase hunger over time
+        self.hunger += 1
+        # print(f"Visitor {self.unique_id} at {self.pos} - Hunger: {self.hunger}")
+
+        # Goes shopping with probability of shopping probability assigned, else attractions when not hungry
+        if not self.destination:
+            if random.random() <= self.shop_prob:
+                self.destination = self.choose_shop()
+                # print(f"Visitor {self.unique_id} chooses to shop at {self.destination}")
+            else:
+                self.destination = self.choose_attraction()
+                # print(f"Visitor {self.unique_id} chooses {self.destination}")
 
         self.move_towards(self.destination)
+
+    def choose_shop(self):
+      """Finds the nearest shop based on visitor's current position."""
+      min_distance = float("inf")
+      closest_shop = None
+
+      for zone, shops in souvenir_shops.items():
+          for (x, y, shop_name) in shops:
+              path = self.model.get_shortest_path(self.pos, (x, y))
+              dist = len(path)
+              if dist < min_distance:
+                  min_distance = dist
+                  closest_shop = (zone, shop_name)
+      return closest_shop
+
+    def find_nearest_food(self):
+      """Finds the nearest food stall based on visitor's current position."""
+      current_zone = self.current_zone
+      if current_zone is None:
+          current_zone = self.get_zone_from_position(self.pos)
+      closest_food = (current_zone, food_stalls[current_zone][0][2])
+      return closest_food
+
+    def start_eating(self):
+        """Starts the eating process for the visitor."""
+        self.eating_time = 2
+        self.hunger = 0
+
+    def start_browsing(self):
+        """Starts the browsing process for the visitor."""
+        self.browsing = 1
 
     def choose_attraction(self):
         """Selects an attraction based on popularity weights."""
@@ -223,20 +292,82 @@ class Visitor(Agent):
 
         return chosen_zone, chosen_ride
 
-    def move_towards(self, destination):
-        """Move towards the chosen attraction."""
-        zone, ride = destination
-        dest_pos = next((x, y) for x, y, name in attractions[zone] if name == ride)
+    def get_zone_from_position(self, pos):
+      """Determines which USS zone a given position belongs to."""
+      x, y = pos
+      dx, dy = x - PARK_CENTER[0], y - PARK_CENTER[1]  # Get relative position from center
+      if dx == 0 and dy == 0:
+          return None
 
-        if self.pos == dest_pos:
-            self.enter_ride(zone, ride)
-        else:
-            path = self.model.get_shortest_path(self.pos, dest_pos)
-            if path:
-                self.model.grid.move_agent(self, path[min(3, len(path)-1)])
-            if not path:  # If no valid path, pick another destination
-              self.destination = self.choose_attraction()
-              return
+      angle = (math.degrees(math.atan2(dy, dx)) + 360) % 360  # Compute angle and normalize
+
+      for zone, data in uss_zones.items():
+          start_angle, end_angle = data["angle_range"]
+          if start_angle <= angle < end_angle:
+              return zone  # Return the corresponding zone name
+      return None
+        
+    def move_towards(self, destination):
+        """Moves the visitor towards the destination, which could be a ride, food stall, or souvenir shop."""
+      zone, name = destination
+
+      # Initialize default values for destination types and coordinates
+      target_x, target_y = None, None
+      food_stall_found = False
+      souvenir_shop_found = False
+      ride_found = False
+
+      # First, check if it's a food stall
+      if zone in food_stalls:
+          for x, y, stall_name in food_stalls[zone]:
+              if stall_name == name:
+                  food_stall_found = True
+                  target_x, target_y = x, y
+                  break
+
+      # Then, check if it's a souvenir shop
+      if not food_stall_found and zone in souvenir_shops:
+          for x, y, shop_name in souvenir_shops[zone]:
+              if shop_name == name:
+                  souvenir_shop_found = True
+                  target_x, target_y = x, y
+                  break
+
+      # If neither food stall nor souvenir shop, treat it as a ride (attraction)
+      if not (food_stall_found or souvenir_shop_found) and zone in attractions:
+          for x, y, attraction_name in attractions[zone]:
+              if attraction_name == name:
+                  ride_found = True
+                  target_x, target_y = x, y
+                  break
+
+      # If none of the destinations are found, print an error
+      if not (food_stall_found or souvenir_shop_found or ride_found):
+          print(f"Error: {name} not found in {zone}")
+          return
+
+      # Introduce slight randomness in the final target position (±1 in x or y)
+      target_x += random.choice([-1, 0, 1])
+      target_y += random.choice([-1, 0, 1])
+
+      dest_pos = (target_x, target_y)
+      if (abs(self.pos[0] - target_x) <= 1) and (abs(self.pos[1] - target_y) <= 1):
+        # Visitor is close enough, so handle the post-arrival actions
+        if ride_found:
+            self.enter_ride(zone, name)
+        elif food_stall_found:
+            self.start_eating()
+        elif souvenir_shop_found:
+            self.start_browsing()
+      else:
+          # Visitor is not at the target yet, so move towards it
+          if self.pos != dest_pos:
+              path = self.model.get_shortest_path(self.pos, dest_pos)
+              if path:
+                  self.model.grid.move_agent(self, path[min(3, len(path)-1)])
+              if not path:  # If no valid path, pick another destination
+                  self.destination = self.choose_attraction()
+                  return
 
     def enter_ride(self, zone, ride):
         """Handles queueing and entering rides."""
