@@ -44,9 +44,9 @@ The simulation outputs a map of USS with the visitor movements in 30minutes inte
 Installation instructions: This is the list of required instalation versions and libraries that will be used to run the Agent Based Model(ABM) simulation
 """
 
-!pip install mesa==1.2.1
-!pip install matplotlib
-!pip install adjustText
+#!pip install mesa==1.2.1
+#!pip install matplotlib
+#!pip install adjustText
 
 from mesa import Agent, Model
 from mesa.space import MultiGrid
