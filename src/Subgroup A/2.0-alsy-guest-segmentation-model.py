@@ -12,8 +12,8 @@ Original file is located at
 """
 
 # Importing From Google Drive
-from google.colab import drive
-drive.mount('/content/drive')
+# from google.colab import drive
+# drive.mount('/content/drive')
 
 """## Importing The Necessary Packages
 
