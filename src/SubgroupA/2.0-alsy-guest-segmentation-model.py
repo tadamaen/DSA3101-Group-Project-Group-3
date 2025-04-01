@@ -60,7 +60,7 @@ pd.set_option('display.expand_frame_repr', False)
 """## Reading The Excel File From Google Drive To Google Colab"""
 
 # Specify the file path of the excel file
-file_path = '/content/drive/MyDrive/uss_survey_responses.xlsx'
+file_path = '/app/data/processed/uss_survey_responses.xlsx'
 
 # Read the excel file into Google Colab using read_excel
 df = pd.read_excel(file_path)
