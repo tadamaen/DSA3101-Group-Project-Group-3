@@ -26,7 +26,14 @@ This project aims to conduct an in-depth analysis of the various factors influen
 
 #### What is the intended use of the project? ❓
 
-The insights gleaned from our analysis of the data we collected through our survey and datasets available online would provide insights into the various factors affecting guest satisfaction levels at USS. Through guest segmentation, we can learn about different guest behaviours and how they respond to changes in certain aspects, both park-related (e.g. variety of rides, quality of customer service) and external (e.g. weather, holidays). These insights can then help USS tailor their promotions and operational strategies to better meet the needs of distinct guest segments. 
+This project will enable USS to increase guest satisfaction and retention through data-driven approaches such as analysis and modelling. 
+
+By analysing data collected from our survey and datasets available online, we will identify key factors influencing guest satisfaction at USS. Guest journey analysis and segmentation will reveal behavioural patterns and preferences across different visitor groups, allowing for customised promotions, optimized operational workflows and deliver enhanced, personalised experiences tailored to each guest segment, therefore driving higher satisfaction and retention levels. 
+
+Predictive modelling will allow for experience optimisation by enhancing operational decision making through forecasting attendance patterns to optimise staff allocation, simulating attraction layouts to minimise wait times and anticipate potential complaints before they occur, allowing USS to implement preventive measures or provide timely support. These capabilities will directly contribute to increased revenue and guest satisfaction. 
+
+Furthermore, we will explore the use of IoT devices to enable real-time crowd monitoring to facilitate dynamic resource allocation, This would enhance responsiveness to unexpected situations, therefore providing USS with operational agility. 
+
 
 #### Project Content 📒
 
