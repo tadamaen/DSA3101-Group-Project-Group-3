@@ -1,20 +1,6 @@
 # DSA3101 Group Project Group 3
 ## Enhancing Guest Experience Through Data-Driven Journey Mapping and Analysis 
 
-#### Subgroup A Members: 
-###### Yu Zifan 
-###### Low Shi Ya Amelia 
-###### Tan Teck Hwe Damaen 
-###### Isabella Chong 
-###### Su Xiangling, Brenda
-
-#### Subgroup B Members: 
-###### Tan Jone Lung 
-###### Beh Wan Ting 
-###### Fun Wen Xin 
-###### Yeo Jing Wen, Cheryl 
-###### Lien Wei Hao, Jordan 
-
 #### Introduction 
 This project aims to look into the guest experiences at Universal Studios Singapore (USS). By utilizing data-driven approach, predictive modeling and agent-based modeling, we want to optimize the guest flow and improve guest satisfaction, looking to potentially boost operational efficiency and revenue for USS. 
 
@@ -40,3 +26,14 @@ For the optimization model, the results were significant in demonstrating the im
 
 
 #### GitHub Repository Navigation (Recommended)
+
+
+#### Subgroup Members
+
+| **Subgroup A**              | **Subgroup B**              |
+|-----------------------------|-----------------------------|
+| Yu Zifan                   | Tan Jone Lung              |
+| Low Shi Ya Amelia          | Beh Wan Ting               |
+| Tan Teck Hwe Damaen        | Fun Wen Xin                |
+| Isabella Chong             | Yeo Jing Wen, Cheryl       |
+| Su Xiangling, Brenda       | Lien Wei Hao, Jordan       |
