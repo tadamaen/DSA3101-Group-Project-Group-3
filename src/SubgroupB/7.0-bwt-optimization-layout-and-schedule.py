@@ -68,7 +68,7 @@ Unlike the attractions (typically rides), Restaurant/Shops does not have a fixed
 ### Survey Response Data
 """
 
-survey_data = pd.read_excel("uss_survey_responses.xlsx")
+survey_data = pd.read_excel("/app/data/processed/uss_survey_responses.xlsx")
 survey_data.head()
 
 """### Park Visual (Fixing Location on Map)"""
