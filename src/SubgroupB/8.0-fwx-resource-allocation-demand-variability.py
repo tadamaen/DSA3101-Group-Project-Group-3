@@ -74,7 +74,7 @@ Historical wait time dataset on the attractions in USS is used to obtain the pop
 Utilising wait time data we have obtained to determine the popularity weights to assign attractions. Function ranks the total visitor count for rides in a ascending order as rides with greater visitor counts are more popular and should have greater popularity weights.
 """
 
-df = pd.read_csv("/waittime_cleandata_updated.csv")
+df = pd.read_csv("/app/data/processed/waittime_cleandata_updated.csv")
 # function to calculate popularity weights of rides:
 def calculate_popularity(df):
   ride_popularity_rank = df.groupby("Ride_name")["Visitor_count"].sum().rank(method='dense', ascending=True)
