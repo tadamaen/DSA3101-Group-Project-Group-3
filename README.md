@@ -1,10 +1,18 @@
 # DSA3101 Group Project Group 3
+
 ## Enhancing Guest Experience Through Data-Driven Journey Mapping and Analysis 
 
 #### Introduction 
-This project aims to look into the guest experiences at Universal Studios Singapore (USS). By utilizing data-driven approach, predictive modeling and agent-based modeling, we want to optimize the guest flow and improve guest satisfaction, looking to potentially boost operational efficiency and revenue for USS. 
+
+This project aims to analyze guest experiences at Universal Studios Singapore (USS), addressing growing concerns about increasing dissatisfaction rates among visitors. Despite efforts to enhance guest satisfaction, USS has struggled to pinpoint the key factors driving this decline, making it difficult to implement targeted improvements.
+
+By leveraging a data-driven approach, predictive modeling, and agent-based simulations, this project seeks to optimize guest flow and enhance the overall visitor experience. Poor satisfaction ratings can lead to declining attendance, reduced revenue, and ultimately lower profitability for USS. By identifying and addressing pain points, the project aims to boost operational efficiency, improve guest satisfaction, and drive revenue growth, ensuring USS remains a top entertainment destination.
 
 #### How the project came about? (Problems faced by entertainment venues)
+
+The project was initiated in response to growing challenges faced by Universal Studios Singapore (USS) in maintaining high guest satisfaction amidst evolving visitor expectations. In recent years, demographic shifts have led to a more diverse audience with varied preferences and demands, making it increasingly difficult to cater to all guest segments effectively. Additionally, guest dissatisfaction rates have been rising, with common complaints related to long wait times, overcrowding, inefficient park layouts and inconsistent service quality.
+
+Despite USS's efforts to enhance operations, they have struggled to pinpoint the exact causes behind this growing dissatisfaction. This issue is critical because poor guest experiences can lead to negative reviews, reduced visitor retention, lower attendance, and ultimately a decline in revenue and profitability. Furthermore, the increased reliance on digital experiences and higher expectations for seamless, personalized services put additional pressure on theme parks to modernize their approach. Recognizing these challenges, this project was developed to leverage data-driven insights, predictive modeling, and agent-based simulations to identify inefficiencies, optimize guest flow, and enhance overall satisfaction, ultimately improving USS’s long-term operational success.
 
 #### What are the motivations of the project?
 
