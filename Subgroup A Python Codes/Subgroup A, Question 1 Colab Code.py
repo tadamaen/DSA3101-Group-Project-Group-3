@@ -543,7 +543,7 @@ nps_score = promoters_percentage - detractors_percentage
 # Print out the result
 print(f"\nNPS Score: {nps_score:.1f}%")
 
-"""From the NPS, we can see that the result obtained is -9.7%, which is a negative value. Based on the score range of NPS, this suggests that USS is not doing enough to satisfy its customers and there is room of improvement for USS to increase its NPS to a value above 30. Due to the highly concerning NPS value, we need to proceed to the next step of the analysis by pinpointing which sections of USS (eg. food and beverage, attractions, performances etc.) are performing poorly (low ratings/scores).
+"""From the NPS, we can see that the result obtained is -9.2%, which is a negative value. Based on the score range of NPS, this suggests that USS is not doing enough to satisfy its customers and there is room of improvement for USS to increase its NPS to a value above 30. Due to the highly concerning NPS value, we need to proceed to the next step of the analysis by pinpointing which sections of USS (eg. food and beverage, attractions, performances etc.) are performing poorly (low ratings/scores).
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -707,7 +707,7 @@ plt.show()
 
 1) The mode ratings for Ticketing Information Accessibility, Ride And Atttractions and Entertainment And Performances are 4, indicating a general slightly positive satisfaction rates among the survey respondants.
 
-2) The mode ratings for Food And Beverage, Merchandise And Shopping and Crowd Management, Comfort and Staff Helpfulness are 3, indicating that the majority of the survey responsdants are less satisifed with these three categories, with barely passable satisfaction rates.
+2) The mode ratings for Food And Beverage, Merchandise And Shopping and Crowd Management, Comfort and Staff Helpfulness are 3, indicating that the majority of the survey respondants are less satisifed with these three categories, with barely passable satisfaction rates.
 
 3) A significantly high number of respondants gave a satisfaction rating of 2 for the Food And Beverage section of USS (more than 100 respondants out of 505 respondants, around 20%), suggesting that a considerable number of people are disastisfied with the Food and Beverage category of USS. Likewise, the number of respondants who gave a rating of 5 for the Food And Beverage category (around 25) is significantly lower compared to the rest of the categories (close to 50 or more).
 
@@ -847,7 +847,7 @@ for index, value in enumerate(sorted_means["Mean Importance Score"]):
 # Show the plot
 plt.show()
 
-"""The bars are ordered by the mean importance, where the bars in darher shades of blue represent more important factors while the bars in lighter shades in blue represent less important factors. We notice that Staff Helpfulness has the darkest blue bar, indicating that the mean importance of Staff Helpfulness is the highest. Other factors such as Entertainment And Performances, Food And Beverage and Merchandise And Shopping have lighter blue bars, indicating that their mean importance values are lower.
+"""The bars are ordered by the mean importance, where the bars in darker shades of blue represent more important factors while the bars in lighter shades in blue represent less important factors. We notice that Staff Helpfulness has the darkest blue bar, indicating that the mean importance of Staff Helpfulness is the highest. Other factors such as Entertainment And Performances, Food And Beverage and Merchandise And Shopping have lighter blue bars, indicating that their mean importance values are lower.
 
 
 From the results obtained from both Step 1 and Step 2, we can proceed to the next step - identifying pain points from customers that affect satisfaction rates for the various sections at USS. This step is crucial as for each section of USS (eg. Rides And Attractions), there are many possible reasons why customers are unsastisfied (eg. For Rides And Attractions - possible reasons include wait time for attractions, variety of rides and attractions, availability and maintenance of attractions etc.). We need to pinpoint exactly the main factors that affect the satisfaction ratings of each section of USS so that strategies can be tailored to focus more on the users' pain points for an enhanced user experience at USS.
@@ -1113,7 +1113,6 @@ print(feature_counts)
 This can be done using the `replace()` methd in pandas where the entry before the colon is the original feature name and the entry after the colon is the modified feature name. We can pass multiple entries separated by commas in a dictionary `{}`. Afterwards, we need to regroup the entries once more using the `groupby()` method and use `.sum()` to tabulate the count of each category.
 """
 
-# Standardize "Price of Souvenirs" to "Price Of Souvenirs"
 # Remove the extra comma after "Staff Helpfulness And Efficiency"
 feature_counts["Feature"] = feature_counts["Feature"].replace(
     {"Cleanliness of USS": "Cleanliness Of USS",
@@ -1168,7 +1167,7 @@ We used several metrics in this step such as the **Net Promoter Score (NPS)** an
 From the results obtained through the survey responses:
 
 *   Number Of Detractors > Number Of Promoters (Area For Concern)
-*   NPS Score: -9.7% (Lower than benchmark of 30%, negative value)
+*   NPS Score: -9.2% (Lower than benchmark of 30%, negative value)
 *   CSAT Scores For All Sections Of USS around 30% to 60% (Lower than benchmark of 80%)
 
 The following table shows the CSAT scores for the various sections of USS:
