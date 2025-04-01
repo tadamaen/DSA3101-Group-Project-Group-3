@@ -43,9 +43,6 @@ The insights gleaned from our analysis of the data we collected through our surv
 | **Predicting Guest Complaints and Service Recovery** | How can USS leverage historical review data to proactively detect and address guest complaints, improving satisfaction, protecting its online reputation, and driving repeat visits? | |
 | **IoT Data Integration for Experience Optimization** | How willing are people to wear a digital watch and how feasible and impactful is IoT in a theme park? | |
 
-
-
-
 #### Benefits of the project 
 
 #### Limitations of the project 😔
@@ -72,18 +69,30 @@ Throughout the project, several challenges emerged, affecting the data collectio
 
 3) Selecting the Best Machine Learning Model – Another key challenge was determining the most suitable Machine Learning model for analyzing guest satisfaction and predicting visitor flow. This required an exhaustive cost-benefit analysis of different models, balancing factors such as accuracy, evaluation metrics (precision, recall, F1-score), efficiency, model complexity and risk of overfitting. Some models performed well in terms of accuracy but were computationally expensive, while others were efficient but had weaker predictive performance, making it difficult to decide on an optimal approach.
 
-#### Conclusion 
+#### Conclusion 📈
 
+This project provided valuable insights into guest experiences at USS by leveraging data-driven analysis, predictive modeling and optimization techniques. Through the identification of key dissatisfaction factors, guest segmentation and demand forecasting, we were able to pinpoint critical areas for improvement including long wait times, inefficient crowd management and gaps in service quality.
+
+Despite limitations such as survey response biases, reliance on external datasets and forecasting challenges, our findings offer actionable recommendations to enhance visitor satisfaction. By implementing targeted strategies—such as optimizing ride schedules, personalizing guest experiences and dynamically allocating resources — USS can improve operational efficiency, elevate guest engagement and ultimately drive higher revenue and profitability. Moving forward, future iterations of this project could integrate real-time IoT data, incorporate more advanced machine learning models and refine predictive analytics to further enhance decision-making. With continuous improvements, USS can stay ahead of evolving guest expectations and maintain its reputation as a top-tier entertainment destination.
 
 #### GitHub Repository Navigation (Recommended)
 
 
-#### Subgroup Members
+#### Subgroup Members  
 
-| **Subgroup A**              | **Subgroup B**              |
-|-----------------------------|-----------------------------|
-| Yu Zifan                   | Tan Jone Lung              |
-| Low Shi Ya Amelia          | Beh Wan Ting               |
-| Tan Teck Hwe Damaen        | Fun Wen Xin                |
-| Isabella Chong             | Yeo Jing Wen, Cheryl       |
-| Su Xiangling, Brenda       | Lien Wei Hao, Jordan       |
+| **Subgroup A**              | GitHub Profile                                      |
+|-----------------------------|-----------------------------------------------------|
+| Yu Zifan                    | [gracoco123](https://github.com/gracoco123)        |
+| Low Shi Ya Amelia           | [am3lia-low](https://github.com/am3lia-low)        |
+| Tan Teck Hwe Damaen         | [tadamaen](https://github.com/tadamaen)            |
+| Isabella Chong              | [isabellachong](https://github.com/isabellachong)  |
+| Su Xiangling, Brenda        | [brenda-su](https://github.com/brenda-su)          |
+
+| **Subgroup B**              | GitHub Profile                                      |
+|-----------------------------|-----------------------------------------------------|
+| Tan Jone Lung, Jayden       | [jaydentjl2002](https://github.com/jaydentjl2002)  |
+| Beh Wan Ting                | [wwwanting](https://github.com/wwwanting)          |
+| Fun Wen Xin                 | [funwenxin](https://github.com/funwenxin)          |
+| Yeo Jing Wen, Cheryl        | [cherylyeov](https://github.com/cherylyeov)        |
+| Lien Wei Hao, Jordan        | [lienweihao](https://github.com/lienweihao)        |
+
