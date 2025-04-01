@@ -25,8 +25,8 @@ from sklearn.model_selection import TimeSeriesSplit
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
-filename = "uss_survey_responses.csv"
-df = pd.read_csv(filename)
+filename = "/app/data/processed/uss_survey_responses.xlsx"
+df = pd.read_excel(filename)
 
 # Dataset Inspection
 print("Column Headers:", df.columns.tolist())
@@ -421,8 +421,8 @@ Two datasets regarding wifi connectivity and usage are used as a reference to ev
 """
 
 # Load the datasets
-wifi_survey = pd.read_csv("WiFiSurvey.csv")
-wifi_data = pd.read_csv("WiFiData.csv")
+wifi_survey = pd.read_csv("/app/data/External/WiFiSurvey.csv")
+wifi_data = pd.read_csv("/app/data/External/WiFiData.csv")
 
 # -----------------------------------
 # Part 1: User Feedback from Survey
@@ -510,7 +510,7 @@ print(speed_stats)
 The dataset
 """
 
-df = pd.read_csv("HomeC.csv")
+df = pd.read_csv("/app/data/External/HomeC.csv")
 df.columns
 df.head()
 
