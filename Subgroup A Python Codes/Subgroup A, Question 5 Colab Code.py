@@ -943,7 +943,7 @@ print("Number Of Visitors By Cluster Number:")
 print()
 print(cluster_counts)
 
-"""We observe that there is a difference in number of observations per cluster. For instance, cluster 2 has 142 observations while cluster 4 has only 17 observations. Since the difference in clusters is quite huge, when creating visualisations to analyze the demographics of each cluster, we will use the proportions instead of counts.
+"""We observe that there is a difference in number of observations per cluster. For instance, cluster 2 has 142 observations while cluster 4 has only 17 observations. Since the difference in clusters is quite huge, when creating visualisations to analyse the demographics of each cluster, we will use the proportions instead of counts.
 
 --------------------------------------------------------------------------------
 
