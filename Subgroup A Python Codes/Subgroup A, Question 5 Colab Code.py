@@ -17,7 +17,7 @@ drive.mount('/content/drive')
 
 """## Importing The Necessary Packages
 
-For this question, we will need to import several packages, inclding pandas for data cleaning and transformation, numpy for numefical computation, matplotlib and seaborn for data visualizations.
+For this question, we will need to import several packages, including pandas for data cleaning and transformation, numpy for numefical computation, matplotlib and seaborn for data visualisations.
 """
 
 # Importing The Necessary Packages
@@ -28,10 +28,10 @@ import pandas as pd
 # 2. numpy - to be used for numerical computing
 import numpy as np
 
-# 3. matplotlib - to be used for data visualizations
+# 3. matplotlib - to be used for data visualisations
 import matplotlib.pyplot as plt
 
-# 4. seaborn - to be used for data visualizations
+# 4. seaborn - to be used for data visualisations
 import seaborn as sns
 
 """## Other Settings Implemented Using Pandas
@@ -196,7 +196,7 @@ print(df_corr.head())
 
 ##### Generating The Correlation Matrix
 
-The function `plot_cor_matrix` is then defined to create a correlation matrix heatmap using Seaborn's `heatmap()` function. The correlation matrix helps identify relationships between different numerical features by displaying correlation coefficients, with values closer to 1 or -1 indicating strong relationships and values near 0 showing weak or no correlation. The heatmap uses the coolwarm colormap for visualization, and values are displayed with two decimal places. Finally, the function is called to generate and display the heatmap, providing insights into feature relationships in the dataset.
+The function `plot_cor_matrix` is then defined to create a correlation matrix heatmap using Seaborn's `heatmap()` function. The correlation matrix helps identify relationships between different numerical features by displaying correlation coefficients, with values closer to 1 or -1 indicating strong relationships and values near 0 showing weak or no correlation. The heatmap uses the coolwarm colormap for visualisation, and values are displayed with two decimal places. Finally, the function is called to generate and display the heatmap, providing insights into feature relationships in the dataset.
 """
 
 # Function to plot a correlation matrix heatmap
@@ -943,7 +943,7 @@ print("Number Of Visitors By Cluster Number:")
 print()
 print(cluster_counts)
 
-"""We observe that there is a difference in number of observations per cluster. For instance, cluster 2 has 142 observations while cluster 4 has only 17 observations. Since the difference in clusters is quite huge, when creating visualizations to analyze the demographics of each cluster, we will use the proportions instead of counts.
+"""We observe that there is a difference in number of observations per cluster. For instance, cluster 2 has 142 observations while cluster 4 has only 17 observations. Since the difference in clusters is quite huge, when creating visualisations to analyze the demographics of each cluster, we will use the proportions instead of counts.
 
 --------------------------------------------------------------------------------
 
