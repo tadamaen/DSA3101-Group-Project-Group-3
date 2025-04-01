@@ -291,6 +291,7 @@ class Visitor(Agent):
         chosen_ride = random.choices(rides, weights=normalized_weights, k=1)[0]
 
         return chosen_zone, chosen_ride
+        
     def get_zone_from_position(self, pos):
       """Determines which USS zone a given position belongs to."""
       x, y = pos
@@ -308,65 +309,65 @@ class Visitor(Agent):
         
     def move_towards(self, destination):
         """Moves the visitor towards the destination, which could be a ride, food stall, or souvenir shop."""
-      zone, name = destination
+        zone, name = destination
 
-      # Initialize default values for destination types and coordinates
-      target_x, target_y = None, None
-      food_stall_found = False
-      souvenir_shop_found = False
-      ride_found = False
+        # Initialize default values for destination types and coordinates
+        target_x, target_y = None, None
+        food_stall_found = False
+        souvenir_shop_found = False
+        ride_found = False
 
-      # First, check if it's a food stall
-      if zone in food_stalls:
-          for x, y, stall_name in food_stalls[zone]:
-              if stall_name == name:
-                  food_stall_found = True
-                  target_x, target_y = x, y
-                  break
+        # First, check if it's a food stall
+        if zone in food_stalls:
+            for x, y, stall_name in food_stalls[zone]:
+                if stall_name == name:
+                    food_stall_found = True
+                    target_x, target_y = x, y
+                    break
 
-      # Then, check if it's a souvenir shop
-      if not food_stall_found and zone in souvenir_shops:
-          for x, y, shop_name in souvenir_shops[zone]:
-              if shop_name == name:
-                  souvenir_shop_found = True
-                  target_x, target_y = x, y
-                  break
+        # Then, check if it's a souvenir shop
+        if not food_stall_found and zone in souvenir_shops:
+            for x, y, shop_name in souvenir_shops[zone]:
+                if shop_name == name:
+                    souvenir_shop_found = True
+                    target_x, target_y = x, y
+                    break
 
-      # If neither food stall nor souvenir shop, treat it as a ride (attraction)
-      if not (food_stall_found or souvenir_shop_found) and zone in attractions:
-          for x, y, attraction_name in attractions[zone]:
-              if attraction_name == name:
-                  ride_found = True
-                  target_x, target_y = x, y
-                  break
+        # If neither food stall nor souvenir shop, treat it as a ride (attraction)
+        if not (food_stall_found or souvenir_shop_found) and zone in attractions:
+            for x, y, attraction_name in attractions[zone]:
+                if attraction_name == name:
+                    ride_found = True
+                    target_x, target_y = x, y
+                    break
 
-      # If none of the destinations are found, print an error
-      if not (food_stall_found or souvenir_shop_found or ride_found):
-          print(f"Error: {name} not found in {zone}")
-          return
+        # If none of the destinations are found, print an error
+        if not (food_stall_found or souvenir_shop_found or ride_found):
+            print(f"Error: {name} not found in {zone}")
+            return
 
-      # Introduce slight randomness in the final target position (±1 in x or y)
-      target_x += random.choice([-1, 0, 1])
-      target_y += random.choice([-1, 0, 1])
+        # Introduce slight randomness in the final target position (±1 in x or y)
+        target_x += random.choice([-1, 0, 1])
+        target_y += random.choice([-1, 0, 1])
 
-      dest_pos = (target_x, target_y)
-      if (abs(self.pos[0] - target_x) <= 1) and (abs(self.pos[1] - target_y) <= 1):
-        # Visitor is close enough, so handle the post-arrival actions
-        if ride_found:
-            self.enter_ride(zone, name)
-        elif food_stall_found:
-            self.start_eating()
-        elif souvenir_shop_found:
-            self.start_browsing()
-      else:
-          # Visitor is not at the target yet, so move towards it
-          if self.pos != dest_pos:
-              path = self.model.get_shortest_path(self.pos, dest_pos)
-              if path:
-                  self.model.grid.move_agent(self, path[min(3, len(path)-1)])
-              if not path:  # If no valid path, pick another destination
-                  self.destination = self.choose_attraction()
-                  return
+        dest_pos = (target_x, target_y)
+        if (abs(self.pos[0] - target_x) <= 1) and (abs(self.pos[1] - target_y) <= 1):
+            # Visitor is close enough, so handle the post-arrival actions
+            if ride_found:
+                self.enter_ride(zone, name)
+            elif food_stall_found:
+                self.start_eating()
+            elif souvenir_shop_found:
+                self.start_browsing()
+        else:
+            # Visitor is not at the target yet, so move towards it
+            if self.pos != dest_pos:
+                path = self.model.get_shortest_path(self.pos, dest_pos)
+                if path:
+                    self.model.grid.move_agent(self, path[min(3, len(path) - 1)])
+                if not path:  # If no valid path, pick another destination
+                    self.destination = self.choose_attraction()
+                    return
 
     def enter_ride(self, zone, ride):
         """Handles queueing and entering rides."""
