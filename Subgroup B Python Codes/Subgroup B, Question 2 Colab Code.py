@@ -423,6 +423,15 @@ class ThemePark(Model):
         # Shuffle for randomness in entry order
         random.shuffle(self.entrance_queue)
 
+    def calculate_wait_time(self, zone, ride):
+      ride_data = self.ride_active[zone][ride]
+      ride_queue = self.ride_queues[zone][ride]
+      ride_capacity = ride_properties[zone][ride]["capacity"]
+      # Assuming each visitor spends the ride duration on a ride
+      visitors_in_queue = len(ride_queue)
+      wait_time = (visitors_in_queue // ride_capacity)
+      return wait_time
+        
     def get_most_crowded_zone(self):
         return max(self.zone_population, key=self.zone_population.get, default=None)
 
@@ -452,65 +461,136 @@ class ThemePark(Model):
               self.zone_population[agent.current_zone] += 1
 
     def get_shortest_path(self, start, goal):
-      queue = deque([(start, [])])
-      visited = set()
+        """Uses A* algorithm to find the shortest path from start to goal."""
+        open_set = []
+        heapq.heappush(open_set, (0, start))  # (priority, node)
 
-      while queue:
-          current, path = queue.popleft()
-          if current == goal:
-              return path
+        came_from = {}  # Tracks how we reached each node
+        g_score = {start: 0}  # Cost from start to each node
+        f_score = {start: self.manhattan_distance(start, goal)}  # Estimated cost (g + h)
 
-          # Skip if visited OR inside water body
-          if current in visited or np.linalg.norm(np.array(current) - np.array(PARK_CENTER)) < WATER_RADIUS:
-              continue
+        visited = set()
+        water_body_threshold = WATER_RADIUS ** 2  # Avoid recalculating square root
 
-          visited.add(current)
+        while open_set:
+            _, current = heapq.heappop(open_set)  # Node with lowest f-score
 
-          neighbors = self.grid.get_neighborhood(current, moore=True, include_center=False)
-          for neighbor in neighbors:
-              if np.linalg.norm(np.array(neighbor) - np.array(PARK_CENTER)) >= WATER_RADIUS:
-                  queue.append((neighbor, path + [neighbor]))  # Only add valid paths
+            if current == goal:
+                return self.reconstruct_path(came_from, current)  # Build path
 
-      return []  # If no valid path exists
+            if current in visited:
+                continue
+            visited.add(current)
+
+            for neighbor in self.grid.get_neighborhood(current, moore=True, include_center=False):
+                if ((neighbor[0] - PARK_CENTER[0]) ** 2 + (neighbor[1] - PARK_CENTER[1]) ** 2) < water_body_threshold:
+                    continue  # Skip water body
+
+                tentative_g_score = g_score[current] + 1  # Assume uniform cost (grid-based)
+                if neighbor not in g_score or tentative_g_score < g_score[neighbor]:
+                    came_from[neighbor] = current
+                    g_score[neighbor] = tentative_g_score
+                    f_score[neighbor] = tentative_g_score + self.manhattan_distance(neighbor, goal)
+                    heapq.heappush(open_set, (f_score[neighbor], neighbor))
+
+        return []  # No valid path found
+
+    def reconstruct_path(self, came_from, current):
+        """Reconstructs the path from goal to start."""
+        path = []
+        while current in came_from:
+            path.append(current)
+            current = came_from[current]
+        path.reverse()
+        return path
+
+    def manhattan_distance(self, a, b):
+        """Computes Manhattan distance as a heuristic."""
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
     def step(self):
         """Runs a simulation step for the theme park."""
         current_time = self.start_time + self.time_per_step * self.schedule.time  # Calculate time
         print(f"Time: {current_time.strftime('%I:%M %p')}")
-        # Handle visitor entrance in the first three steps
-        if self.schedule.time < 3:  # Step 0 and Step 1
+        # Handle visitor entrance in the first four steps
+        if self.schedule.time < 4:  # Step 0 to 4
             if self.schedule.time == 0:
-                num_to_enter = int(0.4 * self.total_visitors)  # 40% enter in step 0
+                num_to_enter = int(0.2 * self.total_visitors)  # 20% enter in step 0
 
-            elif self.schedule.time == 1:
-                num_to_enter = int(0.4 * self.total_visitors)  # 40% enter in step 1
+            if self.schedule.time == 1:
+                num_to_enter = int(0.2 * self.total_visitors)  # 20% enter in step 0
+
+            if self.schedule.time == 2:
+                num_to_enter = int(0.2 * self.total_visitors)  # 20% enter in step 0
+
+            if self.schedule.time == 3:
+                num_to_enter = int(0.2 * self.total_visitors)  # 20% enter in step 0
 
             else:
-                num_to_enter = self.remaining_visitors  # The rest enter in step 1
+                num_to_enter = self.remaining_visitors  # The rest enter after that
 
+            entry_points = [(25, 5), (24, 5), (26, 5)]
             for _ in range(num_to_enter):
                 if self.entrance_queue:
-                    visitor_id = self.entrance_queue.pop(0)
-                    personality = random.choice(["explorer", "thrill-seeker", "family-oriented"])
-                    visitor = Visitor(visitor_id, self)
-                    self.grid.place_agent(visitor, (25, 5))  # Entrance location
-                    self.schedule.add(visitor)
+                  visitor_id = self.entrance_queue.pop(0)
+                  personality = random.choice(["explorer", "thrill-seeker", "family-oriented"])
+                  visitor = Visitor(visitor_id, self)
+
+                  # Choose a random entry point
+                  entry_point = random.choice(entry_points)
+
+                  # Place the visitor at the chosen entry point
+                  self.grid.place_agent(visitor, entry_point)
+                  self.schedule.add(visitor)
+
+                  # print(f"Visitor {visitor_id} enters from {entry_point}")
 
             self.remaining_visitors -= num_to_enter  # Update count of visitors left to enter
+
         if current_time.hour == 18 and current_time.minute >= 30 or current_time.hour >= 19:
             self.make_visitors_leave()
 
         self.schedule.step()
+        self.update_zone_population()  # Update visitor counts
         self.update_rides()  # Update ride operations
-        self.update_zone_population()  # Update visitor count
+        self.update_shop_food()
 
+        # # Compute average wait time for attractions
+        # avg_wait_times = {
+        #     "attractions": {
+        #         zone: {
+        #             ride: (sum(times) / len(times) if times else 0)
+        #             for ride, times in rides.items()
+        #         }
+        #         for zone, rides in self.wait_time_records["attractions"].items()
+        #     }
+        # }
+
+        # print(f"Average Wait Times: {avg_wait_times}")
+
+    def update_shop_food(self):
+        """Handle food and souvenir shop operations."""
+        food_visitors = defaultdict(int)  # Track number of visitors per food stall
+        shop_visitors = defaultdict(int)  # Track number of visitors per shop
+        required_staff1 = defaultdict(int)
+        required_staff2 = defaultdict(int)
+
+        for agent in self.schedule.agents:
+            if isinstance(agent, Visitor) and agent.browsing > 0:
+                if agent.destination not in shop_visitors:
+                    shop_visitors[agent.destination] = 0
+                shop_visitors[agent.destination] += 1  # Count visitors in each shop
+            elif isinstance(agent, Visitor) and agent.eating_time > 0:
+                if agent.destination not in food_visitors:
+                    food_visitors[agent.destination] = 0
+                food_visitors[agent.destination] += 1  # Count visitors in each food stall
 
     def update_rides(self):
         """Handle ride operation cycles and move visitors from queue to ride."""
         for zone, rides in self.ride_active.items():
             for ride, data in rides.items():
-                ride_capacity = ride_properties[zone][ride]["capacity"]
                 ride_duration = ride_properties[zone][ride]["duration"]
+                ride_capacity = ride_properties[zone][ride]["capacity"] * int(30/ride_duration) # Take into account each simulation step is 30min
                 # to track queue
                 queue_length = len(self.ride_queues[zone][ride])
                 avg_wait_time = queue_length * (ride_duration / ride_capacity)  # Estimate avg wait
@@ -531,7 +611,6 @@ class ThemePark(Model):
                     # Start new ride cycle if visitors are inside
                     if data["occupied"] > 0:
                         data["timer"] = ride_duration
-
 
     def make_visitors_leave(self):
         """Gradually makes visitors exit the park."""
