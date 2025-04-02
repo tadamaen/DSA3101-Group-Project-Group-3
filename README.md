@@ -135,6 +135,8 @@ Explanation of Directories and Files:
   - **Subgroup B, Question 3/**: Contain plots for Subgroup B Question 3
   - **Subgroup B, Question 4/**: Contain plots for Subgroup B Question 4
   - **Subgroup B, Question 5/**: Contain plots for Subgroup B Question 5
+
+- **Final Report**: Contains the final report of the project 
   
 - **.gitignore**: Git ignore file to exclude unnecessary files from version control.
 
