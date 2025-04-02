@@ -40,10 +40,16 @@ Our project is structured around multiple business questions (see Project Conten
 You can also run our src files with Docker.
 1. Ensure that you have Docker installed.
 2. Clone this repository. <br>
-   ```git clone https://github.com/tadamaen/DSA3101-Group-Project-Group-3.git```
-3. Run the following commands in the root directory: <br> 
-   ```docker build -t image-name .``` <br> 
-   ```docker run image-name```
+   ```bash
+   git clone https://github.com/tadamaen/DSA3101-Group-Project-Group-3.git
+   ```
+4. Run the following commands in the root directory: <br> 
+   ```bash
+   docker build -t image-name .
+   ``` <br> 
+   ```bash
+   docker run image-name
+   ```
 
 For a detailed breakdown, including coding decisions, function explanations, data descriptions, and analyses, please refer to our thoroughly documented Google Colab notebooks, available in the [Notebooks](https://github.com/tadamaen/DSA3101-Group-Project-Group-3/tree/main/Notebooks) folder.
 
