@@ -46,7 +46,7 @@ You can also run our src files with Docker.
 4. Run the following commands in the root directory: <br> 
    ```bash
    docker build -t image-name .
-   ``` <br> 
+   ```
    ```bash
    docker run image-name
    ```
