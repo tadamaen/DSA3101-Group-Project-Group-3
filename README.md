@@ -182,6 +182,30 @@ Explanation of Directories and Files:
 | q19_8            | How important is entartainment and performances to your overall satisfaction?                                 |
 | q20              | Is there any other feedback about your USS experience that you want to mention?                               |
 
+2) themepark_weather_holiday
+
+| Column Name          | What Each Column Represents                                                         |
+|----------------------|-------------------------------------------------------------------------------------|
+| themepark            | The name of the theme park                                                          |
+| country              | The country where the theme park is located                                         |
+| month                | The month for which the data is recorded                                            |
+| avg_crowd_level      | The average crowd level in the theme park for the given month                       |
+| avg_temp             | The average temperature (in degrees Celsius) during the month                       |
+| avg_precipitation    | The average precipitation (rainfall) during the month                               |
+| avg_humidity         | The average humidity percentage for the month                                       |
+| public_holiday       | The number of public holidays in the given month                                    |
+| school_holiday       | The number of school holidays in the given month                                    |
+
+3)
+
+4)
+
+5)
+
+6)
+
+7)
+
 #### Subgroup Members 👯
 
 | **Subgroup A**              | GitHub Profile                                      |
