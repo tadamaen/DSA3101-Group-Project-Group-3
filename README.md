@@ -130,11 +130,11 @@ Explanation of Directories and Files:
   - **Subgroup A, Question 3/**: Contain plots for Subgroup A Question 3
   - **Subgroup A, Question 4/**: Contain plots for Subgroup A Question 4
   - **Subgroup A, Question 5/**: Contain plots for Subgroup A Question 5
-  - **Subgroup B, Question 1/**: Contain plots for Subgroup A Question 1
-  - **Subgroup B, Question 2/**: Contain plots for Subgroup A Question 2
-  - **Subgroup B, Question 3/**: Contain plots for Subgroup A Question 3
-  - **Subgroup B, Question 4/**: Contain plots for Subgroup A Question 4
-  - **Subgroup B, Question 5/**: Contain plots for Subgroup A Question 5
+  - **Subgroup B, Question 1/**: Contain plots for Subgroup B Question 1
+  - **Subgroup B, Question 2/**: Contain plots for Subgroup B Question 2
+  - **Subgroup B, Question 3/**: Contain plots for Subgroup B Question 3
+  - **Subgroup B, Question 4/**: Contain plots for Subgroup B Question 4
+  - **Subgroup B, Question 5/**: Contain plots for Subgroup B Question 5
   
 - **.gitignore**: Git ignore file to exclude unnecessary files from version control.
 
