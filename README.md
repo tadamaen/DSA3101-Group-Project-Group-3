@@ -122,79 +122,79 @@ Explanation of Directories and Files:
 
 #### Data Directory Of Datasets: 
 
-1) uss_survey_responses
+1) `uss_survey_responses`
    
-| Column Name      | What Each Column Represents                                                                                   |
-|------------------|---------------------------------------------------------------------------------------------------------------|
-| q1               | Which type of theme park visitor best describes you?                                                          |
-| q2_1             | What is your age range?                                                                                       |
-| q2_2             | What is your gender?                                                                                          |
-| q3               | Are you a tourist or a local?                                                                                 |
-| q4_1             | For the category on thrill rides, what is the average time you queued for?                                    |
-| q4_2             | For the category on interactive exhibits, what is the average time you queued for?                            |
-| q4_3             | For the category on performances, what is the average time you queued for?                                    |
-| q4_4             | For the category on food and dining, what is the average time you queued for?                                 |
-| q5_1             | For the category on thrill rides, what is considered an unacceptable wait time? (Integer in Minutes)          |
-| q5_2             | For the category on interactive exhibits, what is considered an unacceptable wait time? (Integer in Minutes)  |
-| q5_3             | For the category on performances, what is considered an unacceptable wait time? (Integer in Minutes)          |
-| q5_4             | For the category on food and dining, what is considered an unacceptable wait time? (Integer in Minutes)       |
-| q6               | The type of attractions you enjoy the most when visiting USS                                                  |
-| q7               | Factors that will influence your decision to visit a theme park like USS                                      |
-| q8               | What type of events influence your decision to visit?                                                         |
-| q9               | How long do you usually spend at USS? (Integer in Hours)                                                      |
-| q10              | When do you usually visit theme parks or attractions like USS?                                                |
-| q11              | When do you typically purchase meals or snacks at the eateries/restaurants?                                   |
-| q12              | How do you usually navigate a theme park like USS?                                                            |
-| q13              | Would you be willing to wear a digital watch given by USS to track your location and activity?                |
-| q14_1            | At what time of the day do you usually visit roller coasters?                                                 |
-| q14_2            | At what time of the day do you usually visit water rides?                                                     |
-| q14_3            | At what time of the day do you usually visit 3D/4D experiences?                                               |
-| q14_4            | At what time of the day do you usually visit performances?                                                    |
-| q14_5            | At what time of the day do you usually visit roadshows?                                                       |
-| q14_6            | At what time of the day do you usually visit eateries and restaurants?                                        |
-| q14_7            | At what time of the day do you usually visit souvenir shops?                                                  |
-| q14_8            | At what time of the day do you usually visit other rides?                                                     |
-| q15              | How likely are you to recommend USS to others?                                                                |
-| q16_1            | How satisfied are you with the overall service of the queuing system?                                         |
-| q16_2            | How satisfied are you with the overall service of retail experience?                                          |
-| q16_3            | How satisfied are you with the overall service of eateries/restaurants?                                       |
-| q16_4            | How satisfied are you with the overall service of photo taking exhibitions?                                   |
-| q16_5            | How satisfied are you with the overall service of entertainment attractions?                                  |
-| q17_1            | Give an overall rating for ticketing information accessibility                                                |
-| q17_2            | Give an overall rating for rides and attractions                                                              |
-| q17_3            | Give an overall rating for entertainment and performances                                                     |
-| q17_4            | Give an overall rating for food and beverage                                                                  |
-| q17_5            | Give an overall rating for merchandise and shopping                                                           |
-| q17_6            | Give an overall rating for crowd management, comfort and staff helpfulness                                    |
-| q18_1            | For ticketing information accessibility, which of the following services are you not satisfied with?          |
-| q18_2            | For rides and attractions,, which of the following services are you not satisfied with?                       |
-| q18_3            | For entertainment and performances, which of the following services are you not satisfied with?               |
-| q18_4            | For food and beverage, which of the following services are you not satisfied with?                            |
-| q18_5            | For merchandise and shopping, which of the following services are you not satisfied with?                     |
-| q18_6            | For crowd management, comfort and staff helpfulness, which are you not satisfied with?                        |
-| q19_1            | How important is ticketing information accessibility to your overall satisfaction?                            |
-| q19_2            | How important is crowd management to your overall satisfaction?                                               |
-| q19_3            | How important is staff helpfulness to your overall satisfaction?                                              |
-| q19_4            | How important is safety and cleanliness to your overall satisfaction?                                         |
-| q19_5            | How important is rides and attractions to your overall satisfaction?                                          |
-| q19_6            | How important is food and beverage to your overall satisfaction?                                              |
-| q19_7            | How important is merchandise and shopping to your overall satisfaction?                                       |
-| q19_8            | How important is entartainment and performances to your overall satisfaction?                                 |
-| q20              | Is there any other feedback about your USS experience that you want to mention?                               |
+| Column Name        | What Each Column Represents                                                                                   |
+|--------------------|---------------------------------------------------------------------------------------------------------------|
+| `q1`               | Which type of theme park visitor best describes you?                                                          |
+| `q2_1`             | What is your age range?                                                                                       |
+| `q2_2`             | What is your gender?                                                                                          |
+| `q3`               | Are you a tourist or a local?                                                                                 |
+| `q4_1`             | For the category on thrill rides, what is the average time you queued for?                                    |
+| `q4_2`             | For the category on interactive exhibits, what is the average time you queued for?                            |
+| `q4_3`            | For the category on performances, what is the average time you queued for?                                    |
+| `q4_4`             | For the category on food and dining, what is the average time you queued for?                                 |
+| `q5_1`             | For the category on thrill rides, what is considered an unacceptable wait time? (Integer in Minutes)          |
+| `q5_2`             | For the category on interactive exhibits, what is considered an unacceptable wait time? (Integer in Minutes)  |
+| `q5_3`             | For the category on performances, what is considered an unacceptable wait time? (Integer in Minutes)          |
+| `q5_4`            | For the category on food and dining, what is considered an unacceptable wait time? (Integer in Minutes)       |
+| `q6`               | The type of attractions you enjoy the most when visiting USS                                                  |
+| `q7`               | Factors that will influence your decision to visit a theme park like USS                                      |
+| `q8`               | What type of events influence your decision to visit?                                                         |
+| `q9`               | How long do you usually spend at USS? (Integer in Hours)                                                      |
+| `q10`              | When do you usually visit theme parks or attractions like USS?                                                |
+| `q11`              | When do you typically purchase meals or snacks at the eateries/restaurants?                                   |
+| `q12`              | How do you usually navigate a theme park like USS?                                                            |
+| `q13`              | Would you be willing to wear a digital watch given by USS to track your location and activity?                |
+| `q14_1`            | At what time of the day do you usually visit roller coasters?                                                 |
+| `q14_2`            | At what time of the day do you usually visit water rides?                                                     |
+| `q14_3`            | At what time of the day do you usually visit 3D/4D experiences?                                               |
+| `q14_4`            | At what time of the day do you usually visit performances?                                                    |
+| `q14_5`            | At what time of the day do you usually visit roadshows?                                                       |
+| `q14_6`            | At what time of the day do you usually visit eateries and restaurants?                                        |
+| `q14_7`            | At what time of the day do you usually visit souvenir shops?                                                  |
+| `q14_8`            | At what time of the day do you usually visit other rides?                                                     |
+| `q15`              | How likely are you to recommend USS to others?                                                                |
+| `q16_1`            | How satisfied are you with the overall service of the queuing system?                                         |
+| `q16_2`            | How satisfied are you with the overall service of retail experience?                                          |
+| `q16_3`            | How satisfied are you with the overall service of eateries/restaurants?                                       |
+| `q16_4`            | How satisfied are you with the overall service of photo taking exhibitions?                                   |
+| `q16_5`            | How satisfied are you with the overall service of entertainment attractions?                                  |
+| `q17_1`            | Give an overall rating for ticketing information accessibility                                                |
+| `q17_2`            | Give an overall rating for rides and attractions                                                              |
+| `q17_3`            | Give an overall rating for entertainment and performances                                                     |
+| `q17_4`            | Give an overall rating for food and beverage                                                                  |
+| `q17_5`            | Give an overall rating for merchandise and shopping                                                           |
+| `q17_6`            | Give an overall rating for crowd management, comfort and staff helpfulness                                    |
+| `q18_1`            | For ticketing information accessibility, which of the following services are you not satisfied with?          |
+| `q18_2`            | For rides and attractions,, which of the following services are you not satisfied with?                       |
+| `q18_3`            | For entertainment and performances, which of the following services are you not satisfied with?               |
+| `q18_4`            | For food and beverage, which of the following services are you not satisfied with?                            |
+| `q18_5`            | For merchandise and shopping, which of the following services are you not satisfied with?                     |
+| `q18_6`            | For crowd management, comfort and staff helpfulness, which are you not satisfied with?                        |
+| `q19_1`            | How important is ticketing information accessibility to your overall satisfaction?                            |
+| `q19_2`            | How important is crowd management to your overall satisfaction?                                               |
+| `q19_3`            | How important is staff helpfulness to your overall satisfaction?                                              |
+| `q19_4`            | How important is safety and cleanliness to your overall satisfaction?                                         |
+| `q19_5`            | How important is rides and attractions to your overall satisfaction?                                          |
+| `q19_6`            | How important is food and beverage to your overall satisfaction?                                              |
+| `q19_7`            | How important is merchandise and shopping to your overall satisfaction?                                       |
+| `q19_8`            | How important is entartainment and performances to your overall satisfaction?                                 |
+| `q20`              | Is there any other feedback about your USS experience that you want to mention?                               |
 
-2) themepark_weather_holiday
+2) `themepark_weather_holiday`
 
-| Column Name          | What Each Column Represents                                                         |
-|----------------------|-------------------------------------------------------------------------------------|
-| themepark            | The name of the theme park                                                          |
-| country              | The country where the theme park is located                                         |
-| month                | The month for which the data is recorded                                            |
-| avg_crowd_level      | The average crowd level in the theme park for the given month                       |
-| avg_temp             | The average temperature (in degrees Celsius) during the month                       |
-| avg_precipitation    | The average precipitation (rainfall) during the month                               |
-| avg_humidity         | The average humidity percentage for the month                                       |
-| public_holiday       | The number of public holidays in the given month                                    |
-| school_holiday       | The number of school holidays in the given month                                    |
+| Column Name            | What Each Column Represents                                                         |
+|------------------------|-------------------------------------------------------------------------------------|
+| `themepark`            | The name of the theme park                                                          |
+| `country`              | The country where the theme park is located                                         |
+| `month`                | The month for which the data is recorded                                            |
+| `avg_crowd_level`      | The average crowd level in the theme park for the given month                       |
+| `avg_temp`             | The average temperature (in degrees Celsius) during the month                       |
+| `avg_precipitation`    | The average precipitation (rainfall) during the month                               |
+| `avg_humidity`         | The average humidity percentage for the month                                       |
+| `public_holiday`       | The number of public holidays in the given month                                    |
+| `school_holiday`       | The number of school holidays in the given month                                    |
 
 3)
 
