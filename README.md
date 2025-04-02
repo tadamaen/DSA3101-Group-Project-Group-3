@@ -279,7 +279,22 @@ Explanation of Directories and Files:
 | `Mean Temperature (°C)`     | The average temperature for the day, measured in degrees Celsius (°C)               |
 | `Date`                      | The full date (in the format YYYY-MM-DD) corresponding to the recorded weather data |
 
-6)
+6) `uss_historical_reviews`
+
+| Column Name         | What Each Column Represents                                               |
+|---------------------|---------------------------------------------------------------------------|
+| `reviewer`          | Account name of the reviewer                                              |
+| `rating`            | Rating from the reviewer, from 1 (unsatisfied) to 5 (satisfied)           |
+| `written_date`      | Date of the review                                                        |
+| `title`             | The title of the review                                                   |
+| `review_text`       | Review made by the visitor                                                |
+| `branch`            | Location of Universal Studios                                             |
+| `Gender`            | Gender of reviewer                                                        |
+| `Age Range`         | Age category that the reviewer belongs to                                 |
+| `Tourist or Local`  | Nationality of reviewer (Local if Singaporean, Tourist otherwise)         |
+| `time_of_day`       | Time period when the reviewer visited USS                                 |
+| `visitor_type`      | Type of people the reviewer visited USS with                              |
+| `day_preferred`     | Reviewer's preferred day of visitation                                    |
 
 7)
 
