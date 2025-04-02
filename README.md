@@ -34,6 +34,8 @@ Predictive modelling will allow for experience optimisation by enhancing operati
 
 Furthermore, we will explore the use of IoT devices to enable real-time crowd monitoring to facilitate dynamic resource allocation, This would enhance responsiveness to unexpected situations, therefore providing USS with operational agility. 
 
+#### How to run our files
+As our project is segmented into various business questions (see Project Content), our code is broken into 10 various parts, each answering a business question. The code files are available in the [src]([url](https://github.com/tadamaen/DSA3101-Group-Project-Group-3/tree/main/src)) folder to be downloaded and ran.
 
 #### Project Content 📒
 
