@@ -227,7 +227,7 @@ Explanation of Directories and Files:
 | `Wait_time`            | The average wait time (in minutes) for a specific ride during the time of the day   |
 | `Visitor_count`        | The average number of visitors at a specific ride during the time of the day        |
 
-4) universal_studio_branches
+4) `universal_studio_branches`
 
 | Column Name     | What Each Column Represents                                               |
 |-----------------|---------------------------------------------------------------------------|
@@ -238,12 +238,21 @@ Explanation of Directories and Files:
 | `review_text`   | Review made by the visitor                                                |
 | `branch`        | Location of Universal Studios                                             |
 
+5) `weather_cleandata`
+   
+| Column Name                 | What Each Column Represents                                                         |
+|-----------------------------|-------------------------------------------------------------------------------------|
+| `Station`                   | Location where the weather data was recorded (e.g., Sentosa Island)                 |
+| `Year`                      | The year the weather data was recorded (from 2024 to 2025)                          |
+| `Month`                     | The month the weather data was recorded (from 1 to 12)                              |
+| `Day`                       | The specific day of the month when the weather data was recorded (1 to 31)          |
+| `Daily Rainfall Total (mm)` | The total amount of rainfall measured on that day, expressed in millimeters (mm)    |
+| `Mean Temperature (°C)`     | The average temperature for the day, measured in degrees Celsius (°C)               |
+| `Date`                      | The full date (in the format YYYY-MM-DD) corresponding to the recorded weather data |
 
 6)
 
 7)
-
-8)
 
 #### Subgroup Members 👯
 
