@@ -232,7 +232,14 @@ Explanation of Directories and Files:
 | `q19_8`            | How important is entartainment and performances to your overall satisfaction?                                 |
 | `q20`              | Is there any other feedback about your USS experience that you want to mention?                               |
 
-2) `themepark_weather_holiday`
+2) `uss_clustered_data`
+the same as `uss_survey_responses` but contains the following additional columns in front:
+| Column Name        | What Each Column Represents                                                                                   |
+|--------------------|---------------------------------------------------------------------------------------------------------------|
+|                    | nameless column containing indexes                                                                            |
+| `cluster`          | Cluster numbers assigned to the various guests. Derived from K-Means model in Subgroup A Q2                   |
+
+4) `themepark_weather_holiday`
 
 | Column Name            | What Each Column Represents                                                         |
 |------------------------|-------------------------------------------------------------------------------------|
@@ -246,7 +253,7 @@ Explanation of Directories and Files:
 | `public_holiday`       | The number of public holidays in the given month                                    |
 | `school_holiday`       | The number of school holidays in the given month                                    |
 
-3) `waittime_cleandata`
+4) `waittime_cleandata`
 
 | Column Name            | What Each Column Represents                                                         |
 |------------------------|-------------------------------------------------------------------------------------|
@@ -257,7 +264,7 @@ Explanation of Directories and Files:
 | `Wait_time`            | The average wait time (in minutes) for a specific ride during the time of the day   |
 | `Visitor_count`        | The average number of visitors at a specific ride during the time of the day        |
 
-4) `universal_studio_branches`
+5) `universal_studio_branches`
 
 | Column Name     | What Each Column Represents                                               |
 |-----------------|---------------------------------------------------------------------------|
@@ -268,7 +275,7 @@ Explanation of Directories and Files:
 | `review_text`   | Review made by the visitor                                                |
 | `branch`        | Location of Universal Studios                                             |
 
-5) `weather_cleandata`
+6) `weather_cleandata`
    
 | Column Name                 | What Each Column Represents                                                         |
 |-----------------------------|-------------------------------------------------------------------------------------|
@@ -280,7 +287,7 @@ Explanation of Directories and Files:
 | `Mean Temperature (°C)`     | The average temperature for the day, measured in degrees Celsius (°C)               |
 | `Date`                      | The full date (in the format YYYY-MM-DD) corresponding to the recorded weather data |
 
-6) `uss_historical_reviews`
+7) `uss_historical_reviews`
 
 | Column Name         | What Each Column Represents                                               |
 |---------------------|---------------------------------------------------------------------------|
@@ -296,7 +303,6 @@ Explanation of Directories and Files:
 | `time_of_day`       | Time period when the reviewer visited USS                                 |
 | `visitor_type`      | Type of people the reviewer visited USS with                              |
 | `day_preferred`     | Reviewer's preferred day of visitation                                    |
-
 
 #### Subgroup Members 👯
 
