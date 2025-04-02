@@ -43,7 +43,7 @@ You can also run our src files with Docker.
    ```bash
    git clone https://github.com/tadamaen/DSA3101-Group-Project-Group-3.git
    ```
-3. Change directory to `DSA3101-Group-Project-Group-3` folder
+3. Change directory to `DSA3101-Group-Project-Group-3` folder.
 4. Run the following commands in the new directory: <br> 
    ```bash
    docker build -t image-name .
