@@ -37,6 +37,12 @@ Furthermore, we will explore the use of IoT devices to enable real-time crowd mo
 #### How to run our files
 Our project is structured around multiple business questions (see Project Content below), with the code divided into 10 distinct sections, each addressing a specific question. You can find these code files in the [src](https://github.com/tadamaen/DSA3101-Group-Project-Group-3/tree/main/src) folder, where they are available for download and execution.
 
+You can also run our src files with Docker.
+1. Ensure that you have Docker installed.
+2. Run the following commands:
+   `docker build -t image-name .`
+   `docker run image-name`
+
 For a detailed breakdown, including coding decisions, function explanations, data descriptions, and analyses, please refer to our thoroughly documented Google Colab notebooks, available in the [Notebooks](https://github.com/tadamaen/DSA3101-Group-Project-Group-3/tree/main/Notebooks) folder.
 
 #### Project Content 📒
