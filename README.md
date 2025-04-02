@@ -297,7 +297,6 @@ Explanation of Directories and Files:
 | `visitor_type`      | Type of people the reviewer visited USS with                              |
 | `day_preferred`     | Reviewer's preferred day of visitation                                    |
 
-7)
 
 #### Subgroup Members 👯
 
