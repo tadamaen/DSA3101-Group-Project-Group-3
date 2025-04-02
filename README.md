@@ -240,7 +240,7 @@ the same as `uss_survey_responses` but contains the following additional columns
 |                    | nameless column containing indexes                                                                            |
 | `cluster`          | Cluster numbers assigned to the various guests. Derived from K-Means model in Subgroup A Q2                   |
 
-4) `themepark_weather_holiday`
+3) `themepark_weather_holiday`
 
 | Column Name            | What Each Column Represents                                                         |
 |------------------------|-------------------------------------------------------------------------------------|
