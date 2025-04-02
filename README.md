@@ -40,10 +40,10 @@ Our project is structured around multiple business questions (see Project Conten
 You can also run our src files with Docker.
 1. Ensure that you have Docker installed.
 2. Clone this repository. <br>
-   `git clone https://github.com/tadamaen/DSA3101-Group-Project-Group-3.git`
+   ```git clone https://github.com/tadamaen/DSA3101-Group-Project-Group-3.git```
 3. Run the following commands in the root directory: <br> 
-   `docker build -t image-name .` <br> 
-   `docker run image-name`
+   ```docker build -t image-name .``` <br> 
+   ```docker run image-name```
 
 For a detailed breakdown, including coding decisions, function explanations, data descriptions, and analyses, please refer to our thoroughly documented Google Colab notebooks, available in the [Notebooks](https://github.com/tadamaen/DSA3101-Group-Project-Group-3/tree/main/Notebooks) folder.
 
@@ -111,40 +111,34 @@ Despite limitations such as survey response biases, reliance on external dataset
 
 Explanation of Directories and Files:
 
-- **Notebooks/**: Contains Google Colab Notebooks for analysis and experiments.
-  - **Subgroup A/**: Notebooks specific to subgroup A.
-  - **Subgroup B/**: Notebooks specific to subgroup B.
-  
-- **data/**: Contains datasets used in the project.
-  - **Raw/**: Raw, unprocessed data (survey data)
-  - **External/**: External datasets from other sources (online, internet)
-  - **Processed/**: Cleaned and processed data
-  
-- **src/**: Contains source code for the project.
-  - **Subgroup A/**: Source code for subgroup A (in python)
-  - **Subgroup B/**: Source code for subgroup B (in python)
- 
-- **Plots/**: Contain all the plots for the projects
-  - **Subgroup A, Question 1/**: Contain plots for Subgroup A Question 1
-  - **Subgroup A, Question 2/**: Contain plots for Subgroup A Question 2
-  - **Subgroup A, Question 3/**: Contain plots for Subgroup A Question 3
-  - **Subgroup A, Question 4/**: Contain plots for Subgroup A Question 4
-  - **Subgroup A, Question 5/**: Contain plots for Subgroup A Question 5
-  - **Subgroup B, Question 1/**: Contain plots for Subgroup B Question 1
-  - **Subgroup B, Question 2/**: Contain plots for Subgroup B Question 2
-  - **Subgroup B, Question 3/**: Contain plots for Subgroup B Question 3
-  - **Subgroup B, Question 4/**: Contain plots for Subgroup B Question 4
-  - **Subgroup B, Question 5/**: Contain plots for Subgroup B Question 5
-
-- **Final Report**: Contains the final report of the project 
-  
-- **.gitignore**: Git ignore file to exclude unnecessary files from version control.
-
-- **Dockerfile**: Defines the environment and dependencies for the project using Docker.
-
-- **README.md**: This file contains information about the project.
-
-- **requirements.txt**: Lists the required Python packages for the project.
+```
+├── Notebooks/ (Contains Google Colab Notebooks for analysis and experiments)
+│   ├── Subgroup A/ (Notebooks specific to subgroup A)
+│   ├── Subgroup B/ (Notebooks specific to subgroup B)
+├── Plots/ (Contain all the plots for the projects)
+│   ├── Subgroup A, Question 1/ (Contain plots for Subgroup A Question 1)
+│   ├── Subgroup A, Question 2/ (Contain plots for Subgroup A Question 2)
+│   ├── Subgroup A, Question 3/ (Contain plots for Subgroup A Question 3)
+│   ├── Subgroup A, Question 4/ (Contain plots for Subgroup A Question 4)
+│   ├── Subgroup A, Question 5/ (Contain plots for Subgroup A Question 5)
+│   ├── Subgroup B, Question 1/ (Contain plots for Subgroup B Question 1)
+│   ├── Subgroup B, Question 2/ (Contain plots for Subgroup B Question 2)
+│   ├── Subgroup B, Question 3/ (Contain plots for Subgroup B Question 3)
+│   ├── Subgroup B, Question 4/ (Contain plots for Subgroup B Question 4)
+│   ├── Subgroup B, Question 5/ (Contain plots for Subgroup B Question 5)
+├── data/ (Contains datasets used in the project)
+│   ├── Raw/ (Raw, unprocessed data (survey data))
+│   ├── External/ (External datasets from other sources (online, internet))
+│   ├── Processed/ (Cleaned and processed data)
+├── src/ (Contains source code for the project)
+│   ├── Subgroup A/ (Source code for subgroup A (in python))
+│   ├── Subgroup B/ (Source code for subgroup B (in python))
+├── .gitignore (Git ignore file to exclude unnecessary files from version control)
+├── Dockerfile (Defines the environment and dependencies for the project using Docker)
+├── Final Report (Contains the final report of the project)
+├── README.md (This file with information about the project)
+└── requirements.txt (Lists the required Python packages for the project)
+```
 
 #### Data Directory Of Datasets: 
 
