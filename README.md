@@ -196,7 +196,16 @@ Explanation of Directories and Files:
 | `public_holiday`       | The number of public holidays in the given month                                    |
 | `school_holiday`       | The number of school holidays in the given month                                    |
 
-3)
+3) `waittime_cleandata`
+
+| Column Name            | What Each Column Represents                                                         |
+|------------------------|-------------------------------------------------------------------------------------|
+| `Date`                 | The date for which the data is recorded                                             |
+| `24h_time`             | The 24 hour time for which the data is recorded                                     |
+| `Ride_name`            | The name of the ride                                                                |
+| `Zone_name`            | The name of the zone that the ride is in                                            |
+| `Wait_time`            | The average wait time (in minutes) for a specific ride during the time of the day   |
+| `Visitor_count`        | The average number of visitors at a specific ride during the time of the day        |
 
 4)
 
