@@ -51,7 +51,7 @@ import datetime
 import scipy.stats as stats
 import heapq
 from collections import defaultdict
-import plotly.express as px
+# import plotly.express as px
 
 """## Loading Dataset
 
@@ -1144,59 +1144,59 @@ plt.tight_layout()
 # Show the plot
 plt.show()
 
-def plot_max_wait_times_plotly(df, dataset_name):
-    """Plots wait times for each attraction over time using Plotly."""
+# def plot_max_wait_times_plotly(df, dataset_name):
+#     """Plots wait times for each attraction over time using Plotly."""
 
-    # Filter out food and souvenir shops
-    attractions_list = [item for sublist in attractions.values() for item in sublist]
-    attraction_names = [attraction[2] for attraction in attractions_list]
-    df_filtered = df[df['place'].isin(attraction_names)]
+#     # Filter out food and souvenir shops
+#     attractions_list = [item for sublist in attractions.values() for item in sublist]
+#     attraction_names = [attraction[2] for attraction in attractions_list]
+#     df_filtered = df[df['place'].isin(attraction_names)]
 
-    fig = px.line(
-        df_filtered,
-        x="time_label",
-        y="maximum",
-        color="place",
-        title=f"{dataset_name} - Wait Times Over Time",
-        labels={"time_label": "Time", "maximum": "Wait Time (minutes)", "place": "Attraction"},
-    )
+#     fig = px.line(
+#         df_filtered,
+#         x="time_label",
+#         y="maximum",
+#         color="place",
+#         title=f"{dataset_name} - Wait Times Over Time",
+#         labels={"time_label": "Time", "maximum": "Wait Time (minutes)", "place": "Attraction"},
+#     )
 
-    fig.update_layout(
-        xaxis_tickangle=-45,  # Rotate x-axis labels for better readability
-        xaxis={'type': 'category'} # Treat x-axis as categorical to preserve order
-    )
+#     fig.update_layout(
+#         xaxis_tickangle=-45,  # Rotate x-axis labels for better readability
+#         xaxis={'type': 'category'} # Treat x-axis as categorical to preserve order
+#     )
 
-    fig.show()
+#     fig.show()
 
-for dataset_name, df in datasets.items():
-    plot_max_wait_times_plotly(df, dataset_name)
+# for dataset_name, df in datasets.items():
+#     plot_max_wait_times_plotly(df, dataset_name)
 
-def plot_avg_wait_times_plotly(df, dataset_name):
-    """Plots wait times for each attraction over time using Plotly."""
+# def plot_avg_wait_times_plotly(df, dataset_name):
+#     """Plots wait times for each attraction over time using Plotly."""
 
-    # Filter out food and souvenir shops
-    attractions_list = [item for sublist in attractions.values() for item in sublist]
-    attraction_names = [attraction[2] for attraction in attractions_list]
-    df_filtered = df[df['place'].isin(attraction_names)]
+#     # Filter out food and souvenir shops
+#     attractions_list = [item for sublist in attractions.values() for item in sublist]
+#     attraction_names = [attraction[2] for attraction in attractions_list]
+#     df_filtered = df[df['place'].isin(attraction_names)]
 
-    fig = px.line(
-        df_filtered,
-        x="time_label",
-        y="average",
-        color="place",
-        title=f"{dataset_name} - Wait Times Over Time",
-        labels={"time_label": "Time", "average": "Wait Time (minutes)", "place": "Attraction"},
-    )
+#     fig = px.line(
+#         df_filtered,
+#         x="time_label",
+#         y="average",
+#         color="place",
+#         title=f"{dataset_name} - Wait Times Over Time",
+#         labels={"time_label": "Time", "average": "Wait Time (minutes)", "place": "Attraction"},
+#     )
 
-    fig.update_layout(
-        xaxis_tickangle=-45,  # Rotate x-axis labels for better readability
-        xaxis={'type': 'category'} # Treat x-axis as categorical to preserve order
-    )
+#     fig.update_layout(
+#         xaxis_tickangle=-45,  # Rotate x-axis labels for better readability
+#         xaxis={'type': 'category'} # Treat x-axis as categorical to preserve order
+#     )
 
-    fig.show()
+#     fig.show()
 
-for dataset_name, df in datasets.items():
-    plot_avg_wait_times_plotly(df, dataset_name)
+# for dataset_name, df in datasets.items():
+#     plot_avg_wait_times_plotly(df, dataset_name)
 
 # Function to calculate the rate of reduction in wait time for maximum wait time
 def calculate_reduction_rate(df_base, df_change, place_name):
