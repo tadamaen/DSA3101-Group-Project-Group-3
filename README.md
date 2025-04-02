@@ -39,8 +39,8 @@ Our project is structured around multiple business questions (see Project Conten
 
 You can also run our src files with Docker.
 1. Ensure that you have Docker installed.
-2. Run the following commands:
-   `docker build -t image-name .`
+2. Run the following commands: <br> <br>
+   `docker build -t image-name .` <br> <br>
    `docker run image-name`
 
 For a detailed breakdown, including coding decisions, function explanations, data descriptions, and analyses, please refer to our thoroughly documented Google Colab notebooks, available in the [Notebooks](https://github.com/tadamaen/DSA3101-Group-Project-Group-3/tree/main/Notebooks) folder.
