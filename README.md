@@ -234,6 +234,7 @@ Explanation of Directories and Files:
 
 2) `uss_clustered_data`
 the same as `uss_survey_responses` but contains the following additional columns in front:
+
 | Column Name        | What Each Column Represents                                                                                   |
 |--------------------|---------------------------------------------------------------------------------------------------------------|
 |                    | nameless column containing indexes                                                                            |
