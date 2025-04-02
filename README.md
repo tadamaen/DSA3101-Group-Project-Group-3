@@ -227,13 +227,23 @@ Explanation of Directories and Files:
 | `Wait_time`            | The average wait time (in minutes) for a specific ride during the time of the day   |
 | `Visitor_count`        | The average number of visitors at a specific ride during the time of the day        |
 
-4)
+4) universal_studio_branches
 
-5)
+| Column Name     | What Each Column Represents                                               |
+|-----------------|---------------------------------------------------------------------------|
+| `reviewer`      | Account name of the reviewer                                              |
+| `rating`        | Rating from the reviewer, from 1 (unsatisfied) to 5 (satisfied)           |
+| `written_date`  | Date of the review                                                        |
+| `title`         | The title of the review                                                   |
+| `review_text`   | Review made by the visitor                                                |
+| `branch`        | Location of Universal Studios                                             |
+
 
 6)
 
 7)
+
+8)
 
 #### Subgroup Members 👯
 
