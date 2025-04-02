@@ -32,6 +32,10 @@ warnings.filterwarnings("ignore")
 weather_df = pd.read_csv('../data/weather_cleandata.csv')
 waittime_df = pd.read_csv('../data/waittime_cleandata.csv')
 
+# Rename column names for waittime_df
+waittime_df['Date'] = pd.to_datetime(waittime_df['Date'], format='%d/%m/%y').dt.strftime('%Y-%m-%d')
+waittime_df.rename(columns={'24h_time': 'Date/Time', 'Ride_name': 'Ride', 'Zone_name': 'Zone', 'Wait_time': 'Wait Time', 'Visitor_count': 'Visitor Count'}, inplace=True)
+
 # %% [markdown]
 # ## 2. Generate External Factors (Date Sensitive Factors)
 # We will be considering the following events: 
@@ -141,10 +145,11 @@ def is_seasonal_event(date):
 # - attractions_df : dataframe that that contains the list of attractions
 # 
 # - dine_df: dataframe that lists dining options
-#     - calculate visitor count data every 2 hours using Survey Q14.6
+#     - calculate visitor count data every 2 hours using Survey Q14.6 
+# 
+#     - Question 14.6: At what time of the day do you usually visit eateries and restaurants?
 #     
 # - retail_df: dataframe that lists retail options
-#     - calculate visitor count data every 2 hours using Survey Q14.7
 
 # %% [markdown]
 # ### 3.1 attractions_df
@@ -179,7 +184,7 @@ attractions_info = {
 
 attractions_df = pd.DataFrame(attractions_info)
 attractions_df.to_csv("attractions_df.csv")
-print(attractions_df)
+print(attractions_df.head(10))
 
 # %% [markdown]
 # ### 3.2 dine_df
@@ -193,9 +198,11 @@ print(attractions_df)
 # - Additionally, park operators are often more concerned about overall demand in a zone for staffing. Hence, prediction of eateries by zone will be conducted.
 # 
 # Steps to Generate Synthetic Data:
-# - Step 1: Generate the count of dining visitors using the number of Visitors for attractions (i.e., "Visitor Count" of waittime_df)
+# - Step 1: Generate the count of dining visitors using the number of Visitors for attractions (i.e., "Visitor Count" of waittime_df). 
 # 
-# - Step 2: Factor in weights for time slot and number of restaurants in zone
+# - Survey Question 14.7: "At what time of the day do you usually visit souvenir shops?" The percentage distribution from this survey questions will be used to synthetically generate visitor counts, to better mimic foot traffic patterns for eateries. 
+# 
+# - Step 2: Factor in weights for time slot and number of restaurants in zone.
 
 # %%
 ## Step 1: Generate count of dining visitors
@@ -376,13 +383,15 @@ dine_df['Date'] = pd.to_datetime(dine_df['Date'])
 # 
 # Prediction Goals:
 # 
-# - We aim to predict both **hourly wait times** for each ride and the **average daily wait time** for each ride over the next month. 
+# - We aim to predict both **hourly wait times** for each ride and the **average monthly wait time** for each ride over the next month. 
 # 
 # - Forecasting **hourly wait times** provides more granular insights into demand fluctuations throughout the day, helping operational teams optimize ride throughput and manage crowding effectively
 # 
-# - Predicting the **average daily wait time** offers a broader view of expected demand patterns, allowing the business to better plan for resource allocation, staffing, and customer satisfaction over time. 
+# - Predicting the **average monthly wait time** offers a broader view of expected demand patterns, allowing the business to better plan for resource allocation, staffing, and customer satisfaction over time. 
 # 
 # - These predictions are essential for **improving guest experience** and **maximizing operational efficiency**, ultimately driving higher customer satisfaction and more effective management of park resources. 
+# 
+# - To ensure consistency in evaluation, all models will be standardized by testing on the Accelerator ride for hourly wait time predictions. When predicting the average wait time of rides for the month, models will be assessed on their forecasted wait times for 28 February 2025. 
 # 
 # ### 5.1 XGBoost
 # #### 5.1(a) XGBoost to predict hourly wait times for Accelerator attraction
@@ -400,24 +409,24 @@ import seaborn as sns
 from datetime import datetime
 
 # Filter for "Accelerator" attraction before training
-waittime_df_accelerator = waittime_df[waittime_df['Ride'] == "Accelerator"].copy()
+waittime_df_accelerator_xg = waittime_df[waittime_df['Ride'] == "Accelerator"].copy()
 
 # Ensure Date column is in datetime format
-waittime_df_accelerator['Date'] = pd.to_datetime(waittime_df_accelerator['Date'], errors='coerce')
+waittime_df_accelerator_xg['Date'] = pd.to_datetime(waittime_df_accelerator_xg['Date'], errors='coerce')
 
 # Extract hour from Timestamp
-waittime_df_accelerator['Hour'] = pd.to_datetime(waittime_df_accelerator['Timestamp']).dt.hour
+waittime_df_accelerator_xg['Hour'] = pd.to_datetime(waittime_df_accelerator_xg['Timestamp']).dt.hour
 
 # Identify categorical columns for encoding
 categorical_columns = ["Time", "Zone", "day_of_week", "is_holiday", "is_seasonal_event"]
 
 # OneHotEncode categorical variables
 encoder = OneHotEncoder(sparse_output=False)
-one_hot_encoded = encoder.fit_transform(waittime_df_accelerator[categorical_columns])
+one_hot_encoded = encoder.fit_transform(waittime_df_accelerator_xg[categorical_columns])
 one_hot_df = pd.DataFrame(one_hot_encoded, columns=encoder.get_feature_names_out(categorical_columns))
 
 # Merge encoded categories with waittime_df
-df_encoded = pd.concat([waittime_df_accelerator, one_hot_df], axis=1)
+df_encoded = pd.concat([waittime_df_accelerator_xg, one_hot_df], axis=1)
 df_encoded = df_encoded.drop(categorical_columns, axis=1)
 
 # Define independent (X) and dependent (y) variables
@@ -451,9 +460,9 @@ print(f"R² Score: {r2:.4f}")
 df_predictions = X_test.copy()
 df_predictions['Predicted Wait Time'] = y_pred
 df_predictions['Date'] = datetime(2025, 2, 28)
-df_predictions['Hour'] = waittime_df_accelerator.loc[X_test.index, 'Hour'].values
+df_predictions['Hour'] = waittime_df_accelerator_xg.loc[X_test.index, 'Hour'].values
 
-df_actual = waittime_df_accelerator[waittime_df_accelerator['Date'] == datetime(2025, 2, 28)][['Hour', 'Wait Time']]
+df_actual = waittime_df_accelerator_xg[waittime_df_accelerator_xg['Date'] == datetime(2025, 2, 28)][['Hour', 'Wait Time']]
 
 # Merge actual and predicted wait times
 df_comparison = df_predictions.merge(df_actual, on='Hour', how='left')
@@ -466,8 +475,8 @@ plt.plot(df_comparison['Hour'], df_comparison['Predicted Wait Time'], marker='o'
 plt.plot(df_comparison['Hour'], df_comparison['Actual Wait Time'], marker='s', linestyle='-', label="Actual Wait Time")
 
 plt.legend()
-plt.title("Actual vs. Predicted Hourly Wait Times for Accelerator Ride on Feb 28, 2025 (XGBoost)")
-plt.xlabel("Hour of the Day")
+plt.title("Actual vs. Predicted Hourly Wait Times for Accelerator on Feb 28, 2025 (XGBoost)")
+plt.xlabel("Hour of the Day (24hr)")
 plt.ylabel("Wait Time (minutes)")
 plt.xticks(range(10, 20, 1))  
 plt.grid()
@@ -475,7 +484,6 @@ plt.show()
 
 # %% [markdown]
 # #### 5.1 (b) XGBoost to predict mean wait times for each ride for February 2025
-# - Run this cell 2 more times after first "Run All"
 
 # %%
 # Identify categorical columns for linear regression
@@ -511,14 +519,14 @@ xgb_model.fit(X_train, y_train)
 # Predict on test data
 y_pred = xgb_model.predict(X_test)
 
+# Model performance evaluation
+rmse = mean_squared_error(y_test, y_pred, squared=False)
+r2 = r2_score(y_test, y_pred)
+
 # Output results
 print(f"Predicted wait times for Feb 2025: \n{y_pred}")
 print(f"RMSE: {rmse:.2f}")
 print(f"R² Score: {r2:.4f}")
-
-# Model performance evaluation
-rmse = mean_squared_error(y_test, y_pred, squared=False)
-r2 = r2_score(y_test, y_pred)
 
 # Extract actual wait times for February 2025 from df
 df_feb_2025 = waittime_df[waittime_df['Date'].dt.strftime('%Y-%m') == '2025-02']
@@ -570,24 +578,24 @@ from sklearn.metrics import accuracy_score
 from scipy.sparse import hstack
 
 # Filter for "Accelerator" attraction before training
-waittime_df_accelerator = waittime_df[waittime_df['Ride'] == "Accelerator"].copy()
+waittime_df_accelerator_rf = waittime_df[waittime_df['Ride'] == "Accelerator"].copy()
 
 # Ensure Date column is in datetime format
-waittime_df_accelerator['Date'] = pd.to_datetime(waittime_df_accelerator['Date'], errors='coerce')
+waittime_df_accelerator_rf['Date'] = pd.to_datetime(waittime_df_accelerator_rf['Date'], errors='coerce')
 
 # Extract hour from Timestamp
-waittime_df_accelerator['Hour'] = pd.to_datetime(waittime_df_accelerator['Timestamp']).dt.hour
+waittime_df_accelerator_rf['Hour'] = pd.to_datetime(waittime_df_accelerator_rf['Timestamp']).dt.hour
 
 # Identify categorical columns for encoding
 categorical_columns = ["Time", "Zone", "day_of_week", "is_holiday", "is_seasonal_event"]
 
 # OneHotEncode categorical variables
 encoder = OneHotEncoder(sparse_output=False)
-one_hot_encoded = encoder.fit_transform(waittime_df_accelerator[categorical_columns])
+one_hot_encoded = encoder.fit_transform(waittime_df_accelerator_rf[categorical_columns])
 one_hot_df = pd.DataFrame(one_hot_encoded, columns=encoder.get_feature_names_out(categorical_columns))
 
 # Merge encoded categories with waittime_df
-df_encoded = pd.concat([waittime_df_accelerator, one_hot_df], axis=1)
+df_encoded = pd.concat([waittime_df_accelerator_rf, one_hot_df], axis=1)
 df_encoded = df_encoded.drop(categorical_columns, axis=1)
 
 # Define independent (X) and dependent (y) variables
@@ -621,9 +629,9 @@ print(f"R² Score: {r2:.4f}")
 df_predictions = X_test.copy()
 df_predictions['Predicted Wait Time'] = y_pred
 df_predictions['Date'] = datetime(2025, 2, 28)
-df_predictions['Hour'] = waittime_df_accelerator.loc[X_test.index, 'Hour'].values
+df_predictions['Hour'] = waittime_df_accelerator_rf.loc[X_test.index, 'Hour'].values
 
-df_actual = waittime_df_accelerator[waittime_df_accelerator['Date'] == datetime(2025, 2, 28)][['Hour', 'Wait Time']]
+df_actual = waittime_df_accelerator_rf[waittime_df_accelerator_rf['Date'] == datetime(2025, 2, 28)][['Hour', 'Wait Time']]
 
 # Merge actual and predicted wait times
 df_comparison = df_predictions.merge(df_actual, on='Hour', how='left')
@@ -646,7 +654,6 @@ plt.show()
 
 # %% [markdown]
 # #### 5.2 (b) RandomForest to predict mean wait times for each ride for February 2025
-# - Run this cell 2 more times after first "Run All"
 
 # %%
 # Identify categorical columns for linear regression
@@ -681,14 +688,14 @@ rf_model.fit(X_train, y_train)
 # Predict wait times for Feb 28, 2025
 y_pred = rf_model.predict(X_test)
 
+# Model performance evaluation
+rmse = mean_squared_error(y_test, y_pred, squared=False)
+r2 = r2_score(y_test, y_pred)
+
 # Output results
 print(f"Predicted wait times for Feb 2025: \n{y_pred}")
 print(f"RMSE: {rmse:.2f}")
 print(f"R² Score: {r2:.4f}")
-
-# Model performance evaluation
-rmse = mean_squared_error(y_test, y_pred, squared=False)
-r2 = r2_score(y_test, y_pred)
 
 # Extract actual wait times for February 2025 from df
 df_feb_2025 = waittime_df[waittime_df['Date'].dt.strftime('%Y-%m') == '2025-02']
@@ -725,9 +732,9 @@ plt.show()
 # ### 5.3 Conclusion from Machine Learning Models 
 # Generally, for both models: 
 # 
-# - Daily average wait time predictions typically yield a higher R² value compared to hourly predictions because temporal aggregation smooths out short-term noise and captures broader demand patterns. This makes the relationship between predictors and wait times more stable. 
+# - Monthly average wait time predictions typically yield a higher R² value compared to hourly predictions because temporal aggregation smooths out short-term noise and captures broader demand patterns. This makes the relationship between predictors and wait times more stable. 
 # 
-# - However, daily averages also produce a higher RMSE because aggregation masks intraday fluctuations. Its predictions are less precise for specific hourly dynamics, resulting in larger absolute errors when compared to actual hourly observations. 
+# - However, monthly averages also produce a higher RMSE because aggregation masks intraday fluctuations. Its predictions are less precise for specific hourly dynamics, resulting in larger absolute errors when compared to actual hourly observations. 
 # 
 # - Therefore, this reflects the trade-off between variance (R²) and minimizing prediction error (RMSE) in predictive modelling.
 # 
@@ -755,9 +762,9 @@ plt.show()
 # 
 # - This is because, a daily forecast offers a broader view of demand, helping to streamline operational planning, and resource allocation across the entire park. 
 # 
-# - Furthermore,  SARIMA models are generally more effective when there are clear, consistent seasonal and trend patterns over a longer period (e.g., daily, weekly).
+# - Furthermore,  SARIMAX models are generally more effective when there are clear, consistent seasonal and trend patterns over a longer period (e.g., daily, weekly).
 # 
-# - Hourly data tends to be more volatile, and capturing short-term fluctuations effectively can be challenging with SARIMA, which is primarily designed to handle lower-frequency time series data.
+# - Hourly data tends to be more volatile, and capturing short-term fluctuations effectively can be challenging with SARIMAX, which is primarily designed to handle lower-frequency time series data.
 # 
 # 
 
@@ -785,7 +792,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 # 
 
 # %%
-waittime_df_tsa = pd.read_csv('../data/waittime_cleandata.csv')
+waittime_df_tsa = waittime_df.copy()
 daily_waittime_df = waittime_df_tsa.groupby(['Date'])['Wait Time'].mean().reset_index()
 daily_waittime_df.columns = ['Date', 'Average Wait Time']
 daily_waittime_df['Date'] = pd.to_datetime(daily_waittime_df['Date'])
@@ -851,9 +858,9 @@ plt.show()
 
 # %% [markdown]
 # ### 6.2 Identify Model Parameters
-# - SARIMA model is commonly represented as  $SARIMA(p, d, q)(P, D, Q)_m$
+# - SARIMAX model is commonly represented as  $SARIMA(p, d, q)(P, D, Q)_m$
 # 
-# - Identify the SARIMA model parameters ($p, d, q, P, D, Q, m$) using ACF and PACF plots
+# - Identify the model's parameters ($p, d, q, P, D, Q, m$) using ACF and PACF plots
 # #### Step 1: Identify $p,d,q$ using normal differencing
 
 # %%
@@ -911,7 +918,7 @@ plt.show()
 # - $m$ (Length of repeating cycles): Assuming weakly seasonality, $m = 7$ is set  
 
 # %% [markdown]
-# ### 6.3 Apply SARIMA Model
+# ### 6.3 Apply SARIMAX Model
 # - Use a training window of 90 days to predict daily average wait time
 # 
 # - Parameters
@@ -973,7 +980,7 @@ def plot_predictions(actual_df, forecast_df):
     plt.figure(figsize=(12, 6))
     plt.plot(actual_df['Date'], actual_df['Average Wait Time'], label='Actual', color='lightblue')
     plt.plot(forecast_df['Date'], forecast_df['Forecast'], label='Forecast', color='red')
-    plt.title("SARIMA Forecast (sliding window)")
+    plt.title("SARIMAX Forecast of Average Wait Times at USS (90-Day Sliding Window)")
     plt.xlabel('Date')
     plt.ylabel('Wait Time')
     plt.legend()
@@ -997,10 +1004,10 @@ plot_predictions(daily_waittime_df, forecast_df)
 
 
 # %% [markdown]
-# ### 6.4 Conclusion of SARIMA model to predict average wait times at Universal Studios Singapore:
+# ### 6.4 Conclusion of SARIMAX model to predict average wait times at Universal Studios Singapore:
 # - The SARIMA model effectively captures the overall trend in average wait times, largely due to the rolling window approach, which continuously updates training data to adapt to evolving patterns. 
 # 
-# - However, it struggles with precise individual predictions (daily wait time), likely because short-term fluctuations—driven by unpredictable factors like sudden crowd surges—are. 
+# - However, it struggles with precise individual predictions (daily wait time), likely because short-term fluctuations—driven by unpredictable factors like sudden crowd surges. 
 # 
 # - While the window size of 90 days enhances trend fidelity, it may have overlooked finer-grained anomalies, highlighting a trade-off between robustness and granular accuracy. 
 
@@ -1101,7 +1108,7 @@ def plot_predictions(actual_df, forecast_df):
     plt.figure(figsize=(12, 6))
     plt.plot(actual_df['Date'], actual_df['Average Wait Time'], label='Actual', color='lightblue')
     plt.plot(forecast_df['Date'], forecast_df['Forecast'], label='Forecast', color='red')
-    plt.title("SARIMA Forecast (sliding window)")
+    plt.title("SARIMAX Forecast of Average Wait Times at USS with Exogenous Variables (90-Day Sliding Window)")
     plt.xlabel('Date')
     plt.ylabel('Wait Time')
     plt.legend()
@@ -1143,6 +1150,14 @@ plot_predictions(attraction_daily_stats_df, forecast_df)
 # 
 
 # %% [markdown]
+# ## 7. Demand Prediction for Eateries in USS
+# Rationale of choosing XGBoost as model:
+# - Based on the models tested, XGBoost demonstrated the best performance in predicting hourly wait times. 
+# 
+# - Given its strong predictive capability, we will extend its use to forecast visitor counts at eateries.
+# 
+# - Prediction of visitor count at eateries will be done in two-hour intervals.
+# 
 # ### 7.1 XGBoost to predict hourly wait times for eateries in a specific zone
 
 # %%
@@ -1229,18 +1244,18 @@ importances = model.named_steps['regressor'].feature_importances_
 importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': importances})
 importance_df = importance_df.sort_values('Importance', ascending=False)
 
-print("\nFeature Importances:")
-print(importance_df.head(10))
+#print("\nFeature Importances:")
+#print(importance_df.head(10))
 
 # Plot predictions
-plt.figure(figsize=(12, 5))
+plt.figure(figsize=(10, 5))
 results_melted = results.melt(id_vars=['Time Slot'], 
                              value_vars=['Predicted Visitors', 'Actual Visitors'],
                              var_name='Type', value_name='Visitors')
 
 sns.barplot(data=results_melted, x='Time Slot', y='Visitors', hue='Type',
             palette={'Predicted Visitors':'skyblue', 'Actual Visitors':'salmon'})
-plt.title('Side-by-Side Comparison: Predicted vs Actual Visitors', fontsize=14)
+plt.title('Predicted vs Actual Number of Visitors in Ancient Egypt Zone', fontsize=14)
 plt.xticks(rotation=45)
 plt.grid(True, linestyle='--', alpha=0.3)
 plt.tight_layout()
@@ -1261,27 +1276,35 @@ plt.show()
 # - Tables below summarize the performance of each model for each test case
 # 
 # - Refer to the Wiki Report for detailed visualizations for each attraction/service
+# 
+# - Generally,
+#     - XGBoost is best suited for hourly wait time predictions
+#     - Random Forest is best suited for average wait time predictions
+#     - SRIMAX with exogenous variables can be used to predict overall average wait times in USS
 
 # %% [markdown]
 # Models' Performance in predicting Hourly Wait Time for Individual Rides
-# | Model           | RMSE (Hourly) | R² (Hourly) | 
+# 
+# | Model           | RMSE (Hourly) | R² (Hourly) |
 # |-----------------|---------------|-------------|
-# | **XGBoost**     | 2.85          | 0.6946      | 
-# | **Random Forest** | 3.18        | 0.6201        | 
+# | **XGBoost**     | 2.85          | 0.6946     |
+# | **Random Forest** | 3.18        | 0.6201      |
 # 
 # 
-# Models' Performance in predicting Daily Average Wait Time for Individual Rides for February 2025
-# | Model           | RMSE (Daily) | R² (Daily) | 
+# Models' Performance in predicting Monthly Average Wait Time for Individual Rides for February 2025
+# 
+# | Model           | RMSE (Monthly) | R² (Monthly) |
 # |-----------------|---------------|-------------|
-# | **XGBoost**     | 5.75          | 0.8974      | 
-# | **Random Forest** | 5.63        | 0.9016        | 
+# | **XGBoost**     | 5.75          | 0.8974      |
+# | **Random Forest** | 5.64        | 0.9014      |
 # 
 # 
-# SARIMA's Performance in predicting average wait times in USS
+# 
+# SARIMAX's Performance in predicting average wait times in USS
 # | Model           | RMSE (Bi-hourly) | R² (Bi-hourly) | MAE (Bi-hourly)|
 # |-----------------|---------------|-------------| -------------|
-# | **SARIMA**     | 7.83          | 0.156      | 5.9247      |
-# | **SARIMA (with exogenous variables)**     | 6.05          | -0.001     | 4.8817      |
+# | **SARIMAX**     | 7.83          | 0.156      | 5.9247      |
+# | **SARIMAX (with exogenous variables)**     | 6.05          | -0.001     | 4.8817      |
 # 
 
 
